@@ -10,6 +10,7 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.StopDrive;
 import frc.robot.commands.TankDrive;
+import frc.robot.commands.ToggleBrakingMode;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -47,6 +48,11 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
+  
+  public Command getToggleBrakingModeCommand() {
+    return new ToggleBrakingMode(drivetrain);
+  }
+
   public Command getStopDriveCommand() {
     return new StopDrive(drivetrain);
   }
