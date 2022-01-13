@@ -8,20 +8,24 @@ import java.util.function.Supplier;
 
 public class ArcadeDriveCommand extends DriveCommand {
 
-  private final Supplier<Double> linearSpeed;
-  private final Supplier<Double> angularSpeed;
+  private final Supplier<Double> linearSpeedSupplier;
+  private final Supplier<Double> angularSpeedSupplier;
 
-  public ArcadeDriveCommand(DriveBase driveBase, Supplier<Double> linearSpeed, Supplier<Double> angularSpeed) {
+  public ArcadeDriveCommand(DriveBase driveBase, Supplier<Double> linearSpeedSupplier, Supplier<Double> angularSpeedSupplier) {
     super(driveBase);
-    this.linearSpeed = linearSpeed;
-    this.angularSpeed = angularSpeed;
+    this.linearSpeedSupplier = linearSpeedSupplier;
+    this.angularSpeedSupplier = angularSpeedSupplier;
     addRequirements(this.driveBase);
+  }
+
+  public ArcadeDriveCommand(DriveBase driveBase, double linearSpeed, double angularSpeed) {
+    this(driveBase, () -> linearSpeed, () -> angularSpeed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveBase.arcadeDrive(linearSpeed.get(), angularSpeed.get());
+    driveBase.arcadeDrive(linearSpeedSupplier.get(), angularSpeedSupplier.get());
   }
 
   // Called once the command ends or is interrupted.

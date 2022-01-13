@@ -8,21 +8,24 @@ import java.util.function.Supplier;
 
 public class TankDriveCommand extends DriveCommand {
 
-  private final Supplier<Double> leftSpeed;
-  private final Supplier<Double> rightSpeed;
+  private final Supplier<Double> leftSpeedSupplier;
+  private final Supplier<Double> rightSpeedSupplier;
 
-  public TankDriveCommand(DriveBase driveBase, Supplier<Double> leftSpeed, Supplier<Double> rightSpeed) {
+  public TankDriveCommand(DriveBase driveBase, Supplier<Double> leftSpeedSupplier, Supplier<Double> rightSpeedSupplier) {
     super(driveBase);
-    this.leftSpeed = leftSpeed;
-    this.rightSpeed = rightSpeed;
+    this.leftSpeedSupplier = leftSpeedSupplier;
+    this.rightSpeedSupplier = rightSpeedSupplier;
     addRequirements(this.driveBase);
   }
 
+  public TankDriveCommand(DriveBase driveBase, double leftSpeed, double rightSpeed) {
+    this(driveBase, () -> leftSpeed, () -> rightSpeed);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveBase.tankDrive(leftSpeed.get(), rightSpeed.get());
+    driveBase.tankDrive(leftSpeedSupplier.get(), rightSpeedSupplier.get());
   }
 
   // Called once the command ends or is interrupted.
