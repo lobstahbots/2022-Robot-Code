@@ -6,15 +6,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ArcadeDrive;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.StopDrive;
-import frc.robot.commands.TankDrive;
-import frc.robot.commands.ToggleBrakingMode;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.DriveBase;
 import edu.wpi.first.wpilibj2.command.Command;
-import java.util.function.Supplier;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -24,11 +17,8 @@ import java.util.function.Supplier;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final Drivetrain drivetrain = new Drivetrain();
+  private final DriveBase driveBase = new DriveBase(0, 1, 2, 3); //TODO: remove dummy port values
   
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -48,25 +38,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  
-  public Command getToggleBrakingModeCommand() {
-    return new ToggleBrakingMode(drivetrain);
-  }
-
-  public Command getStopDriveCommand() {
-    return new StopDrive(drivetrain);
-  }
-
-  public Command getArcadeDriveCommand(Supplier<Double> xSpeed, Supplier<Double> zRotation) {
-    return new ArcadeDrive(drivetrain, xSpeed, zRotation);
-  }
-
-  public Command getTankDriveCommand(Supplier<Double> leftSpeed, Supplier<Double> rightSpeed) {
-    return new TankDrive(drivetrain, leftSpeed, rightSpeed);
-  }
-
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return null;
   }
 }
