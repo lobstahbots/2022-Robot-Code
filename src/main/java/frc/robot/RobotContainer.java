@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.auton.SimpleAutonCommand;
 import frc.robot.subsystems.DriveBase;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -39,6 +40,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return null;
+    return new SimpleAutonCommand(driveBase, Constants.SIMPLE_AUTON_SPEED, Constants.SIMPLE_AUTON_RUNTIME);
   }
 }

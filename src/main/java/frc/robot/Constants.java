@@ -12,4 +12,7 @@ package frc.robot;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
-public final class Constants {}
+public final class Constants {
+    public static final double SIMPLE_AUTON_SPEED = 0.2; //PLACEHOLDER
+    public static final double SIMPLE_AUTON_RUNTIME = 5.0; //PLACEHOLDER
+}
