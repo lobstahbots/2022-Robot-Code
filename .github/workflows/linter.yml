@@ -48,6 +48,6 @@ jobs:
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_GITHUB_ACTIONS: true
           VALIDATE_JAVA: true
-          JAVA_FILE_NAME: checkstyle.xml
+          JAVA_FILE_NAME: ${{ github.workspace }}/checkstyle.xml
           DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}l
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
