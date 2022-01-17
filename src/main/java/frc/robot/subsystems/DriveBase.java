@@ -79,14 +79,30 @@ public class DriveBase extends SubsystemBase {
     rightBackMotor.setIdleMode(mode);
   }
 
+  /**
+   * Sets the motor speeds to 0
+   */
   public void stopDrive() {
     differentialDrive.tankDrive(0, 0);
   }
 
+  /**
+   * Drives the motors using arcade drive controls
+   * 
+   * @param linearSpeed The linear speed
+   * @param angularSpeed The angular speed
+   * 
+   */
   public void arcadeDrive(double linearSpeed, double angularSpeed) {
     differentialDrive.arcadeDrive(linearSpeed, angularSpeed);
   }
 
+  /**
+   * Drives the motors using tank drive controls
+   * 
+   * @param leftSpeed
+   * @param rightSpeed
+   */
   public void tankDrive(double leftSpeed, double rightSpeed) {
     differentialDrive.tankDrive(leftSpeed, rightSpeed);
   }
