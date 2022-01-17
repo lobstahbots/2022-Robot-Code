@@ -7,13 +7,13 @@ package frc.robot.commands.drive;
 import frc.robot.subsystems.DriveBase;
 
 /**
- * Repeatedly sets the {@link DriveBase} speed to 0
+ * Repeatedly sets the {@link DriveBase} speed to 0.
  */
 public class StopDriveCommand extends DriveCommand {
 
   /**
-   * Creates a command that repeatedly sets the {@link DriveBase} speed to 0
-   * 
+   * Creates a command that repeatedly sets the {@link DriveBase} speed to 0.
+   *
    * @param driveBase The {@link DriveBase} to control
    */
   public StopDriveCommand(DriveBase driveBase) {

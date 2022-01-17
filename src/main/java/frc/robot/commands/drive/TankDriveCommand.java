@@ -1,13 +1,14 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
+
 package frc.robot.commands.drive;
 
 import frc.robot.subsystems.DriveBase;
 import java.util.function.Supplier;
 
 /**
- * Drives a {@link DriveBase} using arcade drive controls
+ * Drives a {@link DriveBase} using arcade drive controls.
  */
 public class TankDriveCommand extends DriveCommand {
 
@@ -15,11 +16,10 @@ public class TankDriveCommand extends DriveCommand {
   private final Supplier<Double> rightSpeedSupplier;
 
   /**
-   * Drives the driveBase at the left and right speeds returned by their
-   * respective Suppliers
-   * 
-   * @param driveBase          The {@link DriveBase} to drive
-   * @param leftSpeedSupplier  Supplier for left speed
+   * Drives the driveBase at the left and right speeds returned by their respective Suppliers.
+   *
+   * @param driveBase The {@link DriveBase} to drive
+   * @param leftSpeedSupplier Supplier for left speed
    * @param rightSpeedSupplier Supplier for right speed
    */
   public TankDriveCommand(DriveBase driveBase, Supplier<Double> leftSpeedSupplier,
@@ -31,10 +31,10 @@ public class TankDriveCommand extends DriveCommand {
   }
 
   /**
-   * Drives the driveBase at the given left and right speeds
-   * 
-   * @param driveBase  The {@link DriveBase} to drive
-   * @param leftSpeed  The left speed
+   * Drives the driveBase at the given left and right speeds.
+   *
+   * @param driveBase The {@link DriveBase} to drive
+   * @param leftSpeed The left speed
    * @param rightSpeed The right speed
    */
   public TankDriveCommand(DriveBase driveBase, double leftSpeed, double rightSpeed) {
