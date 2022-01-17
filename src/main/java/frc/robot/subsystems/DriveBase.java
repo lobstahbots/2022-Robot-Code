@@ -1,3 +1,4 @@
+
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
@@ -48,7 +49,8 @@ public class DriveBase extends SubsystemBase {
     rightBackMotor = new CANSparkMax(rightBackId, motorType);
 
     differentialDrive =
-        new DifferentialDrive(new MotorControllerGroup(leftFrontMotor, leftBackMotor),
+        new DifferentialDrive(
+            new MotorControllerGroup(leftFrontMotor, leftBackMotor),
             new MotorControllerGroup(rightFrontMotor, rightBackMotor));
   }
 
@@ -91,7 +93,6 @@ public class DriveBase extends SubsystemBase {
    *
    * @param linearSpeed The linear speed
    * @param angularSpeed The angular speed
-   * 
    */
   public void arcadeDrive(double linearSpeed, double angularSpeed) {
     differentialDrive.arcadeDrive(linearSpeed, angularSpeed);

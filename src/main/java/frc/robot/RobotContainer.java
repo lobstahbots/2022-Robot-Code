@@ -42,7 +42,9 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new SimpleAutonCommand(driveBase, Constants.SIMPLE_AUTON_SPEED,
+    return new SimpleAutonCommand(
+        driveBase,
+        Constants.SIMPLE_AUTON_SPEED,
         Constants.SIMPLE_AUTON_RUNTIME);
   }
 }
