@@ -7,6 +7,9 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+/**
+ * A subsystem that controls the drive train (aka chassis) on a robot
+ */
 public class DriveBase extends SubsystemBase {
 
   private final CANSparkMax leftFrontMotor;
@@ -16,10 +19,30 @@ public class DriveBase extends SubsystemBase {
 
   private final DifferentialDrive differentialDrive;
 
+  /**
+   * Constructs a DriveBase with a {@link CANSparkMax} at each of the given CAN
+   * IDs
+   * 
+   * @param leftFrontID  The CAN ID of the Left Front motor
+   * @param leftBackID   The CAN ID of the Left Back motor
+   * @param rightFrontID The CAN ID of the Right Front motor
+   * @param rightBackID  The CAN ID of the Right Back motor
+   */
   public DriveBase(int leftFrontID, int leftBackID, int rightFrontID, int rightBackID) {
     this(leftFrontID, leftBackID, rightFrontID, rightBackID, MotorType.kBrushless);
   }
 
+  /**
+   * Constructs a DriveBase with a {@link CANSparkMax} at each of the given CAN
+   * IDs
+   * 
+   * @param leftFrontID  The CAN ID of the Left Front motor
+   * @param leftBackID   The CAN ID of the Left Back motor
+   * @param rightFrontID The CAN ID of the Right Front motor
+   * @param rightBackID  The CAN ID of the Right Back motor
+   * @param motorType    The {@link MotorType} of the motors attached to the
+   *                     {@link CANSparkMax}es
+   */
   public DriveBase(int leftFrontID, int leftBackID, int rightFrontID, int rightBackID, MotorType motorType) {
     leftFrontMotor = new CANSparkMax(leftFrontID, motorType);
     leftBackMotor = new CANSparkMax(leftBackID, motorType);
@@ -27,11 +50,13 @@ public class DriveBase extends SubsystemBase {
     rightBackMotor = new CANSparkMax(rightBackID, motorType);
 
     differentialDrive = new DifferentialDrive(
-      new MotorControllerGroup(leftFrontMotor, leftBackMotor),
-      new MotorControllerGroup(rightFrontMotor, rightBackMotor)
-    );
+        new MotorControllerGroup(leftFrontMotor, leftBackMotor),
+        new MotorControllerGroup(rightFrontMotor, rightBackMotor));
   }
 
+  /**
+   * Toggles the {@link IdleMode} between Coast and Brake
+   */
   public void toggleBrakingMode() {
     switch (leftFrontMotor.getIdleMode()) {
       case kBrake:
@@ -44,6 +69,11 @@ public class DriveBase extends SubsystemBase {
     }
   }
 
+  /**
+   * Sets the braking mode to the given {@link IdleMode}
+   * 
+   * @param mode
+   */
   public void setBrakingMode(IdleMode mode) {
     leftFrontMotor.setIdleMode(mode);
     leftBackMotor.setIdleMode(mode);
@@ -51,14 +81,30 @@ public class DriveBase extends SubsystemBase {
     rightBackMotor.setIdleMode(mode);
   }
 
+  /**
+   * Sets the motor speeds to 0
+   */
   public void stopDrive() {
     differentialDrive.tankDrive(0, 0);
   }
 
+  /**
+   * Drives the motors using arcade drive controls
+   * 
+   * @param linearSpeed  The linear speed
+   * @param angularSpeed The angular speed
+   * 
+   */
   public void arcadeDrive(double linearSpeed, double angularSpeed) {
     differentialDrive.arcadeDrive(linearSpeed, angularSpeed);
   }
 
+  /**
+   * Drives the motors using tank drive controls
+   * 
+   * @param leftSpeed
+   * @param rightSpeed
+   */
   public void tankDrive(double leftSpeed, double rightSpeed) {
     differentialDrive.tankDrive(leftSpeed, rightSpeed);
   }

@@ -6,20 +6,26 @@ package frc.robot.commands.drive;
 
 import frc.robot.subsystems.DriveBase;
 
+/**
+ * Repeatedly sets the {@link DriveBase} speed to 0
+ */
 public class StopDriveCommand extends DriveCommand {
-  
+
+  /**
+   * Creates a command that repeatedly sets the {@link DriveBase} speed to 0
+   * 
+   * @param driveBase The {@link DriveBase} to control
+   */
   public StopDriveCommand(DriveBase driveBase) {
     super(driveBase);
     addRequirements(this.driveBase);
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     driveBase.stopDrive();
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;
