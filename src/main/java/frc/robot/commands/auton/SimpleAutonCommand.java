@@ -18,8 +18,8 @@ public class SimpleAutonCommand extends ParallelDeadlineGroup {
    * Drives the driveBase at the given speed for the given number of seconds
    * 
    * @param driveBase The {@link DriveBase} to move
-   * @param speed The speed to move at
-   * @param seconds The time to drive for
+   * @param speed     The speed to move at
+   * @param seconds   The time to drive for
    */
   public SimpleAutonCommand(DriveBase driveBase, double speed, double seconds) {
     super(new WaitCommand(seconds), new TankDriveCommand(driveBase, speed, speed));

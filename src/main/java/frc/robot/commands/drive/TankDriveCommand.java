@@ -15,13 +15,15 @@ public class TankDriveCommand extends DriveCommand {
   private final Supplier<Double> rightSpeedSupplier;
 
   /**
-   * Drives the driveBase at the left and right speeds returned by their respective Suppliers
+   * Drives the driveBase at the left and right speeds returned by their
+   * respective Suppliers
    * 
-   * @param driveBase The {@link DriveBase} to drive
-   * @param leftSpeedSupplier Supplier for left speed
+   * @param driveBase          The {@link DriveBase} to drive
+   * @param leftSpeedSupplier  Supplier for left speed
    * @param rightSpeedSupplier Supplier for right speed
    */
-  public TankDriveCommand(DriveBase driveBase, Supplier<Double> leftSpeedSupplier, Supplier<Double> rightSpeedSupplier) {
+  public TankDriveCommand(DriveBase driveBase, Supplier<Double> leftSpeedSupplier,
+      Supplier<Double> rightSpeedSupplier) {
     super(driveBase);
     this.leftSpeedSupplier = leftSpeedSupplier;
     this.rightSpeedSupplier = rightSpeedSupplier;
@@ -31,8 +33,8 @@ public class TankDriveCommand extends DriveCommand {
   /**
    * Drives the driveBase at the given left and right speeds
    * 
-   * @param driveBase The {@link DriveBase} to drive
-   * @param leftSpeed The left speed
+   * @param driveBase  The {@link DriveBase} to drive
+   * @param leftSpeed  The left speed
    * @param rightSpeed The right speed
    */
   public TankDriveCommand(DriveBase driveBase, double leftSpeed, double rightSpeed) {

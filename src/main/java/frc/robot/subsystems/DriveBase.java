@@ -20,25 +20,28 @@ public class DriveBase extends SubsystemBase {
   private final DifferentialDrive differentialDrive;
 
   /**
-   * Constructs a DriveBase with a {@link CANSparkMax} at each of the given CAN IDs
+   * Constructs a DriveBase with a {@link CANSparkMax} at each of the given CAN
+   * IDs
    * 
-   * @param leftFrontID The CAN ID of the Left Front motor
-   * @param leftBackID The CAN ID of the Left Back motor
+   * @param leftFrontID  The CAN ID of the Left Front motor
+   * @param leftBackID   The CAN ID of the Left Back motor
    * @param rightFrontID The CAN ID of the Right Front motor
-   * @param rightBackID The CAN ID of the Right Back motor
+   * @param rightBackID  The CAN ID of the Right Back motor
    */
   public DriveBase(int leftFrontID, int leftBackID, int rightFrontID, int rightBackID) {
     this(leftFrontID, leftBackID, rightFrontID, rightBackID, MotorType.kBrushless);
   }
 
   /**
-   * Constructs a DriveBase with a {@link CANSparkMax} at each of the given CAN IDs
+   * Constructs a DriveBase with a {@link CANSparkMax} at each of the given CAN
+   * IDs
    * 
-   * @param leftFrontID The CAN ID of the Left Front motor
-   * @param leftBackID The CAN ID of the Left Back motor
+   * @param leftFrontID  The CAN ID of the Left Front motor
+   * @param leftBackID   The CAN ID of the Left Back motor
    * @param rightFrontID The CAN ID of the Right Front motor
-   * @param rightBackID The CAN ID of the Right Back motor
-   * @param motorType The {@link MotorType} of the motors attached to the {@link CANSparkMax}es
+   * @param rightBackID  The CAN ID of the Right Back motor
+   * @param motorType    The {@link MotorType} of the motors attached to the
+   *                     {@link CANSparkMax}es
    */
   public DriveBase(int leftFrontID, int leftBackID, int rightFrontID, int rightBackID, MotorType motorType) {
     leftFrontMotor = new CANSparkMax(leftFrontID, motorType);
@@ -47,9 +50,8 @@ public class DriveBase extends SubsystemBase {
     rightBackMotor = new CANSparkMax(rightBackID, motorType);
 
     differentialDrive = new DifferentialDrive(
-      new MotorControllerGroup(leftFrontMotor, leftBackMotor),
-      new MotorControllerGroup(rightFrontMotor, rightBackMotor)
-    );
+        new MotorControllerGroup(leftFrontMotor, leftBackMotor),
+        new MotorControllerGroup(rightFrontMotor, rightBackMotor));
   }
 
   /**
@@ -89,7 +91,7 @@ public class DriveBase extends SubsystemBase {
   /**
    * Drives the motors using arcade drive controls
    * 
-   * @param linearSpeed The linear speed
+   * @param linearSpeed  The linear speed
    * @param angularSpeed The angular speed
    * 
    */

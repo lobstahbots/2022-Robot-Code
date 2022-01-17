@@ -15,13 +15,15 @@ public class ArcadeDriveCommand extends DriveCommand {
   private final Supplier<Double> angularSpeedSupplier;
 
   /**
-   * Drives the driveBase at the linear and angular speeds returned by their respective Suppliers.
+   * Drives the driveBase at the linear and angular speeds returned by their
+   * respective Suppliers.
    * 
-   * @param driveBase The {@link DriveBase} to drive
-   * @param linearSpeedSupplier Supplier for linear speed
+   * @param driveBase            The {@link DriveBase} to drive
+   * @param linearSpeedSupplier  Supplier for linear speed
    * @param angularSpeedSupplier Supplier for angular speed
    */
-  public ArcadeDriveCommand(DriveBase driveBase, Supplier<Double> linearSpeedSupplier, Supplier<Double> angularSpeedSupplier) {
+  public ArcadeDriveCommand(DriveBase driveBase, Supplier<Double> linearSpeedSupplier,
+      Supplier<Double> angularSpeedSupplier) {
     super(driveBase);
     this.linearSpeedSupplier = linearSpeedSupplier;
     this.angularSpeedSupplier = angularSpeedSupplier;
@@ -31,8 +33,8 @@ public class ArcadeDriveCommand extends DriveCommand {
   /**
    * Drives the driveBase at the given angular and linear speeds.
    * 
-   * @param driveBase The {@link DriveBase} to drive
-   * @param linearSpeedSupplier linear speed
+   * @param driveBase            The {@link DriveBase} to drive
+   * @param linearSpeedSupplier  linear speed
    * @param angularSpeedSupplier angular speed
    */
   public ArcadeDriveCommand(DriveBase driveBase, double linearSpeed, double angularSpeed) {

@@ -7,12 +7,14 @@ package frc.robot.commands.drive;
 import frc.robot.subsystems.DriveBase;
 
 /**
- * Toggles the {@link IdleMode} (aka Braking mode) on the given {@link DriveBase}
+ * Toggles the {@link IdleMode} (aka Braking mode) on the given
+ * {@link DriveBase}
  */
 public class ToggleBrakingModeCommand extends DriveCommand {
-  
+
   /**
-   * Toggles the {@link IdleMode} (aka Braking mode) on the given {@link DriveBase}
+   * Toggles the {@link IdleMode} (aka Braking mode) on the given
+   * {@link DriveBase}
    * 
    * @param driveBase The {@link DriveBase} to control
    */
