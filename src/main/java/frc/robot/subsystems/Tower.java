@@ -8,9 +8,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.commands.drive.ToggleBrakingModeCommand;
 
 public class Tower extends SubsystemBase {
   /** Creates a new Tower. */
@@ -30,8 +28,8 @@ public class Tower extends SubsystemBase {
     towerMotor.setIdleMode(mode);
   }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
+  public void setSpeed(double speed) {
+    towerMotor.set(speed);
   }
+
 }
