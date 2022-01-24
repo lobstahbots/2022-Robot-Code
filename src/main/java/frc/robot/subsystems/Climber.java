@@ -11,7 +11,7 @@ public class Climber extends SubsystemBase {
   private final CANSparkMax climberMotor;
 
   /**
-   * Creates a Climber with its {@link CanSparkMax} at the given CAN id.
+   * Creates a Climber with its {@link CANSparkMax} at the given CAN id.
    * 
    * @param motorId The CAN id of the motor
    */
@@ -20,7 +20,7 @@ public class Climber extends SubsystemBase {
   }
 
   /**
-   * Creates a Climber with its {@link CanSparkMax} at the given CAN id.
+   * Creates a Climber with its {@link CANSparkMax} at the given CAN id.
    * 
    * @param motorId The CAN id of the motor
    * @param motorType The {@link MotorType} of the motor attached to the {@link CANSparkMax}
