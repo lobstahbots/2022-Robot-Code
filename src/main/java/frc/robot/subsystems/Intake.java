@@ -27,10 +27,22 @@ public class Intake extends SubsystemBase {
    * @param forwardChannel The forward channel
    * @param reverseChannel The reverse channel
    */
-
   public Intake(int intakeMotorID, int forwardChannel, int reverseChannel) {
+    this(intakeMotorID, MotorType.kBrushless, forwardChannel, reverseChannel);
+  }
+
+  /**
+   * Constructs an Intake with a {@link CANSparkMax} with the given CAN ID and motor type and a
+   * {@link DoubleSolenoid} with the given forward and reverse channels.
+   *
+   * @param intakeMotorID The CAN ID of the intake motor
+   * @param motorType The motor type of the intake motor
+   * @param forwardChannel The forward channel
+   * @param reverseChannel The reverse channel
+   */
+  public Intake(int intakeMotorID, MotorType motorType, int forwardChannel, int reverseChannel) {
     solenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, forwardChannel, reverseChannel);
-    intakeMotor = new CANSparkMax(intakeMotorID, MotorType.kBrushless);
+    intakeMotor = new CANSparkMax(intakeMotorID, motorType);
     intakeMotor.setIdleMode(IdleMode.kBrake);
   }
 
@@ -39,48 +51,69 @@ public class Intake extends SubsystemBase {
    * 
    * @param intakeSpeed The speed of the intake motor
    */
-  public void setIntakeSpeed(double intakeSpeed) {
-    if (solenoid.get() == DoubleSolenoid.Value.kReverse && intakeSpeed != 0) {
+  public void setSpinSpeed(double intakeSpeed) {
+    if (isRetracted() && intakeSpeed != 0) {
       throw new IllegalStateException();
     }
     intakeMotor.set(intakeSpeed);
   }
 
   /**
-   * Toggles the {@link DoubleSolenoid.Value} between Forward and Reverse. If in neutral toggles it
-   * to Reverse.
+   * Detects if the intake is retracted.
+   */
+  public boolean isRetracted() {
+    return solenoid.get() == DoubleSolenoid.Value.kReverse;
+  }
+
+  /**
+   * Detects if the intake is extended.
+   */
+  public boolean isExtended() {
+    return solenoid.get() == DoubleSolenoid.Value.kForward;
+  }
+
+  /**
+   * Detects if the intake is in neutral extension.
+   */
+  public boolean isNeutralExtension() {
+    return solenoid.get() == DoubleSolenoid.Value.kOff;
+  }
+
+  /**
+   * Toggles the {@link DoubleSolenoid.Value} between Extended and Retracted. If in neutral toggles
+   * it to Retracted.
    */
   public void toggle() {
     switch (solenoid.get()) {
       case kReverse:
-        extend();
+        setExtended();
         return;
       case kForward:
       default:
-        retract();
+        setRetracted();
         return;
     }
   }
 
   /**
-   * Sets the intake DoubleSolenoid to Reverse.
+   * Retracts the intake and sets spin speed to 0.
    */
-  public void retract() {
-    setIntakeSpeed(0.0);
+  public void setRetracted() {
+    setSpinSpeed(0.0);
     solenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
   /**
-   * Sets the intake DoubleSolenoid to neutral.
+   * Sets the intake to Neutral extension.
    */
-  public void neutral() {
+  public void setNeutralExtension() {
     solenoid.set(DoubleSolenoid.Value.kOff);
   }
 
   /**
-   * Sets the intake DoubleSolenoid to Forward.
+   * Extends the intake.
    */
-  public void extend() {
+  public void setExtended() {
     solenoid.set(DoubleSolenoid.Value.kForward);
   }
 }
