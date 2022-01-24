@@ -35,9 +35,9 @@ public class Outtake extends SubsystemBase {
   /**
    * Sets the Outtake {@link CANSparkMax} motor with a given speed.
    *
-   * @param outtakeSpeed The speed to set the {@link CANSparkMax} motor to.
+   * @param speed The speed to set the {@link CANSparkMax} motor to.
    */
   public void setSpeed(double speed) {
-    outtakeMotor.set(outtakeSpeed);
+    outtakeMotor.set(speed);
   }
 }
