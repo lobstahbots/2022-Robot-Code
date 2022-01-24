@@ -7,9 +7,17 @@ package frc.robot.commands.drive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveBase;
 
+/**
+ * A command used to control a {@link DriveBase}.
+ */
 public abstract class DriveCommand extends CommandBase {
   protected final DriveBase driveBase;
 
+  /**
+   * Creates a command used to control a {@link DriveBase}.
+   *
+   * @param driveBase The {@link DriveBase} to control
+   */
   public DriveCommand(DriveBase driveBase) {
     this.driveBase = driveBase;
   }
