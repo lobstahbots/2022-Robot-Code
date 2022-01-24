@@ -4,6 +4,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMax.IdleMode;
 
 /**
  * A subsystem that controls the Outtake on a robot.
@@ -28,6 +29,7 @@ public class Outtake extends SubsystemBase {
    */
   public Outtake(int outtakeId, MotorType motorType) {
     outtakeMotor = new CANSparkMax(outtakeId, motorType);
+    outtakeMotor.setIdleMode(IdleMode.kBrake);
   }
 
   /**
