@@ -10,6 +10,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Climber extends SubsystemBase {
   private final CANSparkMax climberMotor;
 
+  public Climber(int motorId) {
+    this(motorId, MotorType.kBrushless);
+  }
+
   public Climber(int motorId, MotorType motorType) {
     climberMotor = new CANSparkMax(motorId, motorType);
     climberMotor.setIdleMode(IdleMode.kBrake);
