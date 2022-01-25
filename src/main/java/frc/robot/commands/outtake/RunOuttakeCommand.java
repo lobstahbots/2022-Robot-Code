@@ -5,11 +5,11 @@ import frc.robot.subsystems.Outtake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
- * Sets outtake speed to a specified double.
+ * Repeatedly outtake speed to a specified double.
  */
 public class RunOuttakeCommand extends CommandBase {
   private final Outtake outtake;
-  private final double inputSpeed;
+  private final double speed;
 
   /**
    * Creates a command that sets the outtake speed to a specified double.
@@ -19,12 +19,12 @@ public class RunOuttakeCommand extends CommandBase {
   public RunOuttakeCommand(Outtake outtake, double speed) {
     this.outtake = outtake;
     addRequirements(outtake);
-    inputSpeed = speed;
+    this.speed = speed;
   }
 
   @Override
   public void execute() {
-    outtake.setSpeed(inputSpeed);
+    outtake.setSpeed(speed);
   }
 
   @Override
