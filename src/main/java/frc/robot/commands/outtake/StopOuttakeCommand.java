@@ -5,13 +5,13 @@ import frc.robot.subsystems.Outtake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
- * Repeatedly sets the outtake speed to 0.
+ * Repeatedly sets the {@link Outtake} speed to 0.
  */
 public class StopOuttakeCommand extends CommandBase {
   private final Outtake outtake;
 
   /**
-   * Creates a command that sets the outtake speed to 0.
+   * Creates a command that sets the {@link Outtake} speed to 0.
    *
    */
   public StopOuttakeCommand(Outtake outtake) {
