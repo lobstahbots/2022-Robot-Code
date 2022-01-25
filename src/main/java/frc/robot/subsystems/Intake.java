@@ -49,7 +49,7 @@ public class Intake extends SubsystemBase {
   /**
    * Sets the intake motor speed.
    * 
-   * @param intakeSpeed The speed of the intake motor
+   * @param newSpeed The speed of the intake motor
    * @throws IllegalStateException if trying to set speed while retracted
    */
   public void setSpinSpeed(double newSpeed) throws IllegalStateException {
