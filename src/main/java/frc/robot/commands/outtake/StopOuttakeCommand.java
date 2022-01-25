@@ -9,6 +9,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
  */
 public class StopOuttakeCommand extends CommandBase {
 
+  /**
+   * Creates a command that sets the outtake speed to a given double.
+   *
+   */
+  public StopOuttakeCommand() {
+
+  }
+
   @Override
   public void execute() {
 

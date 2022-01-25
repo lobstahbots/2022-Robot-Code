@@ -9,10 +9,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
  */
 public class RunOuttakeCommand extends CommandBase {
 
-  @Override
-  public void execute() {
+  /**
+   * Creates a command that sets the outtake speed to a given double.
+   * 
+   * @param outtakeSpeed The speed to set the outtake to.
+   */
+  public RunOuttakeCommand(double outtakeSpeed) {
 
   }
+
+  @Override
+  public void execute() {}
 
   @Override
   public boolean isFinished() {
