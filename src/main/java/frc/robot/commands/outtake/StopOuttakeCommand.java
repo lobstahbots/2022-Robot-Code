@@ -16,6 +16,7 @@ public class StopOuttakeCommand extends CommandBase {
    */
   public StopOuttakeCommand(Outtake outtake) {
     this.outtake = outtake;
+    addRequirements(outtake);
   }
 
   @Override

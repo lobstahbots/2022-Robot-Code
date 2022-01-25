@@ -18,6 +18,7 @@ public class RunOuttakeCommand extends CommandBase {
    */
   public RunOuttakeCommand(Outtake outtake, double speed) {
     this.outtake = outtake;
+    addRequirements(outtake);
     inputSpeed = speed;
   }
 
