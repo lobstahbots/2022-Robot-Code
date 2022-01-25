@@ -9,17 +9,30 @@ import java.util.function.Supplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
 
+/**
+ * Runs a {@link Climber}
+ */
 public class RunClimberCommand extends CommandBase {
   private final Climber climber;
   private final Supplier<Double> speedSupplier;
 
-  /** Creates a new RunClimberCommand. */
+  /**
+   * Runs the {@link Climber} at the given speed
+   * 
+   * @param climber The {@link Climber} to run
+   * @param speed The speed to run at
+   */
   public RunClimberCommand(Climber climber, double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
     this(climber, () -> speed);
   }
 
-  /** Creates a new RunClimberCommand. */
+  /**
+   * Runs the {@link Climber} at the speed given by the supplier
+   * 
+   * @param climber The {@link Climber} to run
+   * @param speed Supplier for the speed to run at
+   */
   public RunClimberCommand(Climber climber, Supplier<Double> speedSupplier) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.climber = climber;

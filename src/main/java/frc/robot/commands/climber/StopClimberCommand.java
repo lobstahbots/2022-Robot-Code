@@ -4,10 +4,15 @@ package frc.robot.commands.climber;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
 
+/**
+ * Stops the {@link Climber} while active
+ */
 public class StopClimberCommand extends CommandBase {
   private final Climber climber;
 
-  /** Creates a new StopClimberCommand. */
+  /**
+   * @param climber the {@link Climber} to stop
+   */
   public StopClimberCommand(Climber climber) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.climber = climber;
