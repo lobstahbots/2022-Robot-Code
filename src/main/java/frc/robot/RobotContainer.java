@@ -5,8 +5,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants.IOConstants;
 import frc.robot.commands.auton.SimpleAutonCommand;
 import frc.robot.subsystems.DriveBase;
 
@@ -19,6 +21,10 @@ import frc.robot.subsystems.DriveBase;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveBase driveBase = new DriveBase(0, 1, 2, 3); // TODO: remove dummy port values
+  private final Joystick primaryDriverJoystick =
+      new Joystick(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
+  private final Joystick secondaryDriverJoystick =
+      new Joystick(IOConstants.SECONDARY_DRIVER_JOYSTICK_PORT);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
