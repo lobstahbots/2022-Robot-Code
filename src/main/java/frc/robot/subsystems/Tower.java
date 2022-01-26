@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  * A subsystem that controls the Tower on a robot
  */
 public class Tower extends SubsystemBase {
-  /** Creates a new Tower. */
   private final CANSparkMax towerMotor;
 
   /**
