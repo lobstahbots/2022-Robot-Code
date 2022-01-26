@@ -31,7 +31,7 @@ public class RunClimberCommand extends CommandBase {
    * Runs the {@link Climber} at the speed given by the supplier
    * 
    * @param climber The {@link Climber} to run
-   * @param speed Supplier for the speed to run at
+   * @param speedSupplier Supplier for the speed to run at
    */
   public RunClimberCommand(Climber climber, Supplier<Double> speedSupplier) {
     // Use addRequirements() here to declare subsystem dependencies.
