@@ -21,7 +21,7 @@ public class StopSpinIntakeCommand extends CommandBase {
    */
   public StopSpinIntakeCommand(Intake intake) {
     this.intake = intake;
-    addRequirements(intake);
+    addRequirements(this.intake);
   }
 
   @Override
