@@ -23,7 +23,6 @@ public class RunClimberCommand extends CommandBase {
    * @param speed The speed to run at
    */
   public RunClimberCommand(Climber climber, double speed) {
-    // Use addRequirements() here to declare subsystem dependencies.
     this(climber, () -> speed);
   }
 
@@ -34,25 +33,21 @@ public class RunClimberCommand extends CommandBase {
    * @param speedSupplier Supplier for the speed to run at
    */
   public RunClimberCommand(Climber climber, Supplier<Double> speedSupplier) {
-    // Use addRequirements() here to declare subsystem dependencies.
     this.climber = climber;
     this.speedSupplier = speedSupplier;
     addRequirements(this.climber);
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     climber.setSpeed(speedSupplier.get());
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     climber.setSpeed(0);
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;
