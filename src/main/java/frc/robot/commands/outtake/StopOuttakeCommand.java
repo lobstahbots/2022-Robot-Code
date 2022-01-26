@@ -12,7 +12,8 @@ public class StopOuttakeCommand extends CommandBase {
 
   /**
    * Creates a command that sets the {@link Outtake} speed to 0.
-   *
+   * 
+   * @param outtake The outtake to control.
    */
   public StopOuttakeCommand(Outtake outtake) {
     this.outtake = outtake;

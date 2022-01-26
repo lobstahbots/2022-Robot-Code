@@ -14,7 +14,8 @@ public class RunOuttakeCommand extends CommandBase {
   /**
    * Creates a command that sets the {@link Outtake} speed to a specified double.
    * 
-   * @param outtakeSpeed The speed to set the outtake to.
+   * @param speed The speed to set the outtake to.
+   * @param outtake The outtake to control.
    */
   public RunOuttakeCommand(Outtake outtake, double speed) {
     this.outtake = outtake;
