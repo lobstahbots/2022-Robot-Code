@@ -26,11 +26,6 @@ public class StopOuttakeCommand extends CommandBase {
   }
 
   @Override
-  public void end(boolean interrupted) {
-    outtake.setSpeed(0);
-  }
-
-  @Override
   public boolean isFinished() {
     return false;
   }
