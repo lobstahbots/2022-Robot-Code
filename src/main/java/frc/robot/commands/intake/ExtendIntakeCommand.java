@@ -18,8 +18,6 @@ public class ExtendIntakeCommand extends InstantCommand {
    * @param intake The {@link Intake} to control.
    */
   public ExtendIntakeCommand(Intake intake) {
-    super(() -> {
-      intake.setExtended();
-    }, intake);
+    super(intake::setExtended, intake);
   }
 }

@@ -18,8 +18,6 @@ public class RetractIntakeCommand extends InstantCommand {
    * @param intake The {@link Intake} to control.
    */
   public RetractIntakeCommand(Intake intake) {
-    super(() -> {
-      intake.setRetracted();
-    }, intake);
+    super(intake::setRetracted, intake);
   }
 }

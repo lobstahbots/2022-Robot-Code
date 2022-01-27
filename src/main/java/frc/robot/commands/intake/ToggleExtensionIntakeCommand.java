@@ -19,8 +19,6 @@ public class ToggleExtensionIntakeCommand extends InstantCommand {
    * @param intake The {@link Intake} to control.
    */
   public ToggleExtensionIntakeCommand(Intake intake) {
-    super(() -> {
-      intake.toggle();
-    }, intake);
+    super(intake::toggle, intake);
   }
 }
