@@ -11,7 +11,7 @@ public class StopClimberCommand extends CommandBase {
   private final Climber climber;
 
   /**
-   * @param climber the {@link Climber} to stop
+   * @param climber The {@link Climber} to stop
    */
   public StopClimberCommand(Climber climber) {
     this.climber = climber;
