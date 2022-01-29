@@ -16,7 +16,7 @@ public class StopTowerCommand extends CommandBase {
   /**
    * Creates a command that stops a {@link Tower}
    * 
-   * @param tower the {@link tower} to stop
+   * @param tower the {@link Tower} to stop
    */
   public StopTowerCommand(Tower tower) {
     this.tower = tower;
