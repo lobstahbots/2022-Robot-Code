@@ -31,7 +31,7 @@ public class RobotContainer {
       new Joystick(IOConstants.SECONDARY_DRIVER_JOYSTICK_PORT);
   private final JoystickButton outtakeButton =
       new JoystickButton(secondaryDriverJoystick,
-          Constants.IOConstants.OUTTAKE_MOTOR_BUTTON_NUMBER);
+          Constants.IOConstants.OUTTAKE_BUTTON_NUMBER);
 
 
   /**
