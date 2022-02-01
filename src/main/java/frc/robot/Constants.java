@@ -16,6 +16,8 @@ package frc.robot;
 public final class Constants {
   public static final double SIMPLE_AUTON_SPEED = 0.2; // PLACEHOLDER
   public static final double SIMPLE_AUTON_RUNTIME = 5.0; // PLACEHOLDER
+  public static final double OUTTAKE_SPEED = 5.0; // PLACEHOLDER
+  public static final int OUTTAKE_ID = 1; // PLACEHOLDER
 
   /**
    * Stores constants related to driver controls, SmartDashboard and other IO (Input/Output).
