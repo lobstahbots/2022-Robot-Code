@@ -16,8 +16,6 @@ package frc.robot;
 public final class Constants {
   public static final double SIMPLE_AUTON_SPEED = 0.2; // PLACEHOLDER
   public static final double SIMPLE_AUTON_RUNTIME = 5.0; // PLACEHOLDER
-  public static final double OUTTAKE_SPEED = 5.0; // PLACEHOLDER
-  public static final int OUTTAKE_ID = 1; // PLACEHOLDER
 
   /**
    * Stores constants related to driver controls, SmartDashboard and other IO (Input/Output).
@@ -25,6 +23,15 @@ public final class Constants {
   public final class IOConstants {
     public static final int PRIMARY_DRIVER_JOYSTICK_PORT = 0;
     public static final int SECONDARY_DRIVER_JOYSTICK_PORT = 1;
+    public static final int OUTTAKE_MOTOR_BUTTON_NUMBER = 1; // PLACEHOLDER
+  }
+
+  /**
+   * Stores constants related to the Outtake.
+   */
+  public final class OuttakeConstants {
+    public static final double OUTTAKE_SPEED = 5.0; // PLACEHOLDER
+    public static final int OUTTAKE_MOTOR_ID = 1; // PLACEHOLDER
   }
 
 }

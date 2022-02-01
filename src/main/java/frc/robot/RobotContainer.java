@@ -24,13 +24,14 @@ import frc.robot.commands.outtake.*;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveBase driveBase = new DriveBase(0, 1, 2, 3); // TODO: remove dummy port values
-  private final Outtake outtake = new Outtake(Constants.OUTTAKE_ID);
+  private final Outtake outtake = new Outtake(Constants.OuttakeConstants.OUTTAKE_MOTOR_ID);
   private final Joystick primaryDriverJoystick =
       new Joystick(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
   private final Joystick secondaryDriverJoystick =
       new Joystick(IOConstants.SECONDARY_DRIVER_JOYSTICK_PORT);
-  private final JoystickButton secondaryDriverButton1 =
-      new JoystickButton(secondaryDriverJoystick, 1);
+  private final JoystickButton outtakeButton =
+      new JoystickButton(secondaryDriverJoystick,
+          Constants.IOConstants.OUTTAKE_MOTOR_BUTTON_NUMBER);
 
 
   /**
@@ -51,7 +52,8 @@ public class RobotContainer {
     /**
      * Code to add Outtake support in teleop.
      */
-    secondaryDriverButton1.whenActive(new RunOuttakeCommand(outtake, Constants.OUTTAKE_SPEED))
+    outtakeButton
+        .whenActive(new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED))
         .whenInactive(new StopOuttakeCommand(outtake));
   }
 
