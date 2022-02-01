@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -28,6 +27,7 @@ import frc.robot.commands.outtake.*;
 import frc.robot.commands.tower.RunTowerCommand;
 import frc.robot.commands.tower.StopTowerCommand;
 
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -44,12 +44,12 @@ public class RobotContainer {
   private final Outtake outtake = new Outtake(Constants.OuttakeConstants.OUTTAKE_MOTOR_ID1,
       Constants.OuttakeConstants.OUTTAKE_MOTOR_ID2);
   private final Tower tower = new Tower(TowerConstants.TOWER_MOTOR_ID);
-  
+
   private final Joystick primaryDriverJoystick =
       new Joystick(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
   private final Joystick secondaryDriverJoystick =
       new Joystick(IOConstants.SECONDARY_DRIVER_JOYSTICK_PORT);
-  
+
   private final JoystickButton frontIntakeButton =
       new JoystickButton(secondaryDriverJoystick, IOConstants.FRONT_INTAKE_BUTTON_NUMBER);
   private final JoystickButton backIntakeButton =
@@ -73,8 +73,6 @@ public class RobotContainer {
    * instantiating a {@link GenericHID} or one of its subclasses
    * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   *
-   * Configures a button to control each intake.
    */
   private void configureButtonBindings() {
     outtakeButton
@@ -83,7 +81,7 @@ public class RobotContainer {
     towerButton
         .whenActive(new RunTowerCommand(tower, TowerConstants.TOWER_SPEED))
         .whenInactive(new StopTowerCommand(tower));
-    
+
     configureIntakeButton(frontIntake, frontIntakeButton);
     configureIntakeButton(backIntake, backIntakeButton);
   }

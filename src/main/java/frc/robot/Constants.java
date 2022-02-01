@@ -26,7 +26,7 @@ public final class Constants {
 
     public static final int FRONT_INTAKE_BUTTON_NUMBER = 0; // PLACEHOLDER
     public static final int BACK_INTAKE_BUTTON_NUMBER = 1; // PLACEHOLDER
-    
+
     public static final int OUTTAKE_BUTTON_NUMBER = 1; // PLACEHOLDER
     public static final int TOWER_BUTTON_NUMBER = 1; // PLACEHOLDER
   }
