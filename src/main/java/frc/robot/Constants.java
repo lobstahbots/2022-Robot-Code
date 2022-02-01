@@ -31,7 +31,8 @@ public final class Constants {
    */
   public final class OuttakeConstants {
     public static final double OUTTAKE_SPEED = 0.5; // PLACEHOLDER
-    public static final int OUTTAKE_MOTOR_ID = 1; // PLACEHOLDER
+    public static final int OUTTAKE_MOTOR_ID1 = 1; // PLACEHOLDER
+    public static final int OUTTAKE_MOTOR_ID2 = 2; // PLACEHOLDER
   }
 
 }

@@ -24,7 +24,8 @@ import frc.robot.commands.outtake.*;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveBase driveBase = new DriveBase(0, 1, 2, 3); // TODO: remove dummy port values
-  private final Outtake outtake = new Outtake(Constants.OuttakeConstants.OUTTAKE_MOTOR_ID);
+  private final Outtake outtake = new Outtake(Constants.OuttakeConstants.OUTTAKE_MOTOR_ID1,
+      Constants.OuttakeConstants.OUTTAKE_MOTOR_ID2);
   private final Joystick primaryDriverJoystick =
       new Joystick(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
   private final Joystick secondaryDriverJoystick =
