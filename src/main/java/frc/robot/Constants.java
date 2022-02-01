@@ -33,11 +33,11 @@ public final class Constants {
 
     public static final int INTAKE_1_MOTOR_ID = 0; // PLACEHOLDER
     public static final int INTAKE_1_FORWARD_CHANNEL = 0; // PLACEHOLDER
-    public static final int INTAKE_1_REVERSE_CHANNEL = 0; // PLACEHOLDER
+    public static final int INTAKE_1_REVERSE_CHANNEL = 1; // PLACEHOLDER
 
-    public static final int INTAKE_2_MOTOR_ID = 0; // PLACEHOLDER
+    public static final int INTAKE_2_MOTOR_ID = 1; // PLACEHOLDER
     public static final int INTAKE_2_FORWARD_CHANNEL = 0; // PLACEHOLDER
-    public static final int INTAKE_2_REVERSE_CHANNEL = 0; // PLACEHOLDER
+    public static final int INTAKE_2_REVERSE_CHANNEL = 1; // PLACEHOLDER
   }
 
 }
