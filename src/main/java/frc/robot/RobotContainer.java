@@ -8,9 +8,12 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.IOConstants;
 import frc.robot.commands.auton.SimpleAutonCommand;
 import frc.robot.subsystems.DriveBase;
+import frc.robot.subsystems.Outtake;
+import frc.robot.commands.outtake.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -21,10 +24,15 @@ import frc.robot.subsystems.DriveBase;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveBase driveBase = new DriveBase(0, 1, 2, 3); // TODO: remove dummy port values
+  private final Outtake outtake = new Outtake(Constants.OuttakeConstants.OUTTAKE_MOTOR_ID);
   private final Joystick primaryDriverJoystick =
       new Joystick(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
   private final Joystick secondaryDriverJoystick =
       new Joystick(IOConstants.SECONDARY_DRIVER_JOYSTICK_PORT);
+  private final JoystickButton outtakeButton =
+      new JoystickButton(secondaryDriverJoystick,
+          Constants.IOConstants.OUTTAKE_BUTTON_NUMBER);
+
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -40,7 +48,14 @@ public class RobotContainer {
    * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    /**
+     * Code to add Outtake support in teleop.
+     */
+    outtakeButton
+        .whenActive(new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED))
+        .whenInactive(new StopOuttakeCommand(outtake));
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
