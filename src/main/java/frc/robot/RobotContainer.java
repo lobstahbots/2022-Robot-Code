@@ -51,6 +51,11 @@ public class RobotContainer {
   }
 
   /**
+   * Use this method to define your button->command mappings. Buttons can be created by
+   * instantiating a {@link GenericHID} or one of its subclasses
+   * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
+   * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   *
    * Configures a button to control each intake.
    */
   private void configureButtonBindings() {
@@ -67,9 +72,9 @@ public class RobotContainer {
    */
   private void controlIntakeButton(Intake intake, Button button) {
     button
-        .whileHeld(new SequentialCommandGroup(new ExtendIntakeCommand(intake),
+        .whenActive(new SequentialCommandGroup(new ExtendIntakeCommand(intake),
             new SpinIntakeCommand(intake, IntakeConstants.INTAKE_SPEED)))
-        .whenReleased(new SequentialCommandGroup(new StopSpinIntakeCommand(intake),
+        .whenInactive(new SequentialCommandGroup(new StopSpinIntakeCommand(intake),
             new RetractIntakeCommand(intake)));
   }
 
