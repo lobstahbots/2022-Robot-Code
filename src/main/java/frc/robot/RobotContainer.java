@@ -7,9 +7,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.IOConstants;
+import frc.robot.commands.auton.MediumAutonCommand;
 import frc.robot.commands.auton.SimpleAutonCommand;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Outtake;
@@ -68,4 +70,22 @@ public class RobotContainer {
         Constants.SIMPLE_AUTON_SPEED,
         Constants.SIMPLE_AUTON_RUNTIME);
   }
+
+  // A simple auto routine.
+  private final Command m_simpleAuto =
+      new SimpleAutonCommand(driveBase, Constants.SIMPLE_AUTON_SPEED, Constants.SIMPLE_AUTON_RUNTIME);
+
+  // A medium auto routine.
+  private final Command m_mediumAuto =
+  new MediumAutonCommand(driveBase, outtake, Constants.OuttakeConstants.OUTTAKE_SPEED, Constants.SIMPLE_AUTON_SPEED, Constants.MEDIUM_AUTON_OUTAKE_RUNTIME ,Constants.SIMPLE_AUTON_RUNTIME);
+
+  // A chooser for autonomous commands
+  SendableChooser<Command> m_chooser = new SendableChooser<>();
+
+  // Add commands to the autonomous command chooser
+  m_chooser.setDefaultOption("Simple Auto", m_simpleAuto);
+  m_chooser.addOption("Medium Auto", m_mediumAuto);
+
+  // Put the chooser on the dashboard
+  SmartDashboard.putData(m_chooser);
 }
