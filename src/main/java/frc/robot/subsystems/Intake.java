@@ -10,13 +10,16 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.IntakeConstants;
 
 /**
  * A subsystem that controls the intake on a robot.
  */
 public class Intake extends SubsystemBase {
-  private final DoubleSolenoid solenoid;
+  private final DoubleSolenoid topSolenoid;
+  private final DoubleSolenoid bottomSolenoid;
   private final CANSparkMax intakeMotor;
 
   /**
@@ -24,11 +27,15 @@ public class Intake extends SubsystemBase {
    * {@link DoubleSolenoid} with the given forward and reverse channels.
    *
    * @param intakeMotorID The CAN ID of the intake motor
-   * @param forwardChannel The forward channel
-   * @param reverseChannel The reverse channel
+   * @param topForwardChannel The forward channel of the top solenoid
+   * @param topReverseChannel The reverse channel of the top solenoid
+   * @param bottomForwardChannel The forward channel of the bottom solenoid
+   * @param bottomReverseChannel The reverse channel of the bottom solenoid
    */
-  public Intake(int intakeMotorID, int forwardChannel, int reverseChannel) {
-    this(intakeMotorID, MotorType.kBrushless, forwardChannel, reverseChannel);
+  public Intake(int intakeMotorID, int topForwardChannel, int topReverseChannel,
+      int bottomForwardChannel, int bottomReverseChannel) {
+    this(intakeMotorID, MotorType.kBrushless, topForwardChannel, topReverseChannel,
+        bottomForwardChannel, bottomReverseChannel);
   }
 
   /**
@@ -40,8 +47,12 @@ public class Intake extends SubsystemBase {
    * @param forwardChannel The forward channel
    * @param reverseChannel The reverse channel
    */
-  public Intake(int intakeMotorID, MotorType motorType, int forwardChannel, int reverseChannel) {
-    solenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, forwardChannel, reverseChannel);
+  public Intake(int intakeMotorID, MotorType motorType, int topForwardChannel,
+      int topReverseChannel, int bottomForwardChannel, int bottomReverseChannel) {
+    topSolenoid =
+        new DoubleSolenoid(PneumaticsModuleType.REVPH, topForwardChannel, topReverseChannel);
+    bottomSolenoid =
+        new DoubleSolenoid(PneumaticsModuleType.REVPH, bottomForwardChannel, bottomReverseChannel);
     intakeMotor = new CANSparkMax(intakeMotorID, motorType);
     intakeMotor.setIdleMode(IdleMode.kBrake);
   }
@@ -63,21 +74,21 @@ public class Intake extends SubsystemBase {
    * Detects if the intake is retracted.
    */
   public boolean isRetracted() {
-    return solenoid.get() == DoubleSolenoid.Value.kReverse;
+    return topSolenoid.get() == DoubleSolenoid.Value.kReverse;
   }
 
   /**
    * Detects if the intake is extended.
    */
   public boolean isExtended() {
-    return solenoid.get() == DoubleSolenoid.Value.kForward;
+    return topSolenoid.get() == DoubleSolenoid.Value.kForward;
   }
 
   /**
    * Detects if the intake is in neutral extension.
    */
   public boolean isNeutralExtension() {
-    return solenoid.get() == DoubleSolenoid.Value.kOff;
+    return topSolenoid.get() == DoubleSolenoid.Value.kOff;
   }
 
   /**
@@ -85,7 +96,7 @@ public class Intake extends SubsystemBase {
    * it to Retracted.
    */
   public void toggle() {
-    switch (solenoid.get()) {
+    switch (topSolenoid.get()) {
       case kReverse:
         setExtended();
         return;
@@ -101,20 +112,25 @@ public class Intake extends SubsystemBase {
    */
   public void setRetracted() {
     setSpinSpeed(0.0);
-    solenoid.set(DoubleSolenoid.Value.kReverse);
+    bottomSolenoid.set(DoubleSolenoid.Value.kReverse);
+    Timer.delay(IntakeConstants.INTAKE_SOLENOIDS_DELAY_TIME);
+    topSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
   /**
    * Sets the intake to Neutral extension.
    */
   public void setNeutralExtension() {
-    solenoid.set(DoubleSolenoid.Value.kOff);
+    topSolenoid.set(DoubleSolenoid.Value.kOff);
+    bottomSolenoid.set(DoubleSolenoid.Value.kOff);
   }
 
   /**
    * Extends the intake.
    */
   public void setExtended() {
-    solenoid.set(DoubleSolenoid.Value.kForward);
+    topSolenoid.set(DoubleSolenoid.Value.kForward);
+    Timer.delay(IntakeConstants.INTAKE_SOLENOIDS_DELAY_TIME);
+    bottomSolenoid.set(DoubleSolenoid.Value.kForward);
   }
 }

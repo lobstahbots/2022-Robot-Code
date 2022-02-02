@@ -34,4 +34,11 @@ public final class Constants {
     public static final int OUTTAKE_MOTOR_ID = 1; // PLACEHOLDER
   }
 
+  /**
+   * Stores constants related to Intake.
+   */
+  public final class IntakeConstants {
+    public static final double INTAKE_SOLENOIDS_DELAY_TIME = 1.0;
+  }
+
 }
