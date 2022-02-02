@@ -44,8 +44,10 @@ public class Intake extends SubsystemBase {
    *
    * @param intakeMotorID The CAN ID of the intake motor
    * @param motorType The motor type of the intake motor
-   * @param forwardChannel The forward channel
-   * @param reverseChannel The reverse channel
+   * @param topForwardChannel The forward channel of the top solenoid
+   * @param topReverseChannel The reverse channel of the top solenoid
+   * @param bottomForwardChannel The forward channel of the bottom solenoid
+   * @param bottomReverseChannel The reverse channel of the bottom solenoid
    */
   public Intake(int intakeMotorID, MotorType motorType, int topForwardChannel,
       int topReverseChannel, int bottomForwardChannel, int bottomReverseChannel) {
@@ -92,8 +94,8 @@ public class Intake extends SubsystemBase {
   }
 
   /**
-   * Toggles the {@link DoubleSolenoid.Value} between Extended and Retracted. If in neutral toggles
-   * it to Retracted.
+   * Toggles the {@link DoubleSolenoid.Value}s between Extended and Retracted. If in neutral toggles
+   * them to Retracted.
    */
   public void toggle() {
     switch (topSolenoid.get()) {
