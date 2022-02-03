@@ -19,6 +19,8 @@ import frc.robot.commands.intake.SpinIntakeCommand;
 import frc.robot.commands.intake.StopSpinIntakeCommand;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Outtake;
+import frc.robot.commands.outtake.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -33,14 +35,20 @@ public class RobotContainer {
       IntakeConstants.INTAKE_1_FORWARD_CHANNEL, IntakeConstants.INTAKE_1_REVERSE_CHANNEL);
   private final Intake intake2 = new Intake(IntakeConstants.INTAKE_2_MOTOR_ID,
       IntakeConstants.INTAKE_2_FORWARD_CHANNEL, IntakeConstants.INTAKE_2_REVERSE_CHANNEL);
+  private final Outtake outtake = new Outtake(Constants.OuttakeConstants.OUTTAKE_MOTOR_ID);
+
   private final Joystick primaryDriverJoystick =
       new Joystick(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
   private final Joystick secondaryDriverJoystick =
       new Joystick(IOConstants.SECONDARY_DRIVER_JOYSTICK_PORT);
+  
   private final JoystickButton intake1Button =
       new JoystickButton(secondaryDriverJoystick, IOConstants.INTAKE_1_BUTTON_NUMBER);
   private final JoystickButton intake2Button =
       new JoystickButton(secondaryDriverJoystick, IOConstants.INTAKE_2_BUTTON_NUMBER);
+  private final JoystickButton outtakeButton =
+      new JoystickButton(secondaryDriverJoystick,
+          Constants.IOConstants.OUTTAKE_BUTTON_NUMBER);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -59,6 +67,10 @@ public class RobotContainer {
    * Configures a button to control each intake.
    */
   private void configureButtonBindings() {
+    outtakeButton
+        .whenActive(new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED))
+        .whenInactive(new StopOuttakeCommand(outtake));
+    
     controlIntakeButton(intake1, intake1Button);
     controlIntakeButton(intake2, intake2Button);
   }

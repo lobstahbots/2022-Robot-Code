@@ -26,6 +26,8 @@ public final class Constants {
 
     public static final int INTAKE_1_BUTTON_NUMBER = 0; // PLACEHOLDER
     public static final int INTAKE_2_BUTTON_NUMBER = 1; // PLACEHOLDER
+    
+    public static final int OUTTAKE_BUTTON_NUMBER = 2; // PLACEHOLDER
   }
 
   public final class IntakeConstants {
@@ -38,6 +40,14 @@ public final class Constants {
     public static final int INTAKE_2_MOTOR_ID = 1; // PLACEHOLDER
     public static final int INTAKE_2_FORWARD_CHANNEL = 0; // PLACEHOLDER
     public static final int INTAKE_2_REVERSE_CHANNEL = 1; // PLACEHOLDER
+  }
+
+  /**
+   * Stores constants related to the Outtake.
+   */
+  public final class OuttakeConstants {
+    public static final double OUTTAKE_SPEED = 0.5; // PLACEHOLDER
+    public static final int OUTTAKE_MOTOR_ID = 1; // PLACEHOLDER
   }
 
 }
