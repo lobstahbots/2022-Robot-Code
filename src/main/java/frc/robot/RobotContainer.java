@@ -14,10 +14,14 @@ import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.IOConstants;
+import frc.robot.Constants.TowerConstants;
 import frc.robot.commands.auton.SimpleAutonCommand;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Outtake;
+import frc.robot.subsystems.Tower;
 import frc.robot.commands.outtake.*;
+import frc.robot.commands.tower.RunTowerCommand;
+import frc.robot.commands.tower.StopTowerCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -29,6 +33,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveBase driveBase = new DriveBase(0, 1, 2, 3); // TODO: remove dummy port values
   private final Outtake outtake = new Outtake(Constants.OuttakeConstants.OUTTAKE_MOTOR_ID);
+  private final Tower tower = new Tower(TowerConstants.TOWER_MOTOR_ID);
 
   private final Joystick primaryDriverJoystick =
       new Joystick(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
@@ -38,6 +43,8 @@ public class RobotContainer {
   private final JoystickButton outtakeButton =
       new JoystickButton(secondaryDriverJoystick,
           Constants.IOConstants.OUTTAKE_BUTTON_NUMBER);
+  private final JoystickButton towerButton =
+      new JoystickButton(secondaryDriverJoystick, IOConstants.TOWER_BUTTON_NUMBER);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -56,11 +63,14 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     /**
-     * Code to add Outtake support in teleop.
+     * Code to add Outtake and Tower support in teleop.
      */
     outtakeButton
         .whenActive(new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED))
         .whenInactive(new StopOuttakeCommand(outtake));
+    towerButton
+        .whenActive(new RunTowerCommand(tower, TowerConstants.TOWER_SPEED))
+        .whenInactive(new StopTowerCommand(tower));
   }
 
   // A simple auto routine.
