@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.IOConstants;
 import frc.robot.Constants.TowerConstants;
 import frc.robot.commands.auton.SimpleAutonCommand;
+import frc.robot.commands.drive.StopDriveCommand;
 import frc.robot.commands.drive.TankDriveCommand;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Outtake;
@@ -80,9 +81,27 @@ public class RobotContainer {
         Constants.SIMPLE_AUTON_RUNTIME);
   }
 
-  public Command getTankDriveCommand() {
-    return new TankDriveCommand(
-        driveBase, () -> -primaryDriverJoystick.getRawAxis(0),
-        () -> primaryDriverJoystick.getRawAxis(1));
+  /**
+   * Robot.java should run this method when teleop starts.
+   * This method should be used to set the default commands for subsystems while in teleop.
+   * If you set a default here, set a corresponding auton default in setAutonDefaultCommands().
+   */
+  public void setTeleopDefaultCommands() {
+    driveBase.setDefaultCommand(
+        new TankDriveCommand(
+            driveBase,
+            () -> primaryDriverJoystick.getRawAxis(0),
+            () -> primaryDriverJoystick.getRawAxis(1)));
   }
+
+  /**
+   * Robot.java should run this method when auton starts.
+   * This method should be used to set the default commands for subsystems while in auton.
+   * If you set a default here, set a corresponding teleop default in setTeleopDefaultCommands().
+   */
+  public void setAutonDefaultCommands() {
+    driveBase.setDefaultCommand(new StopDriveCommand(driveBase));
+  }
+
+
 }
