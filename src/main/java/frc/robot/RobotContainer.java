@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.IOConstants;
 import frc.robot.Constants.IntakeConstants;
+import frc.robot.Constants.TowerConstants;
 import frc.robot.commands.auton.SimpleAutonCommand;
 import frc.robot.commands.intake.ExtendIntakeCommand;
 import frc.robot.commands.intake.RetractIntakeCommand;
@@ -20,7 +21,10 @@ import frc.robot.commands.intake.StopSpinIntakeCommand;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Outtake;
+import frc.robot.subsystems.Tower;
 import frc.robot.commands.outtake.*;
+import frc.robot.commands.tower.RunTowerCommand;
+import frc.robot.commands.tower.StopTowerCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -36,7 +40,8 @@ public class RobotContainer {
   private final Intake backIntake = new Intake(IntakeConstants.BACK_INTAKE_MOTOR_ID,
       IntakeConstants.BACK_INTAKE_FORWARD_CHANNEL, IntakeConstants.BACK_INTAKE_REVERSE_CHANNEL);
   private final Outtake outtake = new Outtake(Constants.OuttakeConstants.OUTTAKE_MOTOR_ID);
-
+  private final Tower tower = new Tower(TowerConstants.TOWER_MOTOR_ID);
+  
   private final Joystick primaryDriverJoystick =
       new Joystick(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
   private final Joystick secondaryDriverJoystick =
@@ -49,6 +54,8 @@ public class RobotContainer {
   private final JoystickButton outtakeButton =
       new JoystickButton(secondaryDriverJoystick,
           Constants.IOConstants.OUTTAKE_BUTTON_NUMBER);
+  private final JoystickButton towerButton =
+      new JoystickButton(secondaryDriverJoystick, IOConstants.TOWER_BUTTON_NUMBER);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -70,6 +77,9 @@ public class RobotContainer {
     outtakeButton
         .whenActive(new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED))
         .whenInactive(new StopOuttakeCommand(outtake));
+    towerButton
+        .whenActive(new RunTowerCommand(tower, TowerConstants.TOWER_SPEED))
+        .whenInactive(new StopTowerCommand(tower));
     
     configureIntakeButton(frontIntake, frontIntakeButton);
     configureIntakeButton(backIntake, backIntakeButton);

@@ -27,9 +27,13 @@ public final class Constants {
     public static final int FRONT_INTAKE_BUTTON_NUMBER = 0; // PLACEHOLDER
     public static final int BACK_INTAKE_BUTTON_NUMBER = 1; // PLACEHOLDER
     
-    public static final int OUTTAKE_BUTTON_NUMBER = 2; // PLACEHOLDER
+    public static final int OUTTAKE_BUTTON_NUMBER = 1; // PLACEHOLDER
+    public static final int TOWER_BUTTON_NUMBER = 1; // PLACEHOLDER
   }
 
+  /**
+   * Stores constants related to the Intake.
+   */
   public final class IntakeConstants {
     public static final double INTAKE_SPEED = 1.0; // PLACEHOLDER
 
@@ -49,5 +53,14 @@ public final class Constants {
     public static final double OUTTAKE_SPEED = 0.5; // PLACEHOLDER
     public static final int OUTTAKE_MOTOR_ID = 1; // PLACEHOLDER
   }
+
+  /**
+   * Stores constants related to the Tower.
+   */
+  public final class TowerConstants {
+    public static final double TOWER_SPEED = 1.0; // PLACEHOLDER
+    public static final int TOWER_MOTOR_ID = 1; // PLACEHOLDER
+  }
+
 
 }
