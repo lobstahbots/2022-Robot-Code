@@ -31,10 +31,10 @@ import frc.robot.commands.outtake.*;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveBase driveBase = new DriveBase(0, 1, 2, 3); // TODO: remove dummy port values
-  private final Intake intake1 = new Intake(IntakeConstants.INTAKE_1_MOTOR_ID,
-      IntakeConstants.INTAKE_1_FORWARD_CHANNEL, IntakeConstants.INTAKE_1_REVERSE_CHANNEL);
-  private final Intake intake2 = new Intake(IntakeConstants.INTAKE_2_MOTOR_ID,
-      IntakeConstants.INTAKE_2_FORWARD_CHANNEL, IntakeConstants.INTAKE_2_REVERSE_CHANNEL);
+  private final Intake frontIntake = new Intake(IntakeConstants.FRONT_INTAKE_MOTOR_ID,
+      IntakeConstants.FRONT_INTAKE_FORWARD_CHANNEL, IntakeConstants.FRONT_INTAKE_REVERSE_CHANNEL);
+  private final Intake backIntake = new Intake(IntakeConstants.BACK_INTAKE_MOTOR_ID,
+      IntakeConstants.BACK_INTAKE_FORWARD_CHANNEL, IntakeConstants.BACK_INTAKE_REVERSE_CHANNEL);
   private final Outtake outtake = new Outtake(Constants.OuttakeConstants.OUTTAKE_MOTOR_ID);
 
   private final Joystick primaryDriverJoystick =
@@ -42,10 +42,10 @@ public class RobotContainer {
   private final Joystick secondaryDriverJoystick =
       new Joystick(IOConstants.SECONDARY_DRIVER_JOYSTICK_PORT);
   
-  private final JoystickButton intake1Button =
-      new JoystickButton(secondaryDriverJoystick, IOConstants.INTAKE_1_BUTTON_NUMBER);
-  private final JoystickButton intake2Button =
-      new JoystickButton(secondaryDriverJoystick, IOConstants.INTAKE_2_BUTTON_NUMBER);
+  private final JoystickButton frontIntakeButton =
+      new JoystickButton(secondaryDriverJoystick, IOConstants.FRONT_INTAKE_BUTTON_NUMBER);
+  private final JoystickButton backIntakeButton =
+      new JoystickButton(secondaryDriverJoystick, IOConstants.BACK_INTAKE_BUTTON_NUMBER);
   private final JoystickButton outtakeButton =
       new JoystickButton(secondaryDriverJoystick,
           Constants.IOConstants.OUTTAKE_BUTTON_NUMBER);
@@ -71,8 +71,8 @@ public class RobotContainer {
         .whenActive(new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED))
         .whenInactive(new StopOuttakeCommand(outtake));
     
-    controlIntakeButton(intake1, intake1Button);
-    controlIntakeButton(intake2, intake2Button);
+    configureIntakeButton(frontIntake, frontIntakeButton);
+    configureIntakeButton(backIntake, backIntakeButton);
   }
 
   /**
@@ -82,7 +82,7 @@ public class RobotContainer {
    * @param intake The intake to control
    * @param button The button to configure
    */
-  private void controlIntakeButton(Intake intake, Button button) {
+  private void configureIntakeButton(Intake intake, Button button) {
     button
         .whenActive(new SequentialCommandGroup(new ExtendIntakeCommand(intake),
             new SpinIntakeCommand(intake, IntakeConstants.INTAKE_SPEED)))
