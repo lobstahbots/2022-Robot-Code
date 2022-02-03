@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.IOConstants;
@@ -27,14 +28,15 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveBase driveBase = new DriveBase(0, 1, 2, 3); // TODO: remove dummy port values
   private final Outtake outtake = new Outtake(Constants.OuttakeConstants.OUTTAKE_MOTOR_ID);
+
   private final Joystick primaryDriverJoystick =
       new Joystick(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
+
   private final Joystick secondaryDriverJoystick =
       new Joystick(IOConstants.SECONDARY_DRIVER_JOYSTICK_PORT);
   private final JoystickButton outtakeButton =
       new JoystickButton(secondaryDriverJoystick,
           Constants.IOConstants.OUTTAKE_BUTTON_NUMBER);
-
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -42,6 +44,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    configureSmartDash();
   }
 
   /**
@@ -59,30 +62,37 @@ public class RobotContainer {
         .whenInactive(new StopOuttakeCommand(outtake));
   }
 
+  // A simple auto routine.
+  private final Command simpleAuto =
+      new SimpleAutonCommand(driveBase, Constants.SIMPLE_AUTON_SPEED,
+          Constants.SIMPLE_AUTON_RUNTIME);
+
+  // A medium auto routine.
+  private final Command mediumAuto =
+      new MediumAutonCommand(driveBase, outtake, Constants.OuttakeConstants.OUTTAKE_SPEED,
+          Constants.SIMPLE_AUTON_SPEED, Constants.MEDIUM_AUTON_OUTAKE_RUNTIME,
+          Constants.SIMPLE_AUTON_RUNTIME);
+
+  private final SendableChooser<Command> autonChooser = new SendableChooser<>();
+
+  /**
+   * Use this method to run tasks that configure sendables and other smartdashboard items.
+   */
+  private void configureSmartDash() {
+    // Add commands to the autonomous command chooser
+    autonChooser.setDefaultOption("Simple Auton", simpleAuto);
+    autonChooser.addOption("Medium Auto", mediumAuto);
+
+    // Put the chooser on the dashboard
+    SmartDashboard.putData(autonChooser);
+  }
+
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return m_chooser.getSelected();
+    return autonChooser.getSelected();
   }
-
-  // A simple auto routine.
-  private final Command m_simpleAuto =
-      new SimpleAutonCommand(driveBase, Constants.SIMPLE_AUTON_SPEED, Constants.SIMPLE_AUTON_RUNTIME);
-
-  // A medium auto routine.
-  private final Command m_mediumAuto =
-      new MediumAutonCommand(driveBase, outtake, Constants.OuttakeConstants.OUTTAKE_SPEED, Constants.SIMPLE_AUTON_SPEED, Constants.MEDIUM_AUTON_OUTAKE_RUNTIME, Constants.SIMPLE_AUTON_RUNTIME);
-
-  // A chooser for autonomous commands
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
-
-  // Add commands to the autonomous command chooser
-  m_chooser.setDefaultOption("Simple Auto", m_simpleAuto);
-  m_chooser.addOption("Medium Auto", m_mediumAuto);
-
-  // Put the chooser on the dashboard
-  SmartDashboard.putData(m_chooser);
 }
