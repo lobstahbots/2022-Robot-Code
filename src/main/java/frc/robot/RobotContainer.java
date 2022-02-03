@@ -10,9 +10,10 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.IOConstants;
-import frc.robot.commands.auton.MediumAutonCommand;
 import frc.robot.commands.auton.SimpleAutonCommand;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Outtake;
@@ -69,9 +70,10 @@ public class RobotContainer {
 
   // A medium auto routine.
   private final Command mediumAuto =
-      new MediumAutonCommand(driveBase, outtake, Constants.OuttakeConstants.OUTTAKE_SPEED,
-          Constants.SIMPLE_AUTON_SPEED, Constants.MEDIUM_AUTON_OUTAKE_RUNTIME,
-          Constants.SIMPLE_AUTON_RUNTIME);
+      new ParallelDeadlineGroup(new WaitCommand(Constants.MEDIUM_AUTON_OUTAKE_RUNTIME),
+          new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED),
+          new SimpleAutonCommand(driveBase, Constants.SIMPLE_AUTON_SPEED,
+              Constants.SIMPLE_AUTON_RUNTIME));
 
   private final SendableChooser<Command> autonChooser = new SendableChooser<>();
 
