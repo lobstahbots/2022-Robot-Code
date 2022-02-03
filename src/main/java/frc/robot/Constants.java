@@ -24,6 +24,7 @@ public final class Constants {
     public static final int PRIMARY_DRIVER_JOYSTICK_PORT = 0;
     public static final int SECONDARY_DRIVER_JOYSTICK_PORT = 1;
     public static final int OUTTAKE_BUTTON_NUMBER = 1; // PLACEHOLDER
+    public static final int TOWER_BUTTON_NUMBER = 1; // PLACEHOLDER
   }
 
   /**
@@ -34,5 +35,14 @@ public final class Constants {
     public static final int OUTTAKE_MOTOR_ID1 = 1; // PLACEHOLDER
     public static final int OUTTAKE_MOTOR_ID2 = 2; // PLACEHOLDER
   }
+
+  /**
+   * Stores constants related to the Tower.
+   */
+  public final class TowerConstants {
+    public static final double TOWER_SPEED = 1.0; // PLACEHOLDER
+    public static final int TOWER_MOTOR_ID = 1; // PLACEHOLDER
+  }
+
 
 }
