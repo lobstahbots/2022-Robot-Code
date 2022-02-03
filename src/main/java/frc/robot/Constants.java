@@ -27,9 +27,11 @@ public final class Constants {
 
     public static final int FRONT_INTAKE_BUTTON_NUMBER = 0; // PLACEHOLDER
     public static final int BACK_INTAKE_BUTTON_NUMBER = 1; // PLACEHOLDER
-    
+
     public static final int OUTTAKE_BUTTON_NUMBER = 1; // PLACEHOLDER
     public static final int TOWER_BUTTON_NUMBER = 1; // PLACEHOLDER
+    public static final int CLIMBER_UP_BUTTON_NUMBER = 1; // PLACEHOLDER
+    public static final int CLIMBER_DOWN_BUTTON_NUMBER = 1; // PLACEHOLDER
   }
 
   /**
@@ -64,5 +66,12 @@ public final class Constants {
     public static final int TOWER_MOTOR_ID = 1; // PLACEHOLDER
   }
 
+  /**
+   * Stores constants related to the Climber.
+   */
+  public final class ClimberConstants {
+    public static final int CLIMBER_MOTOR_ID = 1; // PLACEHOLDER
+    public static final double CLIMBER_SPEED = 1.0; // PLACEHOLDER
+  }
 
 }

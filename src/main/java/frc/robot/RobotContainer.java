@@ -18,13 +18,17 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.IOConstants;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.TowerConstants;
+import frc.robot.Constants.ClimberConstants;
 import frc.robot.commands.auton.SimpleAutonCommand;
+import frc.robot.commands.climber.RunClimberCommand;
+import frc.robot.commands.climber.StopClimberCommand;
 import frc.robot.commands.drive.StopDriveCommand;
 import frc.robot.commands.drive.TankDriveCommand;
 import frc.robot.commands.intake.ExtendIntakeCommand;
 import frc.robot.commands.intake.RetractIntakeCommand;
 import frc.robot.commands.intake.SpinIntakeCommand;
 import frc.robot.commands.intake.StopSpinIntakeCommand;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Outtake;
@@ -49,12 +53,13 @@ public class RobotContainer {
   private final Outtake outtake = new Outtake(Constants.OuttakeConstants.OUTTAKE_MOTOR_ID1,
       Constants.OuttakeConstants.OUTTAKE_MOTOR_ID2);
   private final Tower tower = new Tower(TowerConstants.TOWER_MOTOR_ID);
+  private final Climber climber = new Climber(ClimberConstants.CLIMBER_MOTOR_ID);
 
   private final Joystick primaryDriverJoystick =
       new Joystick(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
   private final Joystick secondaryDriverJoystick =
       new Joystick(IOConstants.SECONDARY_DRIVER_JOYSTICK_PORT);
-  
+
   private final JoystickButton frontIntakeButton =
       new JoystickButton(secondaryDriverJoystick, IOConstants.FRONT_INTAKE_BUTTON_NUMBER);
   private final JoystickButton backIntakeButton =
@@ -64,6 +69,10 @@ public class RobotContainer {
           Constants.IOConstants.OUTTAKE_BUTTON_NUMBER);
   private final JoystickButton towerButton =
       new JoystickButton(secondaryDriverJoystick, IOConstants.TOWER_BUTTON_NUMBER);
+  private final JoystickButton climberUpButton =
+      new JoystickButton(secondaryDriverJoystick, IOConstants.CLIMBER_UP_BUTTON_NUMBER);
+  private final JoystickButton climberDownButton =
+      new JoystickButton(secondaryDriverJoystick, IOConstants.CLIMBER_DOWN_BUTTON_NUMBER);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -80,7 +89,7 @@ public class RobotContainer {
    * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    *
-   * Configures a button to control each intake.
+   * Configures a button to control each intake. Adds Outtake and Climber support in teleop.
    */
   private void configureButtonBindings() {
     outtakeButton
@@ -89,7 +98,13 @@ public class RobotContainer {
     towerButton
         .whenActive(new RunTowerCommand(tower, TowerConstants.TOWER_SPEED))
         .whenInactive(new StopTowerCommand(tower));
-    
+    climberUpButton
+        .whenActive(new RunClimberCommand(climber, ClimberConstants.CLIMBER_SPEED))
+        .whenInactive(new StopClimberCommand(climber));
+    climberDownButton
+        .whenActive(new RunClimberCommand(climber, -ClimberConstants.CLIMBER_SPEED))
+        .whenInactive(new StopClimberCommand(climber));
+
     configureIntakeButton(frontIntake, frontIntakeButton);
     configureIntakeButton(backIntake, backIntakeButton);
   }
