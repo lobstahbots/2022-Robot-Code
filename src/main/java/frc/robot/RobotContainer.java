@@ -37,13 +37,23 @@ import frc.robot.commands.tower.StopTowerCommand;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveBase driveBase = new DriveBase(0, 1, 2, 3); // TODO: remove dummy port values
-  private final Intake frontIntake = new Intake(IntakeConstants.FRONT_INTAKE_MOTOR_ID,
-      IntakeConstants.FRONT_INTAKE_FORWARD_CHANNEL, IntakeConstants.FRONT_INTAKE_REVERSE_CHANNEL);
-  private final Intake backIntake = new Intake(IntakeConstants.BACK_INTAKE_MOTOR_ID,
-      IntakeConstants.BACK_INTAKE_FORWARD_CHANNEL, IntakeConstants.BACK_INTAKE_REVERSE_CHANNEL);
-  private final Outtake outtake = new Outtake(Constants.OuttakeConstants.OUTTAKE_MOTOR_ID1,
+  private final Intake frontIntake = new Intake(
+      IntakeConstants.FRONT_INTAKE_MOTOR_ID,
+      IntakeConstants.FRONT_INTAKE_FORWARD_CHANNEL,
+      IntakeConstants.FRONT_INTAKE_REVERSE_CHANNEL);
+  private final Intake backIntake = new Intake(
+      IntakeConstants.BACK_INTAKE_MOTOR_ID,
+      IntakeConstants.BACK_INTAKE_FORWARD_CHANNEL,
+      IntakeConstants.BACK_INTAKE_REVERSE_CHANNEL);
+  private final Outtake outtake = new Outtake(
+      Constants.OuttakeConstants.OUTTAKE_MOTOR_ID1,
       Constants.OuttakeConstants.OUTTAKE_MOTOR_ID2);
-  private final Tower tower = new Tower(TowerConstants.TOWER_MOTOR_ID);
+  private final Tower tower = new Tower(
+      TowerConstants.TOP_LEFT_TOWER_MOTOR_ID,
+      TowerConstants.BOTTOM_LEFT_TOWER_MOTOR_ID,
+      TowerConstants.TOP_RIGHT_TOWER_MOTOR_ID,
+      TowerConstants.BOTTOM_RIGHT_TOWER_MOTOR_ID);
+
 
   private final Joystick primaryDriverJoystick =
       new Joystick(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
