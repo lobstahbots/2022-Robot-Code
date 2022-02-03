@@ -27,8 +27,13 @@ public class Tower extends SubsystemBase {
    * @param topRightTowerMotorId The CAN ID of the top right Tower motor
    * @param bottomRightTowerMotorId The CAN ID of the bottom right Tower motor
    */
-  public Tower(int topLeftTowerMotorId, int bottomLeftTowerMotorId, int topRightTowerMotorId, int bottomRightTowerMotorId) {
-    this(topLeftTowerMotorId, bottomLeftTowerMotorId, topRightTowerMotorId, bottomRightTowerMotorId, MotorType.kBrushless);
+  public Tower(int topLeftTowerMotorId, int bottomLeftTowerMotorId, int topRightTowerMotorId,
+      int bottomRightTowerMotorId) {
+    this(topLeftTowerMotorId,
+        bottomLeftTowerMotorId,
+        topRightTowerMotorId,
+        bottomRightTowerMotorId,
+        MotorType.kBrushless);
   }
 
   /**
@@ -41,7 +46,8 @@ public class Tower extends SubsystemBase {
    * @param bottomRightTowerMotorId The CAN ID of the bottom right Tower motor
    * @param motorType The {@link MotorType} of the motors attached to the {@link CANSparkMax}
    */
-  public Tower(int topLeftTowerMotorId, int bottomLeftTowerMotorId, int topRightTowerMotorId, int bottomRightTowerMotorId, MotorType motorType) {
+  public Tower(int topLeftTowerMotorId, int bottomLeftTowerMotorId, int topRightTowerMotorId,
+      int bottomRightTowerMotorId, MotorType motorType) {
     topLeftTowerMotor = new CANSparkMax(topLeftTowerMotorId, motorType);
     topLeftTowerMotor.setIdleMode(IdleMode.kBrake);
     bottomLeftTowerMotor = new CANSparkMax(bottomLeftTowerMotorId, motorType);
