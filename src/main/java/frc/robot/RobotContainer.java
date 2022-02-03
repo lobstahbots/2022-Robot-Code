@@ -61,8 +61,10 @@ public class RobotContainer {
           Constants.IOConstants.OUTTAKE_BUTTON_NUMBER);
   private final JoystickButton towerButton =
       new JoystickButton(secondaryDriverJoystick, IOConstants.TOWER_BUTTON_NUMBER);
-  private final JoystickButton climberButton =
-      new JoystickButton(secondaryDriverJoystick, IOConstants.CLIMBER_BUTTON_NUMBER);
+  private final JoystickButton climberUpButton =
+      new JoystickButton(secondaryDriverJoystick, IOConstants.CLIMBER_UP_BUTTON_NUMBER);
+  private final JoystickButton climberDownButton =
+      new JoystickButton(secondaryDriverJoystick, IOConstants.CLIMBER_DOWN_BUTTON_NUMBER);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -87,8 +89,11 @@ public class RobotContainer {
     towerButton
         .whenActive(new RunTowerCommand(tower, TowerConstants.TOWER_SPEED))
         .whenInactive(new StopTowerCommand(tower));
-    climberButton
+    climberUpButton
         .whenActive(new RunClimberCommand(climber, ClimberConstants.CLIMBER_SPEED))
+        .whenInactive(new StopClimberCommand(climber));
+    climberDownButton
+        .whenActive(new RunClimberCommand(climber, -ClimberConstants.CLIMBER_SPEED))
         .whenInactive(new StopClimberCommand(climber));
 
     configureIntakeButton(frontIntake, frontIntakeButton);
