@@ -6,7 +6,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -44,7 +49,7 @@ public class RobotContainer {
   private final Outtake outtake = new Outtake(Constants.OuttakeConstants.OUTTAKE_MOTOR_ID1,
       Constants.OuttakeConstants.OUTTAKE_MOTOR_ID2);
   private final Tower tower = new Tower(TowerConstants.TOWER_MOTOR_ID);
-  
+
   private final Joystick primaryDriverJoystick =
       new Joystick(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
   private final Joystick secondaryDriverJoystick =
@@ -66,6 +71,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    configureSmartDash();
   }
 
   /**
@@ -103,16 +109,38 @@ public class RobotContainer {
             new RetractIntakeCommand(intake)));
   }
 
+  // A simple auto routine.
+  private final Command simpleAuto =
+      new SimpleAutonCommand(driveBase, Constants.SIMPLE_AUTON_SPEED,
+          Constants.SIMPLE_AUTON_RUNTIME);
+
+  // A medium auto routine.
+  private final Command mediumAuto =
+      new ParallelDeadlineGroup(new WaitCommand(Constants.MEDIUM_AUTON_OUTAKE_RUNTIME),
+          new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED),
+          simpleAuto);
+
+  private final SendableChooser<Command> autonChooser = new SendableChooser<>();
+
+  /**
+   * Use this method to run tasks that configure sendables and other smartdashboard items.
+   */
+  private void configureSmartDash() {
+    // Add commands to the autonomous command chooser
+    autonChooser.setDefaultOption("Simple Auton", simpleAuto);
+    autonChooser.addOption("Medium Auto", mediumAuto);
+
+    // Put the chooser on the dashboard
+    SmartDashboard.putData(autonChooser);
+  }
+
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new SimpleAutonCommand(
-        driveBase,
-        Constants.SIMPLE_AUTON_SPEED,
-        Constants.SIMPLE_AUTON_RUNTIME);
+    return autonChooser.getSelected();
   }
 
   /**
