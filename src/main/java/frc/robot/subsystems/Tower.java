@@ -27,7 +27,9 @@ public class Tower extends SubsystemBase {
    * @param topRightTowerMotorId The CAN ID of the top right Tower motor
    * @param bottomRightTowerMotorId The CAN ID of the bottom right Tower motor
    */
-  public Tower(int topLeftTowerMotorId, int bottomLeftTowerMotorId, int topRightTowerMotorId,
+  public Tower(int topLeftTowerMotorId,
+      int bottomLeftTowerMotorId,
+      int topRightTowerMotorId,
       int bottomRightTowerMotorId) {
     this(topLeftTowerMotorId,
         bottomLeftTowerMotorId,
