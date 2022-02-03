@@ -23,8 +23,27 @@ public final class Constants {
   public final class IOConstants {
     public static final int PRIMARY_DRIVER_JOYSTICK_PORT = 0;
     public static final int SECONDARY_DRIVER_JOYSTICK_PORT = 1;
+
+    public static final int FRONT_INTAKE_BUTTON_NUMBER = 0; // PLACEHOLDER
+    public static final int BACK_INTAKE_BUTTON_NUMBER = 1; // PLACEHOLDER
+    
     public static final int OUTTAKE_BUTTON_NUMBER = 1; // PLACEHOLDER
     public static final int TOWER_BUTTON_NUMBER = 1; // PLACEHOLDER
+  }
+
+  /**
+   * Stores constants related to the Intake.
+   */
+  public final class IntakeConstants {
+    public static final double INTAKE_SPEED = 1.0; // PLACEHOLDER
+
+    public static final int FRONT_INTAKE_MOTOR_ID = 0; // PLACEHOLDER
+    public static final int FRONT_INTAKE_FORWARD_CHANNEL = 0; // PLACEHOLDER
+    public static final int FRONT_INTAKE_REVERSE_CHANNEL = 1; // PLACEHOLDER
+
+    public static final int BACK_INTAKE_MOTOR_ID = 1; // PLACEHOLDER
+    public static final int BACK_INTAKE_FORWARD_CHANNEL = 0; // PLACEHOLDER
+    public static final int BACK_INTAKE_REVERSE_CHANNEL = 1; // PLACEHOLDER
   }
 
   /**
