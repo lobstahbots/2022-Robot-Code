@@ -16,6 +16,7 @@ package frc.robot;
 public final class Constants {
   public static final double SIMPLE_AUTON_SPEED = 0.2; // PLACEHOLDER
   public static final double SIMPLE_AUTON_RUNTIME = 5.0; // PLACEHOLDER
+  public static final double MEDIUM_AUTON_OUTAKE_RUNTIME = 5.0; // PLACEHOLDER
 
   /**
    * Stores constants related to driver controls, SmartDashboard and other IO (Input/Output).
@@ -29,6 +30,8 @@ public final class Constants {
 
     public static final int OUTTAKE_BUTTON_NUMBER = 1; // PLACEHOLDER
     public static final int TOWER_BUTTON_NUMBER = 1; // PLACEHOLDER
+    public static final int CLIMBER_UP_BUTTON_NUMBER = 1; // PLACEHOLDER
+    public static final int CLIMBER_DOWN_BUTTON_NUMBER = 1; // PLACEHOLDER
   }
 
   /**
@@ -66,5 +69,12 @@ public final class Constants {
     public static final int BOTTOM_RIGHT_TOWER_MOTOR_ID = 3; // PLACEHOLDER
   }
 
+  /**
+   * Stores constants related to the Climber.
+   */
+  public final class ClimberConstants {
+    public static final int CLIMBER_MOTOR_ID = 1; // PLACEHOLDER
+    public static final double CLIMBER_SPEED = 1.0; // PLACEHOLDER
+  }
 
 }
