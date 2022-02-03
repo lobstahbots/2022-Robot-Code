@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.IOConstants;
 import frc.robot.Constants.TowerConstants;
 import frc.robot.commands.auton.SimpleAutonCommand;
+import frc.robot.commands.drive.TankDriveCommand;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Outtake;
 import frc.robot.subsystems.Tower;
@@ -77,5 +78,11 @@ public class RobotContainer {
         driveBase,
         Constants.SIMPLE_AUTON_SPEED,
         Constants.SIMPLE_AUTON_RUNTIME);
+  }
+
+  public Command getTankDriveCommand() {
+    return new TankDriveCommand(
+        driveBase, () -> -primaryDriverJoystick.getRawAxis(0),
+        () -> primaryDriverJoystick.getRawAxis(1));
   }
 }
