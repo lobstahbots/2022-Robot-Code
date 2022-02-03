@@ -74,7 +74,7 @@ public class RobotContainer {
 
   // A medium auto routine.
   private final Command m_mediumAuto =
-  new MediumAutonCommand(driveBase, outtake, Constants.OuttakeConstants.OUTTAKE_SPEED, Constants.SIMPLE_AUTON_SPEED, Constants.MEDIUM_AUTON_OUTAKE_RUNTIME ,Constants.SIMPLE_AUTON_RUNTIME);
+      new MediumAutonCommand(driveBase, outtake, Constants.OuttakeConstants.OUTTAKE_SPEED, Constants.SIMPLE_AUTON_SPEED, Constants.MEDIUM_AUTON_OUTAKE_RUNTIME, Constants.SIMPLE_AUTON_RUNTIME);
 
   // A chooser for autonomous commands
   SendableChooser<Command> m_chooser = new SendableChooser<>();
