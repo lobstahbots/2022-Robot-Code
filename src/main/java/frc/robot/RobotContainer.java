@@ -82,8 +82,7 @@ public class RobotContainer {
   private final Command mediumAuto =
       new ParallelDeadlineGroup(new WaitCommand(Constants.MEDIUM_AUTON_OUTAKE_RUNTIME),
           new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED),
-          new SimpleAutonCommand(driveBase, Constants.SIMPLE_AUTON_SPEED,
-              Constants.SIMPLE_AUTON_RUNTIME));
+          simpleAuto);
 
   private final SendableChooser<Command> autonChooser = new SendableChooser<>();
 
