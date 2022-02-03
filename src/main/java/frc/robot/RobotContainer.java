@@ -6,15 +6,22 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.IOConstants;
+import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.TowerConstants;
 import frc.robot.commands.auton.SimpleAutonCommand;
 import frc.robot.commands.drive.StopDriveCommand;
 import frc.robot.commands.drive.TankDriveCommand;
+import frc.robot.commands.intake.ExtendIntakeCommand;
+import frc.robot.commands.intake.RetractIntakeCommand;
+import frc.robot.commands.intake.SpinIntakeCommand;
+import frc.robot.commands.intake.StopSpinIntakeCommand;
 import frc.robot.subsystems.DriveBase;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Outtake;
 import frc.robot.subsystems.Tower;
 import frc.robot.commands.outtake.*;
@@ -30,18 +37,27 @@ import frc.robot.commands.tower.StopTowerCommand;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveBase driveBase = new DriveBase(0, 1, 2, 3); // TODO: remove dummy port values
+  private final Intake frontIntake = new Intake(IntakeConstants.FRONT_INTAKE_MOTOR_ID,
+      IntakeConstants.FRONT_INTAKE_FORWARD_CHANNEL, IntakeConstants.FRONT_INTAKE_REVERSE_CHANNEL);
+  private final Intake backIntake = new Intake(IntakeConstants.BACK_INTAKE_MOTOR_ID,
+      IntakeConstants.BACK_INTAKE_FORWARD_CHANNEL, IntakeConstants.BACK_INTAKE_REVERSE_CHANNEL);
   private final Outtake outtake = new Outtake(Constants.OuttakeConstants.OUTTAKE_MOTOR_ID);
   private final Tower tower = new Tower(TowerConstants.TOWER_MOTOR_ID);
+  
   private final Joystick primaryDriverJoystick =
       new Joystick(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
   private final Joystick secondaryDriverJoystick =
       new Joystick(IOConstants.SECONDARY_DRIVER_JOYSTICK_PORT);
+  
+  private final JoystickButton frontIntakeButton =
+      new JoystickButton(secondaryDriverJoystick, IOConstants.FRONT_INTAKE_BUTTON_NUMBER);
+  private final JoystickButton backIntakeButton =
+      new JoystickButton(secondaryDriverJoystick, IOConstants.BACK_INTAKE_BUTTON_NUMBER);
   private final JoystickButton outtakeButton =
       new JoystickButton(secondaryDriverJoystick,
           Constants.IOConstants.OUTTAKE_BUTTON_NUMBER);
   private final JoystickButton towerButton =
       new JoystickButton(secondaryDriverJoystick, IOConstants.TOWER_BUTTON_NUMBER);
-
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -56,17 +72,34 @@ public class RobotContainer {
    * instantiating a {@link GenericHID} or one of its subclasses
    * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   *
+   * Configures a button to control each intake.
    */
   private void configureButtonBindings() {
-    /**
-     * Code to add Outtake and Tower support in teleop.
-     */
     outtakeButton
         .whenActive(new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED))
         .whenInactive(new StopOuttakeCommand(outtake));
     towerButton
         .whenActive(new RunTowerCommand(tower, TowerConstants.TOWER_SPEED))
         .whenInactive(new StopTowerCommand(tower));
+    
+    configureIntakeButton(frontIntake, frontIntakeButton);
+    configureIntakeButton(backIntake, backIntakeButton);
+  }
+
+  /**
+   * Configures a button for the intake. Extends intake and then spins intake while a button is
+   * held. Stops intake and then retracts intake when the button is released.
+   * 
+   * @param intake The intake to control
+   * @param button The button to configure
+   */
+  private void configureIntakeButton(Intake intake, Button button) {
+    button
+        .whenActive(new SequentialCommandGroup(new ExtendIntakeCommand(intake),
+            new SpinIntakeCommand(intake, IntakeConstants.INTAKE_SPEED)))
+        .whenInactive(new SequentialCommandGroup(new StopSpinIntakeCommand(intake),
+            new RetractIntakeCommand(intake)));
   }
 
   /**
