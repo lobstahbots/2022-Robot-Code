@@ -39,7 +39,8 @@ public class RobotContainer {
       IntakeConstants.FRONT_INTAKE_FORWARD_CHANNEL, IntakeConstants.FRONT_INTAKE_REVERSE_CHANNEL);
   private final Intake backIntake = new Intake(IntakeConstants.BACK_INTAKE_MOTOR_ID,
       IntakeConstants.BACK_INTAKE_FORWARD_CHANNEL, IntakeConstants.BACK_INTAKE_REVERSE_CHANNEL);
-  private final Outtake outtake = new Outtake(Constants.OuttakeConstants.OUTTAKE_MOTOR_ID);
+  private final Outtake outtake = new Outtake(Constants.OuttakeConstants.OUTTAKE_MOTOR_ID1,
+      Constants.OuttakeConstants.OUTTAKE_MOTOR_ID2);
   private final Tower tower = new Tower(TowerConstants.TOWER_MOTOR_ID);
   
   private final Joystick primaryDriverJoystick =
