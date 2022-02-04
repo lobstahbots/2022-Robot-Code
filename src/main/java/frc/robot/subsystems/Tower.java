@@ -7,6 +7,8 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**
@@ -19,8 +21,8 @@ public class Tower extends SubsystemBase {
   private final CANSparkMax bottomRightTowerMotor;
 
   /**
-   * Constructs a Tower with a {@link CANSparkMax} at each of the given CAN IDs.
-   * Motors on right side run in opposite direction to motors on left side.
+   * Constructs a Tower with a {@link CANSparkMax} at each of the given CAN IDs. Motors on right
+   * side run in opposite direction to motors on left side.
    *
    * @param topLeftTowerMotorId The CAN ID of the top left Tower motor
    * @param bottomLeftTowerMotorId The CAN ID of the bottom left Tower motor
@@ -39,8 +41,8 @@ public class Tower extends SubsystemBase {
   }
 
   /**
-   * Constructs a Tower with a {@link CANSparkMax} at each of the given CAN IDs and with the given {@link MotorType}.
-   * Motors on right side run in opposite direction to motors on left side.
+   * Constructs a Tower with a {@link CANSparkMax} at each of the given CAN IDs and with the given
+   * {@link MotorType}. Motors on right side run in opposite direction to motors on left side.
    *
    * @param topLeftTowerMotorId The CAN ID of the top left Tower motor
    * @param bottomLeftTowerMotorId The CAN ID of the bottom left Tower motor
@@ -60,6 +62,8 @@ public class Tower extends SubsystemBase {
     bottomRightTowerMotor = new CANSparkMax(bottomRightTowerMotorId, motorType);
     bottomRightTowerMotor.setIdleMode(IdleMode.kBrake);
     bottomRightTowerMotor.setInverted(true);
+
+    CommandScheduler.getInstance().registerSubsystem(this);
   }
 
   /**

@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**
@@ -44,6 +45,7 @@ public class Intake extends SubsystemBase {
     solenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, forwardChannel, reverseChannel);
     intakeMotor = new CANSparkMax(intakeMotorID, motorType);
     intakeMotor.setIdleMode(IdleMode.kBrake);
+    CommandScheduler.getInstance().registerSubsystem(this);
   }
 
   /**
