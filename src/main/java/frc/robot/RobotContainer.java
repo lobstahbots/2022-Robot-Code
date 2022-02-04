@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -37,6 +36,7 @@ import frc.robot.commands.outtake.*;
 import frc.robot.commands.tower.RunTowerCommand;
 import frc.robot.commands.tower.StopTowerCommand;
 
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -46,13 +46,22 @@ import frc.robot.commands.tower.StopTowerCommand;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveBase driveBase = new DriveBase(0, 1, 2, 3); // TODO: remove dummy port values
-  private final Intake frontIntake = new Intake(IntakeConstants.FRONT_INTAKE_MOTOR_ID,
-      IntakeConstants.FRONT_INTAKE_FORWARD_CHANNEL, IntakeConstants.FRONT_INTAKE_REVERSE_CHANNEL);
-  private final Intake backIntake = new Intake(IntakeConstants.BACK_INTAKE_MOTOR_ID,
-      IntakeConstants.BACK_INTAKE_FORWARD_CHANNEL, IntakeConstants.BACK_INTAKE_REVERSE_CHANNEL);
-  private final Outtake outtake = new Outtake(Constants.OuttakeConstants.OUTTAKE_MOTOR_ID1,
+  private final Intake frontIntake = new Intake(
+      IntakeConstants.FRONT_INTAKE_MOTOR_ID,
+      IntakeConstants.FRONT_INTAKE_FORWARD_CHANNEL,
+      IntakeConstants.FRONT_INTAKE_REVERSE_CHANNEL);
+  private final Intake backIntake = new Intake(
+      IntakeConstants.BACK_INTAKE_MOTOR_ID,
+      IntakeConstants.BACK_INTAKE_FORWARD_CHANNEL,
+      IntakeConstants.BACK_INTAKE_REVERSE_CHANNEL);
+  private final Outtake outtake = new Outtake(
+      Constants.OuttakeConstants.OUTTAKE_MOTOR_ID1,
       Constants.OuttakeConstants.OUTTAKE_MOTOR_ID2);
-  private final Tower tower = new Tower(TowerConstants.TOWER_MOTOR_ID);
+  private final Tower tower = new Tower(
+      TowerConstants.TOP_LEFT_TOWER_MOTOR_ID,
+      TowerConstants.BOTTOM_LEFT_TOWER_MOTOR_ID,
+      TowerConstants.TOP_RIGHT_TOWER_MOTOR_ID,
+      TowerConstants.BOTTOM_RIGHT_TOWER_MOTOR_ID);
   private final Climber climber = new Climber(ClimberConstants.CLIMBER_MOTOR_ID);
 
   private final Joystick primaryDriverJoystick =
@@ -88,8 +97,6 @@ public class RobotContainer {
    * instantiating a {@link GenericHID} or one of its subclasses
    * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   *
-   * Configures a button to control each intake. Adds Outtake and Climber support in teleop.
    */
   private void configureButtonBindings() {
     outtakeButton

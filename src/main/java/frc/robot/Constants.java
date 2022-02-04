@@ -63,7 +63,10 @@ public final class Constants {
    */
   public final class TowerConstants {
     public static final double TOWER_SPEED = 1.0; // PLACEHOLDER
-    public static final int TOWER_MOTOR_ID = 1; // PLACEHOLDER
+    public static final int TOP_LEFT_TOWER_MOTOR_ID = 0; // PLACEHOLDER
+    public static final int BOTTOM_LEFT_TOWER_MOTOR_ID = 1; // PLACEHOLDER
+    public static final int TOP_RIGHT_TOWER_MOTOR_ID = 2; // PLACEHOLDER
+    public static final int BOTTOM_RIGHT_TOWER_MOTOR_ID = 3; // PLACEHOLDER
   }
 
   /**
