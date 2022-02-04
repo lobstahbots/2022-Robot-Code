@@ -114,18 +114,6 @@ public class Intake extends SubsystemBase {
   }
 
   /**
-   * Toggles the {@link DoubleSolenoid.Value}s between Extended and Retracted. If in neutral toggles
-   * them to Retracted.
-   */
-  public Command getToggleCommand() {
-    if (isRetracted()) {
-      return getExtensionCommand();
-    } else {
-      return getRetractionCommand();
-    }
-  }
-
-  /**
    * Retracts the intake and sets spin speed to 0.
    */
   public Command getRetractionCommand() {
