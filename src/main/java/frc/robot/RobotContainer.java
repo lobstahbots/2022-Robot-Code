@@ -48,12 +48,16 @@ public class RobotContainer {
   private final DriveBase driveBase = new DriveBase(0, 1, 2, 3); // TODO: remove dummy port values
   private final Intake frontIntake = new Intake(
       IntakeConstants.FRONT_INTAKE_MOTOR_ID,
-      IntakeConstants.FRONT_INTAKE_FORWARD_CHANNEL,
-      IntakeConstants.FRONT_INTAKE_REVERSE_CHANNEL);
+      IntakeConstants.FRONT_INTAKE_TOP_FORWARD_CHANNEL,
+      IntakeConstants.FRONT_INTAKE_TOP_REVERSE_CHANNEL,
+      IntakeConstants.FRONT_INTAKE_BOTTOM_FORWARD_CHANNEL,
+      IntakeConstants.FRONT_INTAKE_BOTTOM_REVERSE_CHANNEL);
   private final Intake backIntake = new Intake(
       IntakeConstants.BACK_INTAKE_MOTOR_ID,
-      IntakeConstants.BACK_INTAKE_FORWARD_CHANNEL,
-      IntakeConstants.BACK_INTAKE_REVERSE_CHANNEL);
+      IntakeConstants.BACK_INTAKE_TOP_FORWARD_CHANNEL,
+      IntakeConstants.BACK_INTAKE_TOP_REVERSE_CHANNEL,
+      IntakeConstants.BACK_INTAKE_BOTTOM_FORWARD_CHANNEL,
+      IntakeConstants.BACK_INTAKE_BOTTOM_REVERSE_CHANNEL);
   private final Outtake outtake = new Outtake(
       Constants.OuttakeConstants.OUTTAKE_MOTOR_ID1,
       Constants.OuttakeConstants.OUTTAKE_MOTOR_ID2);
@@ -166,9 +170,9 @@ public class RobotContainer {
   }
 
   /**
-   * Robot.java should run this method when teleop starts.
-   * This method should be used to set the default commands for subsystems while in teleop.
-   * If you set a default here, set a corresponding auton default in setAutonDefaultCommands().
+   * Robot.java should run this method when teleop starts. This method should be used to set the
+   * default commands for subsystems while in teleop. If you set a default here, set a corresponding
+   * auton default in setAutonDefaultCommands().
    */
   public void setTeleopDefaultCommands() {
     driveBase.setDefaultCommand(
@@ -179,9 +183,9 @@ public class RobotContainer {
   }
 
   /**
-   * Robot.java should run this method when auton starts.
-   * This method should be used to set the default commands for subsystems while in auton.
-   * If you set a default here, set a corresponding teleop default in setTeleopDefaultCommands().
+   * Robot.java should run this method when auton starts. This method should be used to set the
+   * default commands for subsystems while in auton. If you set a default here, set a corresponding
+   * teleop default in setTeleopDefaultCommands().
    */
   public void setAutonDefaultCommands() {
     driveBase.setDefaultCommand(new StopDriveCommand(driveBase));
