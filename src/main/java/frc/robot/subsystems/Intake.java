@@ -10,8 +10,11 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants.IntakeConstants;
 
 /**
@@ -76,63 +79,79 @@ public class Intake extends SubsystemBase {
    * Detects if the intake is retracted.
    */
   public boolean isRetracted() {
-    return topSolenoid.get() == DoubleSolenoid.Value.kReverse;
+    return getTopExtension() == DoubleSolenoid.Value.kReverse
+        && getBottomExtension() == DoubleSolenoid.Value.kReverse;
   }
 
   /**
    * Detects if the intake is extended.
    */
   public boolean isExtended() {
-    return topSolenoid.get() == DoubleSolenoid.Value.kForward;
+    return getTopExtension() == DoubleSolenoid.Value.kForward
+        && getBottomExtension() == DoubleSolenoid.Value.kForward;
   }
 
   /**
    * Detects if the intake is in neutral extension.
    */
   public boolean isNeutralExtension() {
-    return topSolenoid.get() == DoubleSolenoid.Value.kOff;
+    return getTopExtension() == DoubleSolenoid.Value.kOff
+        && getBottomExtension() == DoubleSolenoid.Value.kOff;
+  }
+
+  /**
+   * Returns the extension state of the top solenoid.
+   */
+  public DoubleSolenoid.Value getTopExtension() {
+    return topSolenoid.get();
+  }
+
+  /**
+   * Returns the extension state of the bottom solenoid.
+   */
+  public DoubleSolenoid.Value getBottomExtension() {
+    return bottomSolenoid.get();
   }
 
   /**
    * Toggles the {@link DoubleSolenoid.Value}s between Extended and Retracted. If in neutral toggles
    * them to Retracted.
    */
-  public void toggle() {
-    switch (topSolenoid.get()) {
-      case kReverse:
-        setExtended();
-        return;
-      case kForward:
-      default:
-        setRetracted();
-        return;
+  public Command getToggleCommand() {
+    if (isRetracted()) {
+      return getExtensionCommand();
+    } else {
+      return getRetractionCommand();
     }
   }
 
   /**
    * Retracts the intake and sets spin speed to 0.
    */
-  public void setRetracted() {
+  public Command getRetractionCommand() {
     setSpinSpeed(0.0);
-    bottomSolenoid.set(DoubleSolenoid.Value.kReverse);
-    Timer.delay(IntakeConstants.INTAKE_SOLENOIDS_DELAY_TIME);
-    topSolenoid.set(DoubleSolenoid.Value.kReverse);
+    return new SequentialCommandGroup(
+        new InstantCommand(() -> bottomSolenoid.set(DoubleSolenoid.Value.kReverse)),
+        new WaitCommand(IntakeConstants.INTAKE_SOLENOIDS_DELAY_TIME),
+        new InstantCommand(() -> topSolenoid.set(DoubleSolenoid.Value.kReverse)));
   }
 
   /**
    * Sets the intake to Neutral extension.
    */
-  public void setNeutralExtension() {
-    topSolenoid.set(DoubleSolenoid.Value.kOff);
-    bottomSolenoid.set(DoubleSolenoid.Value.kOff);
+  public Command getNeutralExtensionCommand() {
+    return new SequentialCommandGroup(
+        new InstantCommand(() -> bottomSolenoid.set(DoubleSolenoid.Value.kOff)),
+        new InstantCommand(() -> topSolenoid.set(DoubleSolenoid.Value.kOff)));
   }
 
   /**
    * Extends the intake.
    */
-  public void setExtended() {
-    topSolenoid.set(DoubleSolenoid.Value.kForward);
-    Timer.delay(IntakeConstants.INTAKE_SOLENOIDS_DELAY_TIME);
-    bottomSolenoid.set(DoubleSolenoid.Value.kForward);
+  public Command getExtensionCommand() {
+    return new SequentialCommandGroup(
+        new InstantCommand(() -> topSolenoid.set(DoubleSolenoid.Value.kForward)),
+        new WaitCommand(IntakeConstants.INTAKE_SOLENOIDS_DELAY_TIME),
+        new InstantCommand(() -> bottomSolenoid.set(DoubleSolenoid.Value.kForward)));
   }
 }

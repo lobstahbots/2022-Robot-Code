@@ -4,20 +4,20 @@
 
 package frc.robot.commands.intake;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Intake;
 
 /**
  * Extends the given {@link Intake}.
  */
-public class ExtendIntakeCommand extends InstantCommand {
+public class ExtendIntakeCommand extends SequentialCommandGroup {
 
   /**
-   * Creates an instantly run command that extends the given {@link Intake}.
+   * Creates a command that extends the given {@link Intake}.
    * 
    * @param intake The {@link Intake} to control.
    */
   public ExtendIntakeCommand(Intake intake) {
-    super(intake::setExtended, intake);
+    super(intake.getExtensionCommand());
   }
 }
