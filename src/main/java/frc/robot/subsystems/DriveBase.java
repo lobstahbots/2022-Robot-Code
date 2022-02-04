@@ -6,6 +6,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**
@@ -52,6 +53,8 @@ public class DriveBase extends SubsystemBase {
         new DifferentialDrive(
             new MotorControllerGroup(leftFrontMotor, leftBackMotor),
             new MotorControllerGroup(rightFrontMotor, rightBackMotor));
+
+    CommandScheduler.getInstance().registerSubsystem(this);
   }
 
   /**

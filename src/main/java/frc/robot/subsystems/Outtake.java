@@ -1,6 +1,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -35,6 +36,7 @@ public class Outtake extends SubsystemBase {
     outtakeMotor.setIdleMode(IdleMode.kBrake);
     outtakeMotor2 = new CANSparkMax(outtakeId2, motorType);
     outtakeMotor2.setIdleMode(IdleMode.kBrake);
+    CommandScheduler.getInstance().registerSubsystem(this);
   }
 
   /**
