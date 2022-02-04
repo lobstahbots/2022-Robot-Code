@@ -7,6 +7,9 @@ package frc.robot.commands.intake;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Intake;
 
+/**
+ * Toggles the {@link DoubleSolenoid.Value} (aka extension/retraction) of the given {@link Intake}.
+ */
 public class ToggleExtensionIntakeCommand extends SequentialCommandGroup {
   /**
    * Creates a command that toggles the {@link DoubleSolenoid.Value} (aka extension/retraction) of
