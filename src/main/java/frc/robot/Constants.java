@@ -59,6 +59,13 @@ public final class Constants {
   }
 
   /**
+   * Stores constants related to Intake.
+   */
+  public final class IntakeConstants {
+    public static final double INTAKE_SOLENOIDS_DELAY_TIME = 1.0;
+  }
+
+  /**
    * Stores constants related to the Tower.
    */
   public final class TowerConstants {
@@ -76,5 +83,4 @@ public final class Constants {
     public static final int CLIMBER_MOTOR_ID = 1; // PLACEHOLDER
     public static final double CLIMBER_SPEED = 1.0; // PLACEHOLDER
   }
-
 }

@@ -4,20 +4,20 @@
 
 package frc.robot.commands.intake;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Intake;
 
 /**
  * Retracts the given {@link Intake}.
  */
-public class RetractIntakeCommand extends InstantCommand {
+public class RetractIntakeCommand extends SequentialCommandGroup {
 
   /**
-   * Creates an instantly run command that retracts the given {@link Intake}.
+   * Creates a command that retracts the given {@link Intake}.
    * 
    * @param intake The {@link Intake} to control.
    */
   public RetractIntakeCommand(Intake intake) {
-    super(intake::setRetracted, intake);
+    super(new StopSpinIntakeCommand(intake), intake.getRetractionCommand());
   }
 }
