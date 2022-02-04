@@ -129,7 +129,6 @@ public class Intake extends SubsystemBase {
    * Retracts the intake and sets spin speed to 0.
    */
   public Command getRetractionCommand() {
-    setSpinSpeed(0.0);
     return new SequentialCommandGroup(
         new InstantCommand(() -> bottomSolenoid.set(DoubleSolenoid.Value.kReverse)),
         new WaitCommand(IntakeConstants.INTAKE_SOLENOIDS_DELAY_TIME),

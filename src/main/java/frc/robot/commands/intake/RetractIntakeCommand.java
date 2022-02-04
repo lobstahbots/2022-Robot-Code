@@ -18,6 +18,6 @@ public class RetractIntakeCommand extends SequentialCommandGroup {
    * @param intake The {@link Intake} to control.
    */
   public RetractIntakeCommand(Intake intake) {
-    super(intake.getRetractionCommand());
+    super(new StopSpinIntakeCommand(intake), intake.getRetractionCommand());
   }
 }
