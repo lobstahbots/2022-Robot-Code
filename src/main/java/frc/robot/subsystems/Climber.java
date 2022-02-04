@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
@@ -28,6 +29,7 @@ public class Climber extends SubsystemBase {
   public Climber(int motorId, MotorType motorType) {
     climberMotor = new CANSparkMax(motorId, motorType);
     climberMotor.setIdleMode(IdleMode.kBrake);
+    CommandScheduler.getInstance().registerSubsystem(this);
   }
 
   /**
