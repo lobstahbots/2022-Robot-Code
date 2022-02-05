@@ -41,12 +41,18 @@ public final class Constants {
     public static final double INTAKE_SPEED = 1.0; // PLACEHOLDER
 
     public static final int FRONT_INTAKE_MOTOR_ID = 0; // PLACEHOLDER
-    public static final int FRONT_INTAKE_FORWARD_CHANNEL = 0; // PLACEHOLDER
-    public static final int FRONT_INTAKE_REVERSE_CHANNEL = 1; // PLACEHOLDER
+    public static final int FRONT_INTAKE_TOP_FORWARD_CHANNEL = 0; // PLACEHOLDER
+    public static final int FRONT_INTAKE_TOP_REVERSE_CHANNEL = 1; // PLACEHOLDER
+    public static final int FRONT_INTAKE_BOTTOM_FORWARD_CHANNEL = 0; // PLACEHOLDER
+    public static final int FRONT_INTAKE_BOTTOM_REVERSE_CHANNEL = 1; // PLACEHOLDER
 
     public static final int BACK_INTAKE_MOTOR_ID = 1; // PLACEHOLDER
-    public static final int BACK_INTAKE_FORWARD_CHANNEL = 0; // PLACEHOLDER
-    public static final int BACK_INTAKE_REVERSE_CHANNEL = 1; // PLACEHOLDER
+    public static final int BACK_INTAKE_TOP_FORWARD_CHANNEL = 0; // PLACEHOLDER
+    public static final int BACK_INTAKE_TOP_REVERSE_CHANNEL = 1; // PLACEHOLDER
+    public static final int BACK_INTAKE_BOTTOM_FORWARD_CHANNEL = 0; // PLACEHOLDER
+    public static final int BACK_INTAKE_BOTTOM_REVERSE_CHANNEL = 1; // PLACEHOLDER
+
+    public static final double INTAKE_SOLENOIDS_DELAY_TIME = 1.0; // PLACEHOLDER
   }
 
   /**
@@ -56,13 +62,6 @@ public final class Constants {
     public static final double OUTTAKE_SPEED = 0.5; // PLACEHOLDER
     public static final int OUTTAKE_MOTOR_ID1 = 1; // PLACEHOLDER
     public static final int OUTTAKE_MOTOR_ID2 = 2; // PLACEHOLDER
-  }
-
-  /**
-   * Stores constants related to Intake.
-   */
-  public final class IntakeConstants {
-    public static final double INTAKE_SOLENOIDS_DELAY_TIME = 1.0;
   }
 
   /**
