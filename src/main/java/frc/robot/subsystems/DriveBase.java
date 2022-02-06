@@ -1,7 +1,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -38,10 +37,6 @@ public class DriveBase extends SubsystemBase {
     rightFrontMotor = new WPI_TalonFX(rightFrontId);
     rightBackMotor = new WPI_TalonFX(rightBackId);
 
-    leftFrontMotor.set(ControlMode.PercentOutput, 0.0);
-    leftBackMotor.set(ControlMode.PercentOutput, 0.0);
-    rightFrontMotor.set(ControlMode.PercentOutput, 0.0);
-    rightBackMotor.set(ControlMode.PercentOutput, 0.0);
     setBrakingMode(NeutralMode.Brake);
 
     differentialDrive =
