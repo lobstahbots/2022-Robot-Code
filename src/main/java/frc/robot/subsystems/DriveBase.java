@@ -21,7 +21,7 @@ public class DriveBase extends SubsystemBase {
   private final TalonFX rightFrontMotor;
   private final TalonFX rightBackMotor;
 
-  private NeutralMode leftFrontMotorNeutralMode;
+  private NeutralMode MotorNeutralMode;
 
   private final DifferentialDrive differentialDrive;
 
@@ -44,7 +44,7 @@ public class DriveBase extends SubsystemBase {
     initializeDriveMotor(rightFrontMotor);
     initializeDriveMotor(rightBackMotor);
 
-    leftFrontMotorNeutralMode = NeutralMode.Brake;
+    MotorNeutralMode = NeutralMode.Brake;
 
     differentialDrive =
         new DifferentialDrive(
@@ -70,7 +70,7 @@ public class DriveBase extends SubsystemBase {
    * Toggles the {@link NeutralMode} between Coast and Brake.
    */
   public void toggleBrakingMode() {
-    switch (leftFrontMotorNeutralMode) {
+    switch (MotorNeutralMode) {
       case Brake:
         setBrakingMode(NeutralMode.Coast);
         return;
@@ -91,7 +91,7 @@ public class DriveBase extends SubsystemBase {
     leftBackMotor.setNeutralMode(mode);
     rightFrontMotor.setNeutralMode(mode);
     rightBackMotor.setNeutralMode(mode);
-    leftFrontMotorNeutralMode = mode;
+    MotorNeutralMode = mode;
   }
 
   /**
