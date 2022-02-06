@@ -11,7 +11,7 @@ public class Climber extends SubsystemBase {
   private final WPI_TalonFX climberMotor;
 
   /**
-   * Creates a Climber with its {@link WPI_TalonFX} at the given CAN id.
+   * Creates a Climber with its {@link WPI_TalonFX} at the given id.
    * 
    * @param motorId The motor ID of the motor
    */
@@ -27,7 +27,7 @@ public class Climber extends SubsystemBase {
    * @param speed
    */
   public void setSpeed(double speed) {
-    climberMotor.set(speed);
+    climberMotor.set(0, speed);
   }
 
 }
