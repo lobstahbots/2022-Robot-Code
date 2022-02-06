@@ -4,22 +4,21 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 
 /**
  * A subsystem that controls the drive train (aka chassis) on a robot.
  */
 public class DriveBase extends SubsystemBase {
 
-  private final TalonFX leftFrontMotor;
-  private final TalonFX leftBackMotor;
-  private final TalonFX rightFrontMotor;
-  private final TalonFX rightBackMotor;
+  private final WPI_TalonFX leftFrontMotor;
+  private final WPI_TalonFX leftBackMotor;
+  private final WPI_TalonFX rightFrontMotor;
+  private final WPI_TalonFX rightBackMotor;
 
   private NeutralMode motorNeutralMode;
 
@@ -34,36 +33,23 @@ public class DriveBase extends SubsystemBase {
    * @param rightBackId The CAN ID of the Right Back motor
    */
   public DriveBase(int leftFrontId, int leftBackId, int rightFrontId, int rightBackId) {
-    leftFrontMotor = new TalonFX(leftFrontId);
-    leftBackMotor = new TalonFX(leftBackId);
-    rightFrontMotor = new TalonFX(rightFrontId);
-    rightBackMotor = new TalonFX(rightBackId);
+    leftFrontMotor = new WPI_TalonFX(leftFrontId);
+    leftBackMotor = new WPI_TalonFX(leftBackId);
+    rightFrontMotor = new WPI_TalonFX(rightFrontId);
+    rightBackMotor = new WPI_TalonFX(rightBackId);
 
-    initializeDriveMotor(leftFrontMotor);
-    initializeDriveMotor(leftBackMotor);
-    initializeDriveMotor(rightFrontMotor);
-    initializeDriveMotor(rightBackMotor);
-
-    motorNeutralMode = NeutralMode.Brake;
+    leftFrontMotor.set(ControlMode.PercentOutput, 0.0);
+    leftBackMotor.set(ControlMode.PercentOutput, 0.0);
+    rightFrontMotor.set(ControlMode.PercentOutput, 0.0);
+    rightBackMotor.set(ControlMode.PercentOutput, 0.0);
+    setBrakingMode(NeutralMode.Brake);
 
     differentialDrive =
         new DifferentialDrive(
-            new MotorControllerGroup((MotorController) leftFrontMotor,
-                (MotorController) leftBackMotor),
-            new MotorControllerGroup((MotorController) rightFrontMotor,
-                (MotorController) rightBackMotor));
+            new MotorControllerGroup(leftFrontMotor, leftBackMotor),
+            new MotorControllerGroup(rightFrontMotor, rightBackMotor));
 
     CommandScheduler.getInstance().registerSubsystem(this);
-  }
-
-  /**
-   * Sets control mode, demand, and neutral mode of a given {@link TalonFX}.
-   *
-   * @param motor The motor to configure.
-   */
-  private void initializeDriveMotor(TalonFX motor) {
-    motor.set(ControlMode.PercentOutput, Constants.DRIVEBASE_MOTORS_DEMAND);
-    motor.setNeutralMode(NeutralMode.Brake);
   }
 
   /**
