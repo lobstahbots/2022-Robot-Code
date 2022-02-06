@@ -1,28 +1,32 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 /**
  * A subsystem that controls the drive train (aka chassis) on a robot.
  */
 public class DriveBase extends SubsystemBase {
 
-  private final CANSparkMax leftFrontMotor;
-  private final CANSparkMax leftBackMotor;
-  private final CANSparkMax rightFrontMotor;
-  private final CANSparkMax rightBackMotor;
+  private final TalonFX leftFrontMotor;
+  private final TalonFX leftBackMotor;
+  private final TalonFX rightFrontMotor;
+  private final TalonFX rightBackMotor;
+
+  private NeutralMode leftFrontMotorNeutralMode;
 
   private final DifferentialDrive differentialDrive;
 
   /**
-   * Constructs a DriveBase with a {@link CANSparkMax} at each of the given CAN IDs.
+   * Constructs a DriveBase with a {@link TalonFX} at each of the given CAN IDs.
    *
    * @param leftFrontId The CAN ID of the Left Front motor
    * @param leftBackId The CAN ID of the Left Back motor
@@ -30,58 +34,64 @@ public class DriveBase extends SubsystemBase {
    * @param rightBackId The CAN ID of the Right Back motor
    */
   public DriveBase(int leftFrontId, int leftBackId, int rightFrontId, int rightBackId) {
-    this(leftFrontId, leftBackId, rightFrontId, rightBackId, MotorType.kBrushless);
-  }
+    leftFrontMotor = new TalonFX(leftFrontId);
+    leftBackMotor = new TalonFX(leftBackId);
+    rightFrontMotor = new TalonFX(rightFrontId);
+    rightBackMotor = new TalonFX(rightBackId);
 
-  /**
-   * Constructs a DriveBase with a {@link CANSparkMax} at each of the given CAN IDs.
-   *
-   * @param leftFrontId The CAN ID of the Left Front motor
-   * @param leftBackId The CAN ID of the Left Back motor
-   * @param rightFrontId The CAN ID of the Right Front motor
-   * @param rightBackId The CAN ID of the Right Back motor
-   * @param motorType The {@link MotorType} of the motors attached to the {@link CANSparkMax}es
-   */
-  public DriveBase(int leftFrontId, int leftBackId, int rightFrontId, int rightBackId,
-      MotorType motorType) {
-    leftFrontMotor = new CANSparkMax(leftFrontId, motorType);
-    leftBackMotor = new CANSparkMax(leftBackId, motorType);
-    rightFrontMotor = new CANSparkMax(rightFrontId, motorType);
-    rightBackMotor = new CANSparkMax(rightBackId, motorType);
+    initializeDriveMotor(leftFrontMotor);
+    initializeDriveMotor(leftBackMotor);
+    initializeDriveMotor(rightFrontMotor);
+    initializeDriveMotor(rightBackMotor);
+
+    leftFrontMotorNeutralMode = NeutralMode.Brake;
 
     differentialDrive =
         new DifferentialDrive(
-            new MotorControllerGroup(leftFrontMotor, leftBackMotor),
-            new MotorControllerGroup(rightFrontMotor, rightBackMotor));
+            new MotorControllerGroup((MotorController) leftFrontMotor,
+                (MotorController) leftBackMotor),
+            new MotorControllerGroup((MotorController) rightFrontMotor,
+                (MotorController) rightBackMotor));
 
     CommandScheduler.getInstance().registerSubsystem(this);
   }
 
   /**
-   * Toggles the {@link IdleMode} between Coast and Brake.
+   * Sets control mode, demand, and neutral mode of a given {@link TalonFX}.
+   *
+   * @param motor The motor to configure.
+   */
+  private void initializeDriveMotor(TalonFX motor) {
+    motor.set(ControlMode.PercentOutput, Constants.DRIVEBASE_MOTORS_DEMAND);
+    motor.setNeutralMode(NeutralMode.Brake);
+  }
+
+  /**
+   * Toggles the {@link NeutralMode} between Coast and Brake.
    */
   public void toggleBrakingMode() {
-    switch (leftFrontMotor.getIdleMode()) {
-      case kBrake:
-        setBrakingMode(IdleMode.kCoast);
+    switch (leftFrontMotorNeutralMode) {
+      case Brake:
+        setBrakingMode(NeutralMode.Coast);
         return;
-      case kCoast:
+      case Coast:
       default:
-        setBrakingMode(IdleMode.kBrake);
+        setBrakingMode(NeutralMode.Brake);
         return;
     }
   }
 
   /**
-   * Sets the braking mode to the given {@link IdleMode}.
+   * Sets the braking mode to the given {@link NeutralMode}.
    *
-   * @param mode The {@link IdleMode} to set the motors to
+   * @param mode The {@link NeutralMode} to set the motors to
    */
-  public void setBrakingMode(IdleMode mode) {
-    leftFrontMotor.setIdleMode(mode);
-    leftBackMotor.setIdleMode(mode);
-    rightFrontMotor.setIdleMode(mode);
-    rightBackMotor.setIdleMode(mode);
+  public void setBrakingMode(NeutralMode mode) {
+    leftFrontMotor.setNeutralMode(mode);
+    leftBackMotor.setNeutralMode(mode);
+    rightFrontMotor.setNeutralMode(mode);
+    rightBackMotor.setNeutralMode(mode);
+    leftFrontMotorNeutralMode = mode;
   }
 
   /**
