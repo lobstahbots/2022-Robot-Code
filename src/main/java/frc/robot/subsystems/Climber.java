@@ -22,7 +22,7 @@ public class Climber extends SubsystemBase {
   }
 
   /**
-   * Set the speed of the Climber motor
+   * Set the speed of the Climber motor in PercentOutput
    * 
    * @param speed
    */
