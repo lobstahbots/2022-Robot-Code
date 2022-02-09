@@ -4,9 +4,9 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -24,10 +24,10 @@ import frc.robot.Constants.IntakeConstants;
 public class Intake extends SubsystemBase {
   private final DoubleSolenoid topSolenoid;
   private final DoubleSolenoid bottomSolenoid;
-  private final CANSparkMax intakeMotor;
+  private final VictorSPX intakeMotor;
 
   /**
-   * Constructs an Intake with a {@link CANSparkMax} at the given CAN ID and a
+   * Constructs an Intake with a {@link VictorSPX} with the given CAN ID and a
    * {@link DoubleSolenoid} with the given forward and reverse channels.
    *
    * @param intakeMotorID The CAN ID of the intake motor
@@ -36,31 +36,14 @@ public class Intake extends SubsystemBase {
    * @param bottomForwardChannel The forward channel of the bottom solenoid
    * @param bottomReverseChannel The reverse channel of the bottom solenoid
    */
-  public Intake(int intakeMotorID, int topForwardChannel, int topReverseChannel,
-      int bottomForwardChannel, int bottomReverseChannel) {
-    this(intakeMotorID, MotorType.kBrushless, topForwardChannel, topReverseChannel,
-        bottomForwardChannel, bottomReverseChannel);
-  }
-
-  /**
-   * Constructs an Intake with a {@link CANSparkMax} with the given CAN ID and motor type and a
-   * {@link DoubleSolenoid} with the given forward and reverse channels.
-   *
-   * @param intakeMotorID The CAN ID of the intake motor
-   * @param motorType The motor type of the intake motor
-   * @param topForwardChannel The forward channel of the top solenoid
-   * @param topReverseChannel The reverse channel of the top solenoid
-   * @param bottomForwardChannel The forward channel of the bottom solenoid
-   * @param bottomReverseChannel The reverse channel of the bottom solenoid
-   */
-  public Intake(int intakeMotorID, MotorType motorType, int topForwardChannel,
+  public Intake(int intakeMotorID, int topForwardChannel,
       int topReverseChannel, int bottomForwardChannel, int bottomReverseChannel) {
     topSolenoid =
         new DoubleSolenoid(PneumaticsModuleType.REVPH, topForwardChannel, topReverseChannel);
     bottomSolenoid =
         new DoubleSolenoid(PneumaticsModuleType.REVPH, bottomForwardChannel, bottomReverseChannel);
-    intakeMotor = new CANSparkMax(intakeMotorID, motorType);
-    intakeMotor.setIdleMode(IdleMode.kBrake);
+    intakeMotor = new VictorSPX(intakeMotorID);
+    intakeMotor.setNeutralMode(NeutralMode.Brake);
     CommandScheduler.getInstance().registerSubsystem(this);
   }
 
@@ -74,7 +57,7 @@ public class Intake extends SubsystemBase {
     if (isRetracted() && newSpeed != 0) {
       throw new IllegalStateException();
     }
-    intakeMotor.set(newSpeed);
+    intakeMotor.set(ControlMode.PercentOutput, newSpeed);
   }
 
   /**
