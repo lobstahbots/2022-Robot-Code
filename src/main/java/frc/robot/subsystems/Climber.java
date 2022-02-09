@@ -1,44 +1,34 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
-  private final CANSparkMax climberMotor;
+  private final WPI_TalonFX climberMotor;
 
   /**
-   * Creates a Climber with its {@link CANSparkMax} at the given CAN id.
+   * Creates a Climber with its {@link WPI_TalonFX} at the given id.
    * 
-   * @param motorId The CAN id of the motor
+   * @param motorId The motor ID of the motor
    */
   public Climber(int motorId) {
-    this(motorId, MotorType.kBrushless);
-  }
-
-  /**
-   * Creates a Climber with its {@link CANSparkMax} at the given CAN id.
-   * 
-   * @param motorId The CAN id of the motor
-   * @param motorType The {@link MotorType} of the motor attached to the {@link CANSparkMax}
-   */
-  public Climber(int motorId, MotorType motorType) {
-    climberMotor = new CANSparkMax(motorId, motorType);
-    climberMotor.setIdleMode(IdleMode.kBrake);
+    climberMotor = new WPI_TalonFX(motorId);
+    climberMotor.setNeutralMode(NeutralMode.Brake);
     CommandScheduler.getInstance().registerSubsystem(this);
   }
 
   /**
-   * Set the speed of the Climber motor
+   * Set the speed of the Climber motor in PercentOutput
    * 
    * @param speed
    */
   public void setSpeed(double speed) {
-    climberMotor.set(speed);
+    climberMotor.set(ControlMode.PercentOutput, speed);
   }
 
 }
