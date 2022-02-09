@@ -1,9 +1,9 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -14,15 +14,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  */
 public class DriveBase extends SubsystemBase {
 
-  private final CANSparkMax leftFrontMotor;
-  private final CANSparkMax leftBackMotor;
-  private final CANSparkMax rightFrontMotor;
-  private final CANSparkMax rightBackMotor;
+  private final WPI_TalonFX leftFrontMotor;
+  private final WPI_TalonFX leftBackMotor;
+  private final WPI_TalonFX rightFrontMotor;
+  private final WPI_TalonFX rightBackMotor;
+
+  private NeutralMode motorNeutralMode;
 
   private final DifferentialDrive differentialDrive;
 
   /**
-   * Constructs a DriveBase with a {@link CANSparkMax} at each of the given CAN IDs.
+   * Constructs a DriveBase with a {@link TalonFX} at each of the given CAN IDs.
    *
    * @param leftFrontId The CAN ID of the Left Front motor
    * @param leftBackId The CAN ID of the Left Back motor
@@ -30,24 +32,12 @@ public class DriveBase extends SubsystemBase {
    * @param rightBackId The CAN ID of the Right Back motor
    */
   public DriveBase(int leftFrontId, int leftBackId, int rightFrontId, int rightBackId) {
-    this(leftFrontId, leftBackId, rightFrontId, rightBackId, MotorType.kBrushless);
-  }
+    leftFrontMotor = new WPI_TalonFX(leftFrontId);
+    leftBackMotor = new WPI_TalonFX(leftBackId);
+    rightFrontMotor = new WPI_TalonFX(rightFrontId);
+    rightBackMotor = new WPI_TalonFX(rightBackId);
 
-  /**
-   * Constructs a DriveBase with a {@link CANSparkMax} at each of the given CAN IDs.
-   *
-   * @param leftFrontId The CAN ID of the Left Front motor
-   * @param leftBackId The CAN ID of the Left Back motor
-   * @param rightFrontId The CAN ID of the Right Front motor
-   * @param rightBackId The CAN ID of the Right Back motor
-   * @param motorType The {@link MotorType} of the motors attached to the {@link CANSparkMax}es
-   */
-  public DriveBase(int leftFrontId, int leftBackId, int rightFrontId, int rightBackId,
-      MotorType motorType) {
-    leftFrontMotor = new CANSparkMax(leftFrontId, motorType);
-    leftBackMotor = new CANSparkMax(leftBackId, motorType);
-    rightFrontMotor = new CANSparkMax(rightFrontId, motorType);
-    rightBackMotor = new CANSparkMax(rightBackId, motorType);
+    setBrakingMode(NeutralMode.Brake);
 
     differentialDrive =
         new DifferentialDrive(
@@ -58,30 +48,31 @@ public class DriveBase extends SubsystemBase {
   }
 
   /**
-   * Toggles the {@link IdleMode} between Coast and Brake.
+   * Toggles the {@link NeutralMode} between Coast and Brake.
    */
   public void toggleBrakingMode() {
-    switch (leftFrontMotor.getIdleMode()) {
-      case kBrake:
-        setBrakingMode(IdleMode.kCoast);
+    switch (motorNeutralMode) {
+      case Brake:
+        setBrakingMode(NeutralMode.Coast);
         return;
-      case kCoast:
+      case Coast:
       default:
-        setBrakingMode(IdleMode.kBrake);
+        setBrakingMode(NeutralMode.Brake);
         return;
     }
   }
 
   /**
-   * Sets the braking mode to the given {@link IdleMode}.
+   * Sets the braking mode to the given {@link NeutralMode}.
    *
-   * @param mode The {@link IdleMode} to set the motors to
+   * @param mode The {@link NeutralMode} to set the motors to
    */
-  public void setBrakingMode(IdleMode mode) {
-    leftFrontMotor.setIdleMode(mode);
-    leftBackMotor.setIdleMode(mode);
-    rightFrontMotor.setIdleMode(mode);
-    rightBackMotor.setIdleMode(mode);
+  public void setBrakingMode(NeutralMode mode) {
+    leftFrontMotor.setNeutralMode(mode);
+    leftBackMotor.setNeutralMode(mode);
+    rightFrontMotor.setNeutralMode(mode);
+    rightBackMotor.setNeutralMode(mode);
+    motorNeutralMode = mode;
   }
 
   /**
