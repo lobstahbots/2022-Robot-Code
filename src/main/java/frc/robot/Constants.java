@@ -17,6 +17,9 @@ public final class Constants {
   public static final double SIMPLE_AUTON_SPEED = 0.2; // PLACEHOLDER
   public static final double SIMPLE_AUTON_RUNTIME = 5.0; // PLACEHOLDER
   public static final double MEDIUM_AUTON_OUTAKE_RUNTIME = 5.0; // PLACEHOLDER
+  public static final int DRIVE_CURRENT_LIMIT = 60;
+  public static final int DRIVE_PEAK_CURRENT_DURATION = 2000;
+  public static final int DRIVE_CONTINUOUS_CURRENT_LIMIT = 50;
 
   /**
    * Stores constants related to driver controls, SmartDashboard and other IO (Input/Output).
@@ -53,6 +56,8 @@ public final class Constants {
     public static final int BACK_INTAKE_BOTTOM_REVERSE_CHANNEL = 1; // PLACEHOLDER
 
     public static final double INTAKE_SOLENOIDS_DELAY_TIME = 1.0; // PLACEHOLDER
+
+    public static final int INTAKE_CURRENT_LIMIT = 40;
   }
 
   /**
@@ -62,6 +67,8 @@ public final class Constants {
     public static final double OUTTAKE_SPEED = 0.5; // PLACEHOLDER
     public static final int OUTTAKE_MOTOR_ID1 = 1; // PLACEHOLDER
     public static final int OUTTAKE_MOTOR_ID2 = 2; // PLACEHOLDER
+
+    public static final int OUTTAKE_CURRENT_LIMIT = 40;
   }
 
   /**
@@ -73,6 +80,8 @@ public final class Constants {
     public static final int BOTTOM_LEFT_TOWER_MOTOR_ID = 1; // PLACEHOLDER
     public static final int TOP_RIGHT_TOWER_MOTOR_ID = 2; // PLACEHOLDER
     public static final int BOTTOM_RIGHT_TOWER_MOTOR_ID = 3; // PLACEHOLDER
+
+    public static final int TOWER_CURRENT_LIMIT = 25;
   }
 
   /**
@@ -81,5 +90,9 @@ public final class Constants {
   public final class ClimberConstants {
     public static final int CLIMBER_MOTOR_ID = 1; // PLACEHOLDER
     public static final double CLIMBER_SPEED = 1.0; // PLACEHOLDER
+
+    public static final int CLIMBER_CURRENT_LIMIT = 60;
+    public static final int CLIMBER_PEAK_CURRENT_DURATION = 2000;
+    public static final int CLIMBER_CONTINUOUS_CURRENT_LIMIT = 50;
   }
 }
