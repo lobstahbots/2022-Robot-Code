@@ -2,6 +2,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -27,7 +28,7 @@ public class Climber extends SubsystemBase {
    * @param speed
    */
   public void setSpeed(double speed) {
-    climberMotor.set(0, speed);
+    climberMotor.set(ControlMode.PercentOutput, speed);
   }
 
 }
