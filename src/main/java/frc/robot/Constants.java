@@ -17,9 +17,6 @@ public final class Constants {
   public static final double SIMPLE_AUTON_SPEED = 0.2; // PLACEHOLDER
   public static final double SIMPLE_AUTON_RUNTIME = 5.0; // PLACEHOLDER
   public static final double MEDIUM_AUTON_OUTAKE_RUNTIME = 5.0; // PLACEHOLDER
-  public static final int DRIVE_CURRENT_LIMIT = 60;
-  public static final int DRIVE_PEAK_CURRENT_DURATION = 2000;
-  public static final int DRIVE_CONTINUOUS_CURRENT_LIMIT = 50;
 
   /**
    * Stores constants related to driver controls, SmartDashboard and other IO (Input/Output).
@@ -35,6 +32,15 @@ public final class Constants {
     public static final int TOWER_BUTTON_NUMBER = 1; // PLACEHOLDER
     public static final int CLIMBER_UP_BUTTON_NUMBER = 1; // PLACEHOLDER
     public static final int CLIMBER_DOWN_BUTTON_NUMBER = 1; // PLACEHOLDER
+  }
+
+  /**
+   * Stores constants related to the DriveBase.
+   */
+  public final class DriveConstants {
+    public static final int DRIVE_CURRENT_LIMIT = 60;
+    public static final int DRIVE_PEAK_CURRENT_DURATION = 2000;
+    public static final int DRIVE_CONTINUOUS_CURRENT_LIMIT = 50;
   }
 
   /**
@@ -95,4 +101,5 @@ public final class Constants {
     public static final int CLIMBER_PEAK_CURRENT_DURATION = 2000;
     public static final int CLIMBER_CONTINUOUS_CURRENT_LIMIT = 50;
   }
+
 }

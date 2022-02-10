@@ -38,21 +38,25 @@ public class DriveBase extends SubsystemBase {
     rightFrontMotor = new WPI_TalonFX(rightFrontId);
     rightBackMotor = new WPI_TalonFX(rightBackId);
 
-    leftFrontMotor.configPeakCurrentLimit(Constants.DRIVE_CURRENT_LIMIT);
-    leftFrontMotor.configPeakCurrentDuration(Constants.DRIVE_PEAK_CURRENT_DURATION);
-    leftFrontMotor.configContinuousCurrentLimit(Constants.DRIVE_CONTINUOUS_CURRENT_LIMIT);
+    leftFrontMotor.configPeakCurrentLimit(Constants.DriveConstants.DRIVE_CURRENT_LIMIT);
+    leftFrontMotor.configPeakCurrentDuration(Constants.DriveConstants.DRIVE_PEAK_CURRENT_DURATION);
+    leftFrontMotor
+        .configContinuousCurrentLimit(Constants.DriveConstants.DRIVE_CONTINUOUS_CURRENT_LIMIT);
     leftFrontMotor.enableCurrentLimit(true);
-    leftBackMotor.configPeakCurrentLimit(Constants.DRIVE_CURRENT_LIMIT);
-    leftBackMotor.configPeakCurrentDuration(Constants.DRIVE_PEAK_CURRENT_DURATION);
-    leftBackMotor.configContinuousCurrentLimit(Constants.DRIVE_CONTINUOUS_CURRENT_LIMIT);
+    leftBackMotor.configPeakCurrentLimit(Constants.DriveConstants.DRIVE_CURRENT_LIMIT);
+    leftBackMotor.configPeakCurrentDuration(Constants.DriveConstants.DRIVE_PEAK_CURRENT_DURATION);
+    leftBackMotor
+        .configContinuousCurrentLimit(Constants.DriveConstants.DRIVE_CONTINUOUS_CURRENT_LIMIT);
     leftBackMotor.enableCurrentLimit(true);
-    rightFrontMotor.configPeakCurrentLimit(Constants.DRIVE_CURRENT_LIMIT);
-    rightFrontMotor.configPeakCurrentDuration(Constants.DRIVE_PEAK_CURRENT_DURATION);
-    rightFrontMotor.configContinuousCurrentLimit(Constants.DRIVE_CONTINUOUS_CURRENT_LIMIT);
+    rightFrontMotor.configPeakCurrentLimit(Constants.DriveConstants.DRIVE_CURRENT_LIMIT);
+    rightFrontMotor.configPeakCurrentDuration(Constants.DriveConstants.DRIVE_PEAK_CURRENT_DURATION);
+    rightFrontMotor
+        .configContinuousCurrentLimit(Constants.DriveConstants.DRIVE_CONTINUOUS_CURRENT_LIMIT);
     rightFrontMotor.enableCurrentLimit(true);
-    rightBackMotor.configPeakCurrentLimit(Constants.DRIVE_CURRENT_LIMIT);
-    rightBackMotor.configPeakCurrentDuration(Constants.DRIVE_PEAK_CURRENT_DURATION);
-    rightBackMotor.configContinuousCurrentLimit(Constants.DRIVE_CONTINUOUS_CURRENT_LIMIT);
+    rightBackMotor.configPeakCurrentLimit(Constants.DriveConstants.DRIVE_CURRENT_LIMIT);
+    rightBackMotor.configPeakCurrentDuration(Constants.DriveConstants.DRIVE_PEAK_CURRENT_DURATION);
+    rightBackMotor
+        .configContinuousCurrentLimit(Constants.DriveConstants.DRIVE_CONTINUOUS_CURRENT_LIMIT);
     rightBackMotor.enableCurrentLimit(true);
 
     setBrakingMode(NeutralMode.Brake);
