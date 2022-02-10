@@ -19,12 +19,10 @@ public class Climber extends SubsystemBase {
    */
   public Climber(int motorId) {
     climberMotor = new WPI_TalonFX(motorId);
-    climberMotor.configPeakCurrentLimit(Constants.ClimberConstants.CLIMBER_CURRENT_LIMIT);
-    climberMotor
-        .configPeakCurrentDuration(Constants.ClimberConstants.CLIMBER_PEAK_CURRENT_DURATION);
-    climberMotor
-        .configContinuousCurrentLimit(Constants.ClimberConstants.CLIMBER_CONTINUOUS_CURRENT_LIMIT);
-    climberMotor.enableCurrentLimit(true);
+    climberMotor.configSupplyCurrentLimit(
+        new SupplyCurrentLimitConfiguration(true, Constants.ClimberConstants.CLIMBER_CURRENT_LIMIT,
+            Constants.ClimberConstants.CLIMBER_TRIGGER_THRESHOLD,
+            Constants.ClimberConstants.CLIMBER_TRIGGER_THRESHOLD_TIME));
     climberMotor.setNeutralMode(NeutralMode.Brake);
     CommandScheduler.getInstance().registerSubsystem(this);
   }

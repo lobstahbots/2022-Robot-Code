@@ -39,8 +39,8 @@ public final class Constants {
    */
   public final class DriveConstants {
     public static final int DRIVE_CURRENT_LIMIT = 60;
-    public static final int DRIVE_PEAK_CURRENT_DURATION = 2000;
-    public static final int DRIVE_CONTINUOUS_CURRENT_LIMIT = 50;
+    public static final int DRIVE_TRIGGER_THRESHOLD = 60;
+    public static final int DRIVE_TRIGGER_THRESHOLD_TIME = 20;
   }
 
   /**
@@ -64,6 +64,8 @@ public final class Constants {
     public static final double INTAKE_SOLENOIDS_DELAY_TIME = 1.0; // PLACEHOLDER
 
     public static final int INTAKE_CURRENT_LIMIT = 40;
+    public static final int INTAKE_TRIGGER_THRESHOLD = 40;
+    public static final int INTAKE_TRIGGER_THRESHOLD_TIME = 2;
   }
 
   /**
@@ -98,8 +100,8 @@ public final class Constants {
     public static final double CLIMBER_SPEED = 1.0; // PLACEHOLDER
 
     public static final int CLIMBER_CURRENT_LIMIT = 60;
-    public static final int CLIMBER_PEAK_CURRENT_DURATION = 2000;
-    public static final int CLIMBER_CONTINUOUS_CURRENT_LIMIT = 50;
+    public static final int CLIMBER_TRIGGER_THRESHOLD = 60;
+    public static final int CLIMBER_TRIGGER_THRESHOLD_TIME = 20;
   }
 
 }

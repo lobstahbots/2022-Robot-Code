@@ -38,26 +38,22 @@ public class DriveBase extends SubsystemBase {
     rightFrontMotor = new WPI_TalonFX(rightFrontId);
     rightBackMotor = new WPI_TalonFX(rightBackId);
 
-    leftFrontMotor.configPeakCurrentLimit(Constants.DriveConstants.DRIVE_CURRENT_LIMIT);
-    leftFrontMotor.configPeakCurrentDuration(Constants.DriveConstants.DRIVE_PEAK_CURRENT_DURATION);
-    leftFrontMotor
-        .configContinuousCurrentLimit(Constants.DriveConstants.DRIVE_CONTINUOUS_CURRENT_LIMIT);
-    leftFrontMotor.enableCurrentLimit(true);
-    leftBackMotor.configPeakCurrentLimit(Constants.DriveConstants.DRIVE_CURRENT_LIMIT);
-    leftBackMotor.configPeakCurrentDuration(Constants.DriveConstants.DRIVE_PEAK_CURRENT_DURATION);
-    leftBackMotor
-        .configContinuousCurrentLimit(Constants.DriveConstants.DRIVE_CONTINUOUS_CURRENT_LIMIT);
-    leftBackMotor.enableCurrentLimit(true);
-    rightFrontMotor.configPeakCurrentLimit(Constants.DriveConstants.DRIVE_CURRENT_LIMIT);
-    rightFrontMotor.configPeakCurrentDuration(Constants.DriveConstants.DRIVE_PEAK_CURRENT_DURATION);
-    rightFrontMotor
-        .configContinuousCurrentLimit(Constants.DriveConstants.DRIVE_CONTINUOUS_CURRENT_LIMIT);
-    rightFrontMotor.enableCurrentLimit(true);
-    rightBackMotor.configPeakCurrentLimit(Constants.DriveConstants.DRIVE_CURRENT_LIMIT);
-    rightBackMotor.configPeakCurrentDuration(Constants.DriveConstants.DRIVE_PEAK_CURRENT_DURATION);
-    rightBackMotor
-        .configContinuousCurrentLimit(Constants.DriveConstants.DRIVE_CONTINUOUS_CURRENT_LIMIT);
-    rightBackMotor.enableCurrentLimit(true);
+    leftFrontMotor.configSupplyCurrentLimit(
+        new SupplyCurrentLimitConfiguration(true, Constants.DriveConstants.DRIVE_CURRENT_LIMIT,
+            Constants.DriveConstants.DRIVE_TRIGGER_THRESHOLD,
+            Constants.DriveConstants.DRIVE_TRIGGER_THRESHOLD_TIME));
+    leftBackMotor.configSupplyCurrentLimit(
+        new SupplyCurrentLimitConfiguration(true, Constants.DriveConstants.DRIVE_CURRENT_LIMIT,
+            Constants.DriveConstants.DRIVE_TRIGGER_THRESHOLD,
+            Constants.DriveConstants.DRIVE_TRIGGER_THRESHOLD_TIME));
+    rightFrontMotor.configSupplyCurrentLimit(
+        new SupplyCurrentLimitConfiguration(true, Constants.DriveConstants.DRIVE_CURRENT_LIMIT,
+            Constants.DriveConstants.DRIVE_TRIGGER_THRESHOLD,
+            Constants.DriveConstants.DRIVE_TRIGGER_THRESHOLD_TIME));
+    rightBackMotor.configSupplyCurrentLimit(
+        new SupplyCurrentLimitConfiguration(true, Constants.DriveConstants.DRIVE_CURRENT_LIMIT,
+            Constants.DriveConstants.DRIVE_TRIGGER_THRESHOLD,
+            Constants.DriveConstants.DRIVE_TRIGGER_THRESHOLD_TIME));
 
     setBrakingMode(NeutralMode.Brake);
 
