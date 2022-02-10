@@ -40,7 +40,7 @@ public final class Constants {
   public final class DriveConstants {
     public static final int DRIVE_CURRENT_LIMIT = 60;
     public static final int DRIVE_TRIGGER_THRESHOLD = 60;
-    public static final int DRIVE_TRIGGER_THRESHOLD_TIME = 20;
+    public static final int DRIVE_TRIGGER_THRESHOLD_TIME = 2;
   }
 
   /**
@@ -101,7 +101,7 @@ public final class Constants {
 
     public static final int CLIMBER_CURRENT_LIMIT = 60;
     public static final int CLIMBER_TRIGGER_THRESHOLD = 60;
-    public static final int CLIMBER_TRIGGER_THRESHOLD_TIME = 20;
+    public static final int CLIMBER_TRIGGER_THRESHOLD_TIME = 2;
   }
 
 }
