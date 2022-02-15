@@ -3,6 +3,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -33,8 +35,10 @@ public class Outtake extends SubsystemBase {
    */
   public Outtake(int outtakeId, int outtakeId2, MotorType motorType) {
     outtakeMotor = new CANSparkMax(outtakeId, motorType);
+    outtakeMotor.setSmartCurrentLimit(Constants.OuttakeConstants.OUTTAKE_CURRENT_LIMIT);
     outtakeMotor.setIdleMode(IdleMode.kBrake);
     outtakeMotor2 = new CANSparkMax(outtakeId2, motorType);
+    outtakeMotor2.setSmartCurrentLimit(Constants.OuttakeConstants.OUTTAKE_CURRENT_LIMIT);
     outtakeMotor2.setIdleMode(IdleMode.kBrake);
     CommandScheduler.getInstance().registerSubsystem(this);
   }

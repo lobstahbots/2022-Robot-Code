@@ -35,6 +35,15 @@ public final class Constants {
   }
 
   /**
+   * Stores constants related to the DriveBase.
+   */
+  public final class DriveConstants {
+    public static final int DRIVE_CURRENT_LIMIT = 60;
+    public static final int DRIVE_TRIGGER_THRESHOLD = 60;
+    public static final int DRIVE_TRIGGER_THRESHOLD_TIME = 2;
+  }
+
+  /**
    * Stores constants related to the Intake.
    */
   public final class IntakeConstants {
@@ -53,6 +62,10 @@ public final class Constants {
     public static final int BACK_INTAKE_BOTTOM_REVERSE_CHANNEL = 1; // PLACEHOLDER
 
     public static final double INTAKE_SOLENOIDS_DELAY_TIME = 1.0; // PLACEHOLDER
+
+    public static final int INTAKE_CURRENT_LIMIT = 40;
+    public static final int INTAKE_TRIGGER_THRESHOLD = 40;
+    public static final int INTAKE_TRIGGER_THRESHOLD_TIME = 2;
   }
 
   /**
@@ -62,6 +75,8 @@ public final class Constants {
     public static final double OUTTAKE_SPEED = 0.5; // PLACEHOLDER
     public static final int OUTTAKE_MOTOR_ID1 = 1; // PLACEHOLDER
     public static final int OUTTAKE_MOTOR_ID2 = 2; // PLACEHOLDER
+
+    public static final int OUTTAKE_CURRENT_LIMIT = 40;
   }
 
   /**
@@ -73,6 +88,8 @@ public final class Constants {
     public static final int BOTTOM_LEFT_TOWER_MOTOR_ID = 1; // PLACEHOLDER
     public static final int TOP_RIGHT_TOWER_MOTOR_ID = 2; // PLACEHOLDER
     public static final int BOTTOM_RIGHT_TOWER_MOTOR_ID = 3; // PLACEHOLDER
+
+    public static final int TOWER_CURRENT_LIMIT = 25;
   }
 
   /**
@@ -81,5 +98,10 @@ public final class Constants {
   public final class ClimberConstants {
     public static final int CLIMBER_MOTOR_ID = 1; // PLACEHOLDER
     public static final double CLIMBER_SPEED = 1.0; // PLACEHOLDER
+
+    public static final int CLIMBER_CURRENT_LIMIT = 60;
+    public static final int CLIMBER_TRIGGER_THRESHOLD = 60;
+    public static final int CLIMBER_TRIGGER_THRESHOLD_TIME = 2;
   }
+
 }

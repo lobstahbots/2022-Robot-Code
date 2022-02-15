@@ -4,9 +4,9 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.Constants.IntakeConstants;
+import frc.robot.Constants;
 
 /**
  * A subsystem that controls the intake on a robot.
@@ -24,7 +24,7 @@ import frc.robot.Constants.IntakeConstants;
 public class Intake extends SubsystemBase {
   private final DoubleSolenoid topSolenoid;
   private final DoubleSolenoid bottomSolenoid;
-  private final VictorSPX intakeMotor;
+  private final WPI_TalonSRX intakeMotor;
 
   /**
    * Constructs an Intake with a {@link VictorSPX} with the given CAN ID and a
@@ -42,7 +42,11 @@ public class Intake extends SubsystemBase {
         new DoubleSolenoid(PneumaticsModuleType.REVPH, topForwardChannel, topReverseChannel);
     bottomSolenoid =
         new DoubleSolenoid(PneumaticsModuleType.REVPH, bottomForwardChannel, bottomReverseChannel);
-    intakeMotor = new VictorSPX(intakeMotorID);
+    intakeMotor = new WPI_TalonSRX(intakeMotorID);
+    intakeMotor.configSupplyCurrentLimit(
+        new SupplyCurrentLimitConfiguration(true, Constants.IntakeConstants.INTAKE_CURRENT_LIMIT,
+            Constants.IntakeConstants.INTAKE_TRIGGER_THRESHOLD,
+            Constants.IntakeConstants.INTAKE_TRIGGER_THRESHOLD_TIME));
     intakeMotor.setNeutralMode(NeutralMode.Brake);
     CommandScheduler.getInstance().registerSubsystem(this);
   }

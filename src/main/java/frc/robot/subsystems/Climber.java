@@ -7,6 +7,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Climber extends SubsystemBase {
   private final WPI_TalonFX climberMotor;
@@ -18,6 +19,10 @@ public class Climber extends SubsystemBase {
    */
   public Climber(int motorId) {
     climberMotor = new WPI_TalonFX(motorId);
+    climberMotor.configSupplyCurrentLimit(
+        new SupplyCurrentLimitConfiguration(true, Constants.ClimberConstants.CLIMBER_CURRENT_LIMIT,
+            Constants.ClimberConstants.CLIMBER_TRIGGER_THRESHOLD,
+            Constants.ClimberConstants.CLIMBER_TRIGGER_THRESHOLD_TIME));
     climberMotor.setNeutralMode(NeutralMode.Brake);
     CommandScheduler.getInstance().registerSubsystem(this);
   }
