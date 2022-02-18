@@ -2,8 +2,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -15,17 +15,17 @@ import frc.robot.Constants;
  */
 public class DriveBase extends SubsystemBase {
 
-  private final WPI_TalonFX leftFrontMotor;
-  private final WPI_TalonFX leftBackMotor;
-  private final WPI_TalonFX rightFrontMotor;
-  private final WPI_TalonFX rightBackMotor;
+  private final WPI_TalonSRX leftFrontMotor;
+  private final WPI_TalonSRX leftBackMotor;
+  private final WPI_TalonSRX rightFrontMotor;
+  private final WPI_TalonSRX rightBackMotor;
 
   private NeutralMode motorNeutralMode;
 
   private final DifferentialDrive differentialDrive;
 
   /**
-   * Constructs a DriveBase with a {@link TalonFX} at each of the given CAN IDs.
+   * Constructs a DriveBase with a {@link TalonSRX} at each of the given CAN IDs.
    *
    * @param leftFrontId The CAN ID of the Left Front motor
    * @param leftBackId The CAN ID of the Left Back motor
@@ -33,10 +33,10 @@ public class DriveBase extends SubsystemBase {
    * @param rightBackId The CAN ID of the Right Back motor
    */
   public DriveBase(int leftFrontId, int leftBackId, int rightFrontId, int rightBackId) {
-    leftFrontMotor = new WPI_TalonFX(leftFrontId);
-    leftBackMotor = new WPI_TalonFX(leftBackId);
-    rightFrontMotor = new WPI_TalonFX(rightFrontId);
-    rightBackMotor = new WPI_TalonFX(rightBackId);
+    leftFrontMotor = new WPI_TalonSRX(leftFrontId);
+    leftBackMotor = new WPI_TalonSRX(leftBackId);
+    rightFrontMotor = new WPI_TalonSRX(rightFrontId);
+    rightBackMotor = new WPI_TalonSRX(rightBackId);
 
     leftFrontMotor.configSupplyCurrentLimit(
         new SupplyCurrentLimitConfiguration(true, Constants.DriveConstants.DRIVE_CURRENT_LIMIT,

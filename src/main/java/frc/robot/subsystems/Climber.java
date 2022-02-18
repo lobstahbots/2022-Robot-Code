@@ -3,22 +3,22 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Climber extends SubsystemBase {
-  private final WPI_TalonFX climberMotor;
+  private final WPI_TalonSRX climberMotor;
 
   /**
-   * Creates a Climber with its {@link WPI_TalonFX} at the given id.
+   * Creates a Climber with its {@link WPI_TalonSRX} at the given id.
    * 
    * @param motorId The motor ID of the motor
    */
   public Climber(int motorId) {
-    climberMotor = new WPI_TalonFX(motorId);
+    climberMotor = new WPI_TalonSRX(motorId);
     climberMotor.configSupplyCurrentLimit(
         new SupplyCurrentLimitConfiguration(true, Constants.ClimberConstants.CLIMBER_CURRENT_LIMIT,
             Constants.ClimberConstants.CLIMBER_TRIGGER_THRESHOLD,
