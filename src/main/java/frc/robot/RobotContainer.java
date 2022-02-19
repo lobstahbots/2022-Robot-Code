@@ -45,7 +45,8 @@ import frc.robot.commands.tower.StopTowerCommand;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DriveBase driveBase = new DriveBase(0, 1, 2, 3); // TODO: remove dummy port values
+  private final DriveBase driveBase = new DriveBase(54, 55, 52, 53); // TODO: remove dummy port
+                                                                     // values
   // private final Intake frontIntake = new Intake(
   // IntakeConstants.FRONT_INTAKE_MOTOR_ID,
   // IntakeConstants.FRONT_INTAKE_TOP_FORWARD_CHANNEL,
@@ -58,9 +59,9 @@ public class RobotContainer {
   // IntakeConstants.BACK_INTAKE_TOP_REVERSE_CHANNEL,
   // IntakeConstants.BACK_INTAKE_BOTTOM_FORWARD_CHANNEL,
   // IntakeConstants.BACK_INTAKE_BOTTOM_REVERSE_CHANNEL);
-  // private final Outtake outtake = new Outtake(
-  // Constants.OuttakeConstants.OUTTAKE_MOTOR_ID1,
-  // Constants.OuttakeConstants.OUTTAKE_MOTOR_ID2);
+  private final Outtake outtake = new Outtake(
+      Constants.OuttakeConstants.OUTTAKE_MOTOR_ID1,
+      Constants.OuttakeConstants.OUTTAKE_MOTOR_ID2);
   // private final Tower tower = new Tower(
   // TowerConstants.TOP_LEFT_TOWER_MOTOR_ID,
   // TowerConstants.BOTTOM_LEFT_TOWER_MOTOR_ID,
@@ -78,9 +79,9 @@ public class RobotContainer {
   // new JoystickButton(secondaryDriverJoystick, IOConstants.FRONT_INTAKE_BUTTON_NUMBER);
   // private final JoystickButton backIntakeButton =
   // new JoystickButton(secondaryDriverJoystick, IOConstants.BACK_INTAKE_BUTTON_NUMBER);
-  // private final JoystickButton outtakeButton =
-  // new JoystickButton(secondaryDriverJoystick,
-  // Constants.IOConstants.OUTTAKE_BUTTON_NUMBER);
+  private final JoystickButton outtakeButton =
+      new JoystickButton(secondaryDriverJoystick,
+          Constants.IOConstants.OUTTAKE_BUTTON_NUMBER);
   // private final JoystickButton towerButton =
   // new JoystickButton(secondaryDriverJoystick, IOConstants.TOWER_BUTTON_NUMBER);
   private final JoystickButton climberUpButton =
@@ -104,18 +105,15 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // outtakeButton
-    // .whenActive(new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED))
-    // .whenInactive(new StopOuttakeCommand(outtake));
+    outtakeButton
+        .whileHeld(new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED));
     // towerButton
     // .whenActive(new RunTowerCommand(tower, TowerConstants.TOWER_SPEED))
     // .whenInactive(new StopTowerCommand(tower));
     climberUpButton
-        .whenActive(new RunClimberCommand(climber1, climber2, ClimberConstants.CLIMBER_SPEED))
-        .whenInactive(new StopClimberCommand(climber1, climber2));
+        .whileHeld(new RunClimberCommand(climber1, climber2, ClimberConstants.CLIMBER_SPEED));
     climberDownButton
-        .whenActive(new RunClimberCommand(climber1, climber2, -ClimberConstants.CLIMBER_SPEED))
-        .whenInactive(new StopClimberCommand(climber1, climber2));
+        .whileHeld(new RunClimberCommand(climber1, climber2, -ClimberConstants.CLIMBER_SPEED));
 
     // configureIntakeButton(frontIntake, frontIntakeButton);
     // configureIntakeButton(backIntake, backIntakeButton);
@@ -141,10 +139,10 @@ public class RobotContainer {
       new SimpleAutonCommand(driveBase, Constants.SIMPLE_AUTON_SPEED,
           Constants.SIMPLE_AUTON_RUNTIME);
   // A medium auto routine.
-  // private final Command mediumAuto =
-  // new ParallelDeadlineGroup(new WaitCommand(Constants.MEDIUM_AUTON_OUTAKE_RUNTIME),
-  // new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED),
-  // simpleAuto);
+  private final Command mediumAuto =
+      new ParallelDeadlineGroup(new WaitCommand(Constants.MEDIUM_AUTON_OUTAKE_RUNTIME),
+          new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED),
+          simpleAuto);
 
   private final SendableChooser<Command> autonChooser = new SendableChooser<>();
 
@@ -166,7 +164,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return autonChooser.getSelected();
+    return mediumAuto;
   }
 
   /**
@@ -178,8 +176,8 @@ public class RobotContainer {
     driveBase.setDefaultCommand(
         new TankDriveCommand(
             driveBase,
-            () -> primaryDriverJoystick.getRawAxis(0),
-            () -> primaryDriverJoystick.getRawAxis(1)));
+            () -> primaryDriverJoystick.getRawAxis(1),
+            () -> primaryDriverJoystick.getRawAxis(3)));
   }
 
   /**
@@ -189,6 +187,8 @@ public class RobotContainer {
    */
   public void setAutonDefaultCommands() {
     driveBase.setDefaultCommand(new StopDriveCommand(driveBase));
+    climber1.setDefaultCommand(new StopClimberCommand(climber1, climber2));
+    outtake.setDefaultCommand(new StopOuttakeCommand(outtake));
   }
 
 

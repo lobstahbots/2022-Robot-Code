@@ -120,6 +120,6 @@ public class DriveBase extends SubsystemBase {
    * @param rightSpeed The right speed
    */
   public void tankDrive(double leftSpeed, double rightSpeed) {
-    differentialDrive.tankDrive(leftSpeed, rightSpeed);
+    differentialDrive.tankDrive(leftSpeed, rightSpeed, true);
   }
 }

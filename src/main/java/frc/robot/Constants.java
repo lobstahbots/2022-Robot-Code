@@ -14,9 +14,9 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static final double SIMPLE_AUTON_SPEED = 0.2; // PLACEHOLDER
-  public static final double SIMPLE_AUTON_RUNTIME = 5.0; // PLACEHOLDER
-  public static final double MEDIUM_AUTON_OUTAKE_RUNTIME = 5.0; // PLACEHOLDER
+  public static final double SIMPLE_AUTON_SPEED = 0.5; // PLACEHOLDER
+  public static final double SIMPLE_AUTON_RUNTIME = 4.0; // PLACEHOLDER
+  public static final double MEDIUM_AUTON_OUTAKE_RUNTIME = 2.0; // PLACEHOLDER
 
   /**
    * Stores constants related to driver controls, SmartDashboard and other IO (Input/Output).
@@ -28,9 +28,9 @@ public final class Constants {
     public static final int FRONT_INTAKE_BUTTON_NUMBER = 0; // PLACEHOLDER
     public static final int BACK_INTAKE_BUTTON_NUMBER = 1; // PLACEHOLDER
 
-    public static final int OUTTAKE_BUTTON_NUMBER = 1; // PLACEHOLDER
-    public static final int TOWER_BUTTON_NUMBER = 1; // PLACEHOLDER
-    public static final int CLIMBER_UP_BUTTON_NUMBER = 1; // PLACEHOLDER
+    public static final int OUTTAKE_BUTTON_NUMBER = 2; // PLACEHOLDER
+    public static final int TOWER_BUTTON_NUMBER = 6; // PLACEHOLDER
+    public static final int CLIMBER_UP_BUTTON_NUMBER = 4; // PLACEHOLDER
     public static final int CLIMBER_DOWN_BUTTON_NUMBER = 1; // PLACEHOLDER
   }
 
@@ -96,13 +96,13 @@ public final class Constants {
    * Stores constants related to the Climber.
    */
   public final class ClimberConstants {
-    public static final int CLIMBER_MOTOR_ID = 1; // PLACEHOLDER
-    public static final int CLIMBER_MOTOR_ID_2 = 1; // PLACEHOLDER
-    public static final double CLIMBER_SPEED = 1.0; // PLACEHOLDER
+    public static final int CLIMBER_MOTOR_ID = 50; // PLACEHOLDER
+    public static final int CLIMBER_MOTOR_ID_2 = 51; // PLACEHOLDER
+    public static final double CLIMBER_SPEED = 1; // PLACEHOLDER
 
-    public static final int CLIMBER_CURRENT_LIMIT = 60;
-    public static final int CLIMBER_TRIGGER_THRESHOLD = 60;
-    public static final int CLIMBER_TRIGGER_THRESHOLD_TIME = 2;
+    public static final int CLIMBER_CURRENT_LIMIT = 85;
+    public static final int CLIMBER_TRIGGER_THRESHOLD = 100;
+    public static final double CLIMBER_TRIGGER_THRESHOLD_TIME = 0.5;
   }
 
 }
