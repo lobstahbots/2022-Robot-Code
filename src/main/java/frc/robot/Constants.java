@@ -97,6 +97,7 @@ public final class Constants {
    */
   public final class ClimberConstants {
     public static final int CLIMBER_MOTOR_ID = 1; // PLACEHOLDER
+    public static final int CLIMBER_MOTOR_ID_2 = 1; // PLACEHOLDER
     public static final double CLIMBER_SPEED = 1.0; // PLACEHOLDER
 
     public static final int CLIMBER_CURRENT_LIMIT = 60;

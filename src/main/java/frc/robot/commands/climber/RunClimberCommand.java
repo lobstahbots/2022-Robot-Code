@@ -13,7 +13,8 @@ import frc.robot.subsystems.Climber;
  * Runs a {@link Climber}
  */
 public class RunClimberCommand extends CommandBase {
-  private final Climber climber;
+  private final Climber climber1;
+  private final Climber climber2;
   private final Supplier<Double> speedSupplier;
 
   /**
@@ -22,30 +23,35 @@ public class RunClimberCommand extends CommandBase {
    * @param climber The {@link Climber} to run
    * @param speed The speed to run at
    */
-  public RunClimberCommand(Climber climber, double speed) {
-    this(climber, () -> speed);
+  public RunClimberCommand(Climber climber1, Climber climber2, double speed) {
+    this(climber1, climber2, () -> speed);
   }
 
   /**
    * Runs the {@link Climber} at the speed given by the supplier
    * 
-   * @param climber The {@link Climber} to run
+   * @param climber1 The {@link Climber} to run
+   * @param climber2 The {@link Climber} to run
    * @param speedSupplier Supplier for the speed to run at
    */
-  public RunClimberCommand(Climber climber, Supplier<Double> speedSupplier) {
-    this.climber = climber;
+  public RunClimberCommand(Climber climber1, Climber climber2, Supplier<Double> speedSupplier) {
+    this.climber1 = climber1;
+    this.climber2 = climber2;
     this.speedSupplier = speedSupplier;
-    addRequirements(this.climber);
+    addRequirements(this.climber1);
+    addRequirements(this.climber2);
   }
 
   @Override
   public void execute() {
-    climber.setSpeed(speedSupplier.get());
+    climber1.setSpeed(speedSupplier.get());
+    climber2.setSpeed(speedSupplier.get());
   }
 
   @Override
   public void end(boolean interrupted) {
-    climber.setSpeed(0);
+    climber1.setSpeed(0);
+    climber2.setSpeed(0);
   }
 
   @Override
