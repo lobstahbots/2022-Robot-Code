@@ -140,7 +140,6 @@ public class RobotContainer {
   private final Command simpleAuto =
       new SimpleAutonCommand(driveBase, Constants.SIMPLE_AUTON_SPEED,
           Constants.SIMPLE_AUTON_RUNTIME);
-
   // A medium auto routine.
   // private final Command mediumAuto =
   // new ParallelDeadlineGroup(new WaitCommand(Constants.MEDIUM_AUTON_OUTAKE_RUNTIME),
