@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -108,7 +109,7 @@ public class Intake extends SubsystemBase {
   public Command getRetractionCommand() {
     return new SequentialCommandGroup(
         new InstantCommand(() -> bottomSolenoid.set(DoubleSolenoid.Value.kReverse)),
-        new WaitCommand(IntakeConstants.INTAKE_SOLENOIDS_DELAY_TIME),
+        new WaitCommand(Constants.IntakeConstants.INTAKE_SOLENOIDS_DELAY_TIME),
         new InstantCommand(() -> topSolenoid.set(DoubleSolenoid.Value.kReverse)));
   }
 
@@ -127,7 +128,7 @@ public class Intake extends SubsystemBase {
   public Command getExtensionCommand() {
     return new SequentialCommandGroup(
         new InstantCommand(() -> topSolenoid.set(DoubleSolenoid.Value.kForward)),
-        new WaitCommand(IntakeConstants.INTAKE_SOLENOIDS_DELAY_TIME),
+        new WaitCommand(Constants.IntakeConstants.INTAKE_SOLENOIDS_DELAY_TIME),
         new InstantCommand(() -> bottomSolenoid.set(DoubleSolenoid.Value.kForward)));
   }
 }
