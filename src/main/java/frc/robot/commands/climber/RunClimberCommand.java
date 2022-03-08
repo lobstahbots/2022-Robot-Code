@@ -29,7 +29,7 @@ public class RunClimberCommand extends CommandBase {
   }
 
   /**
-   * Runs the {@link Climbers} at the speed given by the supplier
+   * Runs the {@link Climber} at the speed given by the supplier
    * 
    * @param leftClimber The left {@link Climber} to run
    * @param rightClimber The right {@link Climber} to run
