@@ -4,8 +4,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -68,10 +67,10 @@ public class RobotContainer {
       TowerConstants.BOTTOM_RIGHT_TOWER_MOTOR_ID);
   private final Climber climber = new Climber(ClimberConstants.CLIMBER_MOTOR_ID);
 
-  private final Joystick primaryDriverJoystick =
-      new Joystick(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
-  private final Joystick secondaryDriverJoystick =
-      new Joystick(IOConstants.SECONDARY_DRIVER_JOYSTICK_PORT);
+  private final GenericHID primaryDriverJoystick =
+      new GenericHID(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
+  private final GenericHID secondaryDriverJoystick =
+      new GenericHID(IOConstants.SECONDARY_DRIVER_JOYSTICK_PORT);
 
   private final JoystickButton frontIntakeButton =
       new JoystickButton(secondaryDriverJoystick, IOConstants.FRONT_INTAKE_BUTTON_NUMBER);
@@ -99,7 +98,8 @@ public class RobotContainer {
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses
-   * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
+   * ({@link edu.wpi.first.wpilibj.Joystick} or
+   * {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
