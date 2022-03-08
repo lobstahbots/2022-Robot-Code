@@ -14,9 +14,9 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static final double SIMPLE_AUTON_SPEED = 0.2; // PLACEHOLDER
-  public static final double SIMPLE_AUTON_RUNTIME = 5.0; // PLACEHOLDER
-  public static final double MEDIUM_AUTON_OUTAKE_RUNTIME = 5.0; // PLACEHOLDER
+  public static final double SIMPLE_AUTON_SPEED = 0.5; // WEEK0
+  public static final double SIMPLE_AUTON_RUNTIME = 4.0; // WEEK0
+  public static final double MEDIUM_AUTON_OUTTAKE_RUNTIME = 2.0; // PLACEHOLDER
 
   /**
    * Stores constants related to driver controls, SmartDashboard and other IO (Input/Output).
@@ -28,16 +28,21 @@ public final class Constants {
     public static final int FRONT_INTAKE_BUTTON_NUMBER = 0; // PLACEHOLDER
     public static final int BACK_INTAKE_BUTTON_NUMBER = 1; // PLACEHOLDER
 
-    public static final int OUTTAKE_BUTTON_NUMBER = 1; // PLACEHOLDER
-    public static final int TOWER_BUTTON_NUMBER = 1; // PLACEHOLDER
-    public static final int CLIMBER_UP_BUTTON_NUMBER = 1; // PLACEHOLDER
-    public static final int CLIMBER_DOWN_BUTTON_NUMBER = 1; // PLACEHOLDER
+    public static final int OUTTAKE_BUTTON_NUMBER = 2; // WEEK0
+    public static final int TOWER_BUTTON_NUMBER = 6; // WEEK0
+    public static final int CLIMBER_UP_BUTTON_NUMBER = 4; // WEEK0
+    public static final int CLIMBER_DOWN_BUTTON_NUMBER = 1; // WEEK0
   }
 
   /**
    * Stores constants related to the DriveBase.
    */
   public final class DriveConstants {
+    public static final int DRIVE_LEFT_FRONT_MOTOR_ID = 54; // WEEK0
+    public static final int DRIVE_LEFT_BACK_MOTOR_ID = 55; // WEEK0
+    public static final int DRIVE_RIGHT_FRONT_MOTOR_ID = 52; // WEEK0
+    public static final int DRIVE_RIGHT_BACK_MOTOR_ID = 53; // WEEK0
+
     public static final int DRIVE_CURRENT_LIMIT = 60;
     public static final int DRIVE_TRIGGER_THRESHOLD = 60;
     public static final int DRIVE_TRIGGER_THRESHOLD_TIME = 2;
@@ -96,12 +101,13 @@ public final class Constants {
    * Stores constants related to the Climber.
    */
   public final class ClimberConstants {
-    public static final int CLIMBER_MOTOR_ID = 1; // PLACEHOLDER
-    public static final double CLIMBER_SPEED = 1.0; // PLACEHOLDER
+    public static final int LEFT_CLIMBER_MOTOR_ID = 50; // WEEK0
+    public static final int RIGHT_CLIMBER_MOTOR_ID = 51; // WEEK0
+    public static final double CLIMBER_SPEED = 1.0; // WEEK0
 
-    public static final int CLIMBER_CURRENT_LIMIT = 60;
-    public static final int CLIMBER_TRIGGER_THRESHOLD = 60;
-    public static final int CLIMBER_TRIGGER_THRESHOLD_TIME = 2;
+    public static final int CLIMBER_CURRENT_LIMIT = 85;
+    public static final int CLIMBER_TRIGGER_THRESHOLD = 100;
+    public static final double CLIMBER_TRIGGER_THRESHOLD_TIME = 0.5;
   }
 
 }
