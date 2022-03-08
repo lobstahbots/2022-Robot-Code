@@ -69,7 +69,7 @@ public class RobotContainer {
       TowerConstants.BOTTOM_LEFT_TOWER_MOTOR_ID,
       TowerConstants.TOP_RIGHT_TOWER_MOTOR_ID,
       TowerConstants.BOTTOM_RIGHT_TOWER_MOTOR_ID);
-  private final Climber climber = new Climber(ClimberConstants.LEFT_CLIMBER_MOTOR_ID);
+  private final Climber climber = new Climber(ClimberConstants.CLIMBER_MOTOR_ID);
 
   private final Joystick primaryDriverJoystick =
       new Joystick(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);

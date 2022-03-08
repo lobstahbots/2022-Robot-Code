@@ -101,8 +101,7 @@ public final class Constants {
    * Stores constants related to the Climber.
    */
   public final class ClimberConstants {
-    public static final int LEFT_CLIMBER_MOTOR_ID = 50; // WEEK0
-    public static final int RIGHT_CLIMBER_MOTOR_ID = 51; // WEEK0
+    public static final int CLIMBER_MOTOR_ID = 1; // PLACEHOLDER
     public static final double CLIMBER_SPEED = 1.0; // WEEK0
 
     public static final int CLIMBER_CURRENT_LIMIT = 85;
