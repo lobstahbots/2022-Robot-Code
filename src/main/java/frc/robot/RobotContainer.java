@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.IOConstants;
 import frc.robot.Constants.IntakeConstants;
@@ -97,24 +96,18 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     outtakeButton
-        .whenActive(new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED))
-        .whenInactive(new StopOuttakeCommand(outtake));
+        .whileHeld(new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED));
     towerButton
-        .whenActive(new RunTowerCommand(tower, TowerConstants.TOWER_SPEED))
-        .whenInactive(new StopTowerCommand(tower));
+        .whileHeld(new RunTowerCommand(tower, TowerConstants.TOWER_SPEED));
     climberUpButton
-        .whenActive(
-            new RunClimberCommand(leftClimber, rightClimber, ClimberConstants.CLIMBER_SPEED))
-        .whenInactive(new StopClimberCommand(leftClimber, rightClimber));
+        .whileHeld(
+            new RunClimberCommand(leftClimber, rightClimber, ClimberConstants.CLIMBER_SPEED));
     climberDownButton
-        .whenActive(
-            new RunClimberCommand(leftClimber, rightClimber, -ClimberConstants.CLIMBER_SPEED))
-        .whenInactive(new StopClimberCommand(leftClimber, rightClimber));
+        .whileHeld(
+            new RunClimberCommand(leftClimber, rightClimber, -ClimberConstants.CLIMBER_SPEED));
     intakeButton
-        .whenActive(new SequentialCommandGroup(new ExtendIntakeCommand(intake),
-            new SpinIntakeCommand(intake, IntakeConstants.INTAKE_SPEED)))
-        .whenInactive(new SequentialCommandGroup(new StopSpinIntakeCommand(intake),
-            new RetractIntakeCommand(intake)));
+        .whileHeld(new SequentialCommandGroup(new ExtendIntakeCommand(intake),
+            new SpinIntakeCommand(intake, IntakeConstants.INTAKE_SPEED)));
   }
 
   // A simple auto routine.
@@ -160,8 +153,8 @@ public class RobotContainer {
     driveBase.setDefaultCommand(
         new TankDriveCommand(
             driveBase,
-            () -> primaryDriverJoystick.getRawAxis(0),
-            () -> primaryDriverJoystick.getRawAxis(1)));
+            () -> primaryDriverJoystick.getRawAxis(1),
+            () -> primaryDriverJoystick.getRawAxis(3)));
   }
 
   /**
@@ -171,6 +164,11 @@ public class RobotContainer {
    */
   public void setAutonDefaultCommands() {
     driveBase.setDefaultCommand(new StopDriveCommand(driveBase));
+    leftClimber.setDefaultCommand(new StopClimberCommand(leftClimber, rightClimber));
+    outtake.setDefaultCommand(new StopOuttakeCommand(outtake));
+    tower.setDefaultCommand(new StopTowerCommand(tower));
+    intake.setDefaultCommand(new SequentialCommandGroup(new StopSpinIntakeCommand(intake),
+        new RetractIntakeCommand(intake)));
   }
 
 
