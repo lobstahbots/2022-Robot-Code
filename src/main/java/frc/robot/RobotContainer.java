@@ -164,11 +164,6 @@ public class RobotContainer {
    */
   public void setAutonDefaultCommands() {
     driveBase.setDefaultCommand(new StopDriveCommand(driveBase));
-    climber.setDefaultCommand(new StopClimberCommand(climber));
-    outtake.setDefaultCommand(new StopOuttakeCommand(outtake));
-    tower.setDefaultCommand(new StopTowerCommand(tower));
-    intake.setDefaultCommand(new SequentialCommandGroup(new StopSpinIntakeCommand(intake),
-        new RetractIntakeCommand(intake)));
   }
 
 
