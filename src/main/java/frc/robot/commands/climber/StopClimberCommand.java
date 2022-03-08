@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
 
 /**
- * Stops the two {@link Climbers} while active
+ * Stops the two {@link Climber} while active
  */
 public class StopClimberCommand extends CommandBase {
   private final Climber leftClimber;

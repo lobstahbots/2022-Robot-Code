@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
 
 /**
- * Runs the two {@link Climbers}
+ * Runs the two {@link Climber}
  */
 public class RunClimberCommand extends CommandBase {
   private final Climber leftClimber;
@@ -18,7 +18,7 @@ public class RunClimberCommand extends CommandBase {
   private final Supplier<Double> speedSupplier;
 
   /**
-   * Runs the {@link Climbers} at the given speed
+   * Runs the two {@link Climber} at the given speed
    * 
    * @param leftClimber The left {@link Climber} to run
    * @param rightClimber The right {@link Climber} to run
