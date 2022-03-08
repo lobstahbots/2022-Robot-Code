@@ -10,50 +10,42 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
 
 /**
- * Runs the two {@link Climber}
+ * Runs the {@link Climber}
  */
 public class RunClimberCommand extends CommandBase {
-  private final Climber leftClimber;
-  private final Climber rightClimber;
+  private final Climber climber;
   private final Supplier<Double> speedSupplier;
 
   /**
-   * Runs the two {@link Climber} at the given speed
+   * Runs the {@link Climber} at the given speed
    * 
-   * @param leftClimber The left {@link Climber} to run
-   * @param rightClimber The right {@link Climber} to run
+   * @param climber The {@link Climber} to run
    * @param speed The speed to run at
    */
-  public RunClimberCommand(Climber leftClimber, Climber rightClimber, double speed) {
-    this(leftClimber, rightClimber, () -> speed);
+  public RunClimberCommand(Climber climber, double speed) {
+    this(climber, () -> speed);
   }
 
   /**
    * Runs the {@link Climber} at the speed given by the supplier
    * 
-   * @param leftClimber The left {@link Climber} to run
-   * @param rightClimber The right {@link Climber} to run
+   * @param climber The {@link Climber} to run
    * @param speedSupplier Supplier for the speed to run at
    */
-  public RunClimberCommand(Climber leftClimber, Climber rightClimber,
-      Supplier<Double> speedSupplier) {
-    this.leftClimber = leftClimber;
-    this.rightClimber = rightClimber;
+  public RunClimberCommand(Climber climber, Supplier<Double> speedSupplier) {
+    this.climber = climber;
     this.speedSupplier = speedSupplier;
-    addRequirements(this.leftClimber);
-    addRequirements(this.rightClimber);
+    addRequirements(this.climber);
   }
 
   @Override
   public void execute() {
-    leftClimber.setSpeed(speedSupplier.get());
-    rightClimber.setSpeed(speedSupplier.get());
+    climber.setSpeed(speedSupplier.get());
   }
 
   @Override
   public void end(boolean interrupted) {
-    leftClimber.setSpeed(0);
-    rightClimber.setSpeed(0);
+    climber.setSpeed(0);
   }
 
   @Override

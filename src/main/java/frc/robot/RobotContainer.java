@@ -59,8 +59,8 @@ public class RobotContainer {
       TowerConstants.BOTTOM_LEFT_TOWER_MOTOR_ID,
       TowerConstants.TOP_RIGHT_TOWER_MOTOR_ID,
       TowerConstants.BOTTOM_RIGHT_TOWER_MOTOR_ID);
-  private final Climber leftClimber = new Climber(ClimberConstants.LEFT_CLIMBER_MOTOR_ID);
-  private final Climber rightClimber = new Climber(ClimberConstants.RIGHT_CLIMBER_MOTOR_ID);
+  private final Climber climber =
+      new Climber(ClimberConstants.LEFT_CLIMBER_MOTOR_ID, ClimberConstants.RIGHT_CLIMBER_MOTOR_ID);
 
   private final Joystick primaryDriverJoystick =
       new Joystick(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
@@ -101,10 +101,10 @@ public class RobotContainer {
         .whileHeld(new RunTowerCommand(tower, TowerConstants.TOWER_SPEED));
     climberUpButton
         .whileHeld(
-            new RunClimberCommand(leftClimber, rightClimber, ClimberConstants.CLIMBER_SPEED));
+            new RunClimberCommand(climber, ClimberConstants.CLIMBER_SPEED));
     climberDownButton
         .whileHeld(
-            new RunClimberCommand(leftClimber, rightClimber, -ClimberConstants.CLIMBER_SPEED));
+            new RunClimberCommand(climber, -ClimberConstants.CLIMBER_SPEED));
     intakeButton
         .whileHeld(new SequentialCommandGroup(new ExtendIntakeCommand(intake),
             new SpinIntakeCommand(intake, IntakeConstants.INTAKE_SPEED)));
@@ -164,7 +164,7 @@ public class RobotContainer {
    */
   public void setAutonDefaultCommands() {
     driveBase.setDefaultCommand(new StopDriveCommand(driveBase));
-    leftClimber.setDefaultCommand(new StopClimberCommand(leftClimber, rightClimber));
+    climber.setDefaultCommand(new StopClimberCommand(climber));
     outtake.setDefaultCommand(new StopOuttakeCommand(outtake));
     tower.setDefaultCommand(new StopTowerCommand(tower));
     intake.setDefaultCommand(new SequentialCommandGroup(new StopSpinIntakeCommand(intake),

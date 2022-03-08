@@ -5,27 +5,22 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
 
 /**
- * Stops the two {@link Climber} while active
+ * Stops the {@link Climber} while active
  */
 public class StopClimberCommand extends CommandBase {
-  private final Climber leftClimber;
-  private final Climber rightClimber;
+  private final Climber climber;
 
   /**
-   * @param leftClimber The left {@link Climber} to stop
-   * @param rightClimber The right {@link Climber} to stop
+   * @param climber The {@link Climber} to stop
    */
-  public StopClimberCommand(Climber leftClimber, Climber rightClimber) {
-    this.leftClimber = leftClimber;
-    this.rightClimber = rightClimber;
-    addRequirements(this.leftClimber);
-    addRequirements(this.rightClimber);
+  public StopClimberCommand(Climber climber) {
+    this.climber = climber;
+    addRequirements(this.climber);
   }
 
   @Override
   public void execute() {
-    leftClimber.setSpeed(0);
-    rightClimber.setSpeed(0);
+    climber.setSpeed(0);
   }
 
   @Override
