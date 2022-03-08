@@ -10,42 +10,50 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
 
 /**
- * Runs a {@link Climber}
+ * Runs the two {@link Climbers}
  */
 public class RunClimberCommand extends CommandBase {
-  private final Climber climber;
+  private final Climber leftClimber;
+  private final Climber rightClimber;
   private final Supplier<Double> speedSupplier;
 
   /**
-   * Runs the {@link Climber} at the given speed
+   * Runs the {@link Climbers} at the given speed
    * 
-   * @param climber The {@link Climber} to run
+   * @param leftClimber The left {@link Climber} to run
+   * @param rightClimber The right {@link Climber} to run
    * @param speed The speed to run at
    */
-  public RunClimberCommand(Climber climber, double speed) {
-    this(climber, () -> speed);
+  public RunClimberCommand(Climber leftClimber, Climber rightClimber, double speed) {
+    this(leftClimber, rightClimber, () -> speed);
   }
 
   /**
-   * Runs the {@link Climber} at the speed given by the supplier
+   * Runs the {@link Climbers} at the speed given by the supplier
    * 
-   * @param climber The {@link Climber} to run
+   * @param leftClimber The left {@link Climber} to run
+   * @param rightClimber The right {@link Climber} to run
    * @param speedSupplier Supplier for the speed to run at
    */
-  public RunClimberCommand(Climber climber, Supplier<Double> speedSupplier) {
-    this.climber = climber;
+  public RunClimberCommand(Climber leftClimber, Climber rightClimber,
+      Supplier<Double> speedSupplier) {
+    this.leftClimber = leftClimber;
+    this.rightClimber = rightClimber;
     this.speedSupplier = speedSupplier;
-    addRequirements(this.climber);
+    addRequirements(this.leftClimber);
+    addRequirements(this.rightClimber);
   }
 
   @Override
   public void execute() {
-    climber.setSpeed(speedSupplier.get());
+    leftClimber.setSpeed(speedSupplier.get());
+    rightClimber.setSpeed(speedSupplier.get());
   }
 
   @Override
   public void end(boolean interrupted) {
-    climber.setSpeed(0);
+    leftClimber.setSpeed(0);
+    rightClimber.setSpeed(0);
   }
 
   @Override

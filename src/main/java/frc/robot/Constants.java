@@ -25,8 +25,7 @@ public final class Constants {
     public static final int PRIMARY_DRIVER_JOYSTICK_PORT = 0;
     public static final int SECONDARY_DRIVER_JOYSTICK_PORT = 1;
 
-    public static final int FRONT_INTAKE_BUTTON_NUMBER = 0; // PLACEHOLDER
-    public static final int BACK_INTAKE_BUTTON_NUMBER = 1; // PLACEHOLDER
+    public static final int INTAKE_BUTTON_NUMBER = 0; // PLACEHOLDER
 
     public static final int OUTTAKE_BUTTON_NUMBER = 1; // PLACEHOLDER
     public static final int TOWER_BUTTON_NUMBER = 1; // PLACEHOLDER
@@ -49,17 +48,11 @@ public final class Constants {
   public final class IntakeConstants {
     public static final double INTAKE_SPEED = 1.0; // PLACEHOLDER
 
-    public static final int FRONT_INTAKE_MOTOR_ID = 0; // PLACEHOLDER
-    public static final int FRONT_INTAKE_TOP_FORWARD_CHANNEL = 0; // PLACEHOLDER
-    public static final int FRONT_INTAKE_TOP_REVERSE_CHANNEL = 1; // PLACEHOLDER
-    public static final int FRONT_INTAKE_BOTTOM_FORWARD_CHANNEL = 0; // PLACEHOLDER
-    public static final int FRONT_INTAKE_BOTTOM_REVERSE_CHANNEL = 1; // PLACEHOLDER
-
-    public static final int BACK_INTAKE_MOTOR_ID = 1; // PLACEHOLDER
-    public static final int BACK_INTAKE_TOP_FORWARD_CHANNEL = 0; // PLACEHOLDER
-    public static final int BACK_INTAKE_TOP_REVERSE_CHANNEL = 1; // PLACEHOLDER
-    public static final int BACK_INTAKE_BOTTOM_FORWARD_CHANNEL = 0; // PLACEHOLDER
-    public static final int BACK_INTAKE_BOTTOM_REVERSE_CHANNEL = 1; // PLACEHOLDER
+    public static final int INTAKE_MOTOR_ID = 0; // PLACEHOLDER
+    public static final int INTAKE_TOP_FORWARD_CHANNEL = 0; // PLACEHOLDER
+    public static final int INTAKE_TOP_REVERSE_CHANNEL = 1; // PLACEHOLDER
+    public static final int INTAKE_BOTTOM_FORWARD_CHANNEL = 0; // PLACEHOLDER
+    public static final int INTAKE_BOTTOM_REVERSE_CHANNEL = 1; // PLACEHOLDER
 
     public static final double INTAKE_SOLENOIDS_DELAY_TIME = 1.0; // PLACEHOLDER
 
@@ -96,7 +89,8 @@ public final class Constants {
    * Stores constants related to the Climber.
    */
   public final class ClimberConstants {
-    public static final int CLIMBER_MOTOR_ID = 1; // PLACEHOLDER
+    public static final int LEFT_CLIMBER_MOTOR_ID = 1; // PLACEHOLDER
+    public static final int RIGHT_CLIMBER_MOTOR_ID = 0; // PLACEHOLDER
     public static final double CLIMBER_SPEED = 1.0; // PLACEHOLDER
 
     public static final int CLIMBER_CURRENT_LIMIT = 60;
