@@ -4,8 +4,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -17,6 +16,7 @@ import frc.robot.Constants.IOConstants;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.TowerConstants;
 import frc.robot.Constants.ClimberConstants;
+import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.auton.SimpleAutonCommand;
 import frc.robot.commands.climber.RunClimberCommand;
 import frc.robot.commands.climber.StopClimberCommand;
@@ -44,7 +44,9 @@ import frc.robot.commands.tower.StopTowerCommand;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DriveBase driveBase = new DriveBase(0, 1, 2, 3); // TODO: remove dummy port values
+  private final DriveBase driveBase = new DriveBase(DriveConstants.DRIVE_LEFT_FRONT_MOTOR_ID,
+      DriveConstants.DRIVE_LEFT_BACK_MOTOR_ID, DriveConstants.DRIVE_RIGHT_FRONT_MOTOR_ID,
+      DriveConstants.DRIVE_RIGHT_BACK_MOTOR_ID);
   private final Intake intake = new Intake(
       IntakeConstants.INTAKE_MOTOR_ID,
       IntakeConstants.INTAKE_TOP_FORWARD_CHANNEL,
@@ -62,10 +64,10 @@ public class RobotContainer {
   private final Climber climber =
       new Climber(ClimberConstants.LEFT_CLIMBER_MOTOR_ID, ClimberConstants.RIGHT_CLIMBER_MOTOR_ID);
 
-  private final Joystick primaryDriverJoystick =
-      new Joystick(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
-  private final Joystick secondaryDriverJoystick =
-      new Joystick(IOConstants.SECONDARY_DRIVER_JOYSTICK_PORT);
+  private final GenericHID primaryDriverJoystick =
+      new GenericHID(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
+  private final GenericHID secondaryDriverJoystick =
+      new GenericHID(IOConstants.SECONDARY_DRIVER_JOYSTICK_PORT);
 
   private final JoystickButton intakeButton =
       new JoystickButton(secondaryDriverJoystick, IOConstants.INTAKE_BUTTON_NUMBER);
@@ -91,7 +93,8 @@ public class RobotContainer {
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses
-   * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
+   * ({@link edu.wpi.first.wpilibj.Joystick} or
+   * {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
@@ -117,7 +120,7 @@ public class RobotContainer {
 
   // A medium auto routine.
   private final Command mediumAuto =
-      new ParallelDeadlineGroup(new WaitCommand(Constants.MEDIUM_AUTON_OUTAKE_RUNTIME),
+      new ParallelDeadlineGroup(new WaitCommand(Constants.MEDIUM_AUTON_OUTTAKE_RUNTIME),
           new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED),
           simpleAuto);
 
