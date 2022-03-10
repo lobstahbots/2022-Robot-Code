@@ -11,30 +11,39 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Climber extends SubsystemBase {
-  private final WPI_TalonFX climberMotor;
+  private final WPI_TalonFX leftClimberMotor;
+  private final WPI_TalonFX rightClimberMotor;
 
   /**
-   * Creates a Climber with its {@link WPI_TalonFX} at the given id.
+   * Creates a Climber with its left and right {@link WPI_TalonFX} at the given IDS.
    * 
-   * @param motorId The motor ID of the motor
+   * @param leftMotorID The ID of the left motor
+   * @param rightMotorID The ID of the right motor
    */
-  public Climber(int motorId) {
-    climberMotor = new WPI_TalonFX(motorId);
-    climberMotor.configSupplyCurrentLimit(
+  public Climber(int leftMotorID, int rightMotorID) {
+    leftClimberMotor = new WPI_TalonFX(leftMotorID);
+    rightClimberMotor = new WPI_TalonFX(rightMotorID);
+    leftClimberMotor.configSupplyCurrentLimit(
         new SupplyCurrentLimitConfiguration(true, Constants.ClimberConstants.CLIMBER_CURRENT_LIMIT,
             Constants.ClimberConstants.CLIMBER_TRIGGER_THRESHOLD,
             Constants.ClimberConstants.CLIMBER_TRIGGER_THRESHOLD_TIME));
-    climberMotor.setNeutralMode(NeutralMode.Brake);
+    rightClimberMotor.configSupplyCurrentLimit(
+        new SupplyCurrentLimitConfiguration(true, Constants.ClimberConstants.CLIMBER_CURRENT_LIMIT,
+            Constants.ClimberConstants.CLIMBER_TRIGGER_THRESHOLD,
+            Constants.ClimberConstants.CLIMBER_TRIGGER_THRESHOLD_TIME));
+    leftClimberMotor.setNeutralMode(NeutralMode.Brake);
+    rightClimberMotor.setNeutralMode(NeutralMode.Brake);
     CommandScheduler.getInstance().registerSubsystem(this);
   }
 
   /**
-   * Set the speed of the Climber motor in PercentOutput
+   * Set the speed of the left and right Climber motors in PercentOutput
    * 
-   * @param speed
+   * @param speed The speed to set both climbers to
    */
   public void setSpeed(double speed) {
-    climberMotor.set(ControlMode.PercentOutput, speed);
+    leftClimberMotor.set(ControlMode.PercentOutput, speed);
+    rightClimberMotor.set(ControlMode.PercentOutput, speed);
   }
 
 }

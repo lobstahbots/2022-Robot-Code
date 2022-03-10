@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
 
 /**
- * Runs a {@link Climber}
+ * Runs the {@link Climber}
  */
 public class RunClimberCommand extends CommandBase {
   private final Climber climber;

@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.IOConstants;
 import frc.robot.Constants.IntakeConstants;
@@ -48,18 +47,12 @@ public class RobotContainer {
   private final DriveBase driveBase = new DriveBase(DriveConstants.DRIVE_LEFT_FRONT_MOTOR_ID,
       DriveConstants.DRIVE_LEFT_BACK_MOTOR_ID, DriveConstants.DRIVE_RIGHT_FRONT_MOTOR_ID,
       DriveConstants.DRIVE_RIGHT_BACK_MOTOR_ID);
-  private final Intake frontIntake = new Intake(
-      IntakeConstants.FRONT_INTAKE_MOTOR_ID,
-      IntakeConstants.FRONT_INTAKE_TOP_FORWARD_CHANNEL,
-      IntakeConstants.FRONT_INTAKE_TOP_REVERSE_CHANNEL,
-      IntakeConstants.FRONT_INTAKE_BOTTOM_FORWARD_CHANNEL,
-      IntakeConstants.FRONT_INTAKE_BOTTOM_REVERSE_CHANNEL);
-  private final Intake backIntake = new Intake(
-      IntakeConstants.BACK_INTAKE_MOTOR_ID,
-      IntakeConstants.BACK_INTAKE_TOP_FORWARD_CHANNEL,
-      IntakeConstants.BACK_INTAKE_TOP_REVERSE_CHANNEL,
-      IntakeConstants.BACK_INTAKE_BOTTOM_FORWARD_CHANNEL,
-      IntakeConstants.BACK_INTAKE_BOTTOM_REVERSE_CHANNEL);
+  private final Intake intake = new Intake(
+      IntakeConstants.INTAKE_MOTOR_ID,
+      IntakeConstants.INTAKE_TOP_FORWARD_CHANNEL,
+      IntakeConstants.INTAKE_TOP_REVERSE_CHANNEL,
+      IntakeConstants.INTAKE_BOTTOM_FORWARD_CHANNEL,
+      IntakeConstants.INTAKE_BOTTOM_REVERSE_CHANNEL);
   private final Outtake outtake = new Outtake(
       Constants.OuttakeConstants.OUTTAKE_MOTOR_ID1,
       Constants.OuttakeConstants.OUTTAKE_MOTOR_ID2);
@@ -68,17 +61,16 @@ public class RobotContainer {
       TowerConstants.BOTTOM_LEFT_TOWER_MOTOR_ID,
       TowerConstants.TOP_RIGHT_TOWER_MOTOR_ID,
       TowerConstants.BOTTOM_RIGHT_TOWER_MOTOR_ID);
-  private final Climber climber = new Climber(ClimberConstants.CLIMBER_MOTOR_ID);
+  private final Climber climber =
+      new Climber(ClimberConstants.LEFT_CLIMBER_MOTOR_ID, ClimberConstants.RIGHT_CLIMBER_MOTOR_ID);
 
   private final GenericHID primaryDriverJoystick =
       new GenericHID(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
   private final GenericHID secondaryDriverJoystick =
       new GenericHID(IOConstants.SECONDARY_DRIVER_JOYSTICK_PORT);
 
-  private final JoystickButton frontIntakeButton =
-      new JoystickButton(secondaryDriverJoystick, IOConstants.FRONT_INTAKE_BUTTON_NUMBER);
-  private final JoystickButton backIntakeButton =
-      new JoystickButton(secondaryDriverJoystick, IOConstants.BACK_INTAKE_BUTTON_NUMBER);
+  private final JoystickButton intakeButton =
+      new JoystickButton(secondaryDriverJoystick, IOConstants.INTAKE_BUTTON_NUMBER);
   private final JoystickButton outtakeButton =
       new JoystickButton(secondaryDriverJoystick,
           Constants.IOConstants.OUTTAKE_BUTTON_NUMBER);
@@ -107,35 +99,18 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     outtakeButton
-        .whenActive(new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED))
-        .whenInactive(new StopOuttakeCommand(outtake));
+        .whileHeld(new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED));
     towerButton
-        .whenActive(new RunTowerCommand(tower, TowerConstants.TOWER_SPEED))
-        .whenInactive(new StopTowerCommand(tower));
+        .whileHeld(new RunTowerCommand(tower, TowerConstants.TOWER_SPEED));
     climberUpButton
-        .whenActive(new RunClimberCommand(climber, ClimberConstants.CLIMBER_SPEED))
-        .whenInactive(new StopClimberCommand(climber));
+        .whileHeld(
+            new RunClimberCommand(climber, ClimberConstants.CLIMBER_SPEED));
     climberDownButton
-        .whenActive(new RunClimberCommand(climber, -ClimberConstants.CLIMBER_SPEED))
-        .whenInactive(new StopClimberCommand(climber));
-
-    configureIntakeButton(frontIntake, frontIntakeButton);
-    configureIntakeButton(backIntake, backIntakeButton);
-  }
-
-  /**
-   * Configures a button for the intake. Extends intake and then spins intake while a button is
-   * held. Stops intake and then retracts intake when the button is released.
-   * 
-   * @param intake The intake to control
-   * @param button The button to configure
-   */
-  private void configureIntakeButton(Intake intake, Button button) {
-    button
-        .whenActive(new SequentialCommandGroup(new ExtendIntakeCommand(intake),
-            new SpinIntakeCommand(intake, IntakeConstants.INTAKE_SPEED)))
-        .whenInactive(new SequentialCommandGroup(new StopSpinIntakeCommand(intake),
-            new RetractIntakeCommand(intake)));
+        .whileHeld(
+            new RunClimberCommand(climber, -ClimberConstants.CLIMBER_SPEED));
+    intakeButton
+        .whileHeld(new SequentialCommandGroup(new ExtendIntakeCommand(intake),
+            new SpinIntakeCommand(intake, IntakeConstants.INTAKE_SPEED)));
   }
 
   // A simple auto routine.
@@ -181,8 +156,8 @@ public class RobotContainer {
     driveBase.setDefaultCommand(
         new TankDriveCommand(
             driveBase,
-            () -> primaryDriverJoystick.getRawAxis(0),
-            () -> primaryDriverJoystick.getRawAxis(1)));
+            () -> primaryDriverJoystick.getRawAxis(1),
+            () -> primaryDriverJoystick.getRawAxis(3)));
   }
 
   /**
