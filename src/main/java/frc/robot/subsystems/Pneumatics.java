@@ -66,6 +66,13 @@ public class Pneumatics extends SubsystemBase {
   }
 
   /**
+   * Returns the current being used by the compressor.
+   */
+  public double getCurrent() {
+    return compressor.getCurrent();
+  }
+
+  /**
    * Returns the current operating mode of the compressor
    */
   public CompressorConfigType configType() {
