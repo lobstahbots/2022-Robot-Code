@@ -28,7 +28,7 @@ import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Outtake;
 import frc.robot.subsystems.Tower;
-import frc.robot.commands.outtake.*;
+import frc.robot.commands.outtake.RunOuttakeCommand;
 import frc.robot.commands.tower.RunTowerCommand;
 
 /**
