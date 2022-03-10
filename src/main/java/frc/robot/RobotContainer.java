@@ -19,13 +19,10 @@ import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.auton.SimpleAutonCommand;
 import frc.robot.commands.climber.RunClimberCommand;
-import frc.robot.commands.climber.StopClimberCommand;
 import frc.robot.commands.drive.StopDriveCommand;
 import frc.robot.commands.drive.TankDriveCommand;
 import frc.robot.commands.intake.ExtendIntakeCommand;
-import frc.robot.commands.intake.RetractIntakeCommand;
 import frc.robot.commands.intake.SpinIntakeCommand;
-import frc.robot.commands.intake.StopSpinIntakeCommand;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Intake;
@@ -33,8 +30,6 @@ import frc.robot.subsystems.Outtake;
 import frc.robot.subsystems.Tower;
 import frc.robot.commands.outtake.*;
 import frc.robot.commands.tower.RunTowerCommand;
-import frc.robot.commands.tower.StopTowerCommand;
-
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -93,8 +88,7 @@ public class RobotContainer {
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses
-   * ({@link edu.wpi.first.wpilibj.Joystick} or
-   * {@link XboxController}), and then passing it to a
+   * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
