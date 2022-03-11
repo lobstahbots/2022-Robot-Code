@@ -1,6 +1,4 @@
 {
-  "java.configuration.updateBuildConfiguration": "automatic",
-  "java.server.launchMode": "Standard",
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,
@@ -12,9 +10,16 @@
     "**/.project": true,
     "**/.settings": true,
     "**/.factorypath": true,
-    "**/*~": true
+    "**/*~": true,
+    ".gradle/": true,
+    "build/": true,
+    ".gitattributes": true,
+    "gradlew": true,
+    "gradlew.bat": true,
+    "gradle": true,
   },
-  "editor.formatOnSave": true,
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.server.launchMode": "Standard",
   "java.test.config": [
     {
       "name": "WPIlibUnitTests",
@@ -29,10 +34,11 @@
     },
   ],
   "java.test.defaultConfig": "WPIlibUnitTests",
+  "java.checkstyle.version": "10.0.0",
   "java.checkstyle.configuration": "${workspaceFolder}\\checkstyle.xml",
   "java.format.settings.url": ".vscode/java-formatter.xml",
-  "java.checkstyle.version": "9.2.1",
-  "java.saveActions.organizeImports": false,
+  "editor.formatOnSave": true,
+  "java.saveActions.organizeImports": true,
   "java.completion.importOrder": [
     "#",
     "java",
