@@ -32,6 +32,13 @@
   "java.checkstyle.configuration": "${workspaceFolder}\\checkstyle.xml",
   "java.format.settings.url": ".vscode/java-formatter.xml",
   "java.checkstyle.version": "9.2.1",
+  "java.saveActions.organizeImports": false,
+  "java.completion.importOrder": [
+    "#",
+    "java",
+    "javax",
+    "",
+  ],
   "[java]": {
     "editor.tabSize": 2,
     "editor.detectIndentation": false
