@@ -14,7 +14,7 @@ public class ToggleExtensionIntakeCommand extends SequentialCommandGroup {
   /**
    * Creates a command that toggles the {@link DoubleSolenoid.Value}s between Extended and
    * Retracted. If in neutral toggles them to Retracted.
-   * 
+   *
    * @param intake The {@link Intake} to control.
    */
   public ToggleExtensionIntakeCommand(Intake intake) {

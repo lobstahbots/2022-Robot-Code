@@ -5,31 +5,32 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants.ClimberConstants;
+import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.IOConstants;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.TowerConstants;
-import frc.robot.Constants.ClimberConstants;
-import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.auton.SimpleAutonCommand;
 import frc.robot.commands.climber.RunClimberCommand;
 import frc.robot.commands.drive.StopDriveCommand;
 import frc.robot.commands.drive.TankDriveCommand;
 import frc.robot.commands.intake.ExtendIntakeCommand;
 import frc.robot.commands.intake.SpinIntakeCommand;
+import frc.robot.commands.outtake.RunOuttakeCommand;
+import frc.robot.commands.tower.RunTowerCommand;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Outtake;
 import frc.robot.subsystems.Tower;
-import frc.robot.commands.outtake.RunOuttakeCommand;
-import frc.robot.commands.tower.RunTowerCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a

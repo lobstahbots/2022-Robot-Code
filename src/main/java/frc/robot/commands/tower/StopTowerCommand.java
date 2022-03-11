@@ -8,14 +8,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Tower;
 
 /**
- * Stops a {@link Tower}
+ * Stops a {@link Tower}.
  */
 public class StopTowerCommand extends CommandBase {
   private final Tower tower;
 
   /**
-   * Creates a command that stops a {@link Tower}
-   * 
+   * Creates a command that stops a {@link Tower}.
+   *
    * @param tower the {@link Tower} to stop
    */
   public StopTowerCommand(Tower tower) {

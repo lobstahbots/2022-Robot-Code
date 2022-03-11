@@ -4,8 +4,9 @@
 
 package frc.robot.commands.drive;
 
-import frc.robot.subsystems.DriveBase;
 import java.util.function.Supplier;
+
+import frc.robot.subsystems.DriveBase;
 
 /**
  * Drives a {@link DriveBase} using arcade drive controls.

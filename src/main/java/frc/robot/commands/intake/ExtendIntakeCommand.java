@@ -14,7 +14,7 @@ public class ExtendIntakeCommand extends SequentialCommandGroup {
 
   /**
    * Creates a command that extends the given {@link Intake}.
-   * 
+   *
    * @param intake The {@link Intake} to control.
    */
   public ExtendIntakeCommand(Intake intake) {

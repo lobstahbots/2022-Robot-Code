@@ -5,13 +5,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
 
 /**
- * Stops the {@link Climber} while active
+ * Stops the {@link Climber} while active.
  */
 public class StopClimberCommand extends CommandBase {
   private final Climber climber;
 
   /**
-   * @param climber The {@link Climber} to stop
+   * Creates a command that stops the {@link Climber} while active.
+   *
+   * @param climber The {@link Climber} to stop.
    */
   public StopClimberCommand(Climber climber) {
     this.climber = climber;

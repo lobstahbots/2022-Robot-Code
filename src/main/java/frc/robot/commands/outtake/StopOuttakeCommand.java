@@ -1,8 +1,8 @@
 
 package frc.robot.commands.outtake;
 
-import frc.robot.subsystems.Outtake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Outtake;
 
 /**
  * Repeatedly sets the {@link Outtake} speed to 0.
@@ -12,8 +12,8 @@ public class StopOuttakeCommand extends CommandBase {
 
   /**
    * Creates a command that sets the {@link Outtake} speed to 0.
-   * 
-   * @param outtake The outtake to control.
+   *
+   * @param outtake The outtake to control
    */
   public StopOuttakeCommand(Outtake outtake) {
     this.outtake = outtake;

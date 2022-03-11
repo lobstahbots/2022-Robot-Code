@@ -14,7 +14,7 @@ public class RetractIntakeCommand extends SequentialCommandGroup {
 
   /**
    * Creates a command that retracts the given {@link Intake}.
-   * 
+   *
    * @param intake The {@link Intake} to control.
    */
   public RetractIntakeCommand(Intake intake) {

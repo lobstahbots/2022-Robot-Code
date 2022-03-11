@@ -8,15 +8,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Tower;
 
 /**
- * Runs a {@link Tower} at a given speed
+ * Runs a {@link Tower} at a given speed.
  */
 public class RunTowerCommand extends CommandBase {
   private final Tower tower;
   private final double speed;
 
   /**
-   * Creates a command that runs the {@link Tower} at a given speed
-   * 
+   * Creates a command that runs the {@link Tower} at a given speed.
+   *
    * @param tower the tower to run
    * @param speed the speed the tower runs at
    */

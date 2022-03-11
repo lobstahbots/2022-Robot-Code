@@ -1,8 +1,8 @@
 
 package frc.robot.commands.outtake;
 
-import frc.robot.subsystems.Outtake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Outtake;
 
 /**
  * Repeatedly sets {@link Outtake} speed to a specified double.
@@ -13,7 +13,7 @@ public class RunOuttakeCommand extends CommandBase {
 
   /**
    * Creates a command that sets the {@link Outtake} speed to a specified double.
-   * 
+   *
    * @param speed The speed to set the outtake to.
    * @param outtake The outtake to control.
    */
