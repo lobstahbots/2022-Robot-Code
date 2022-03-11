@@ -106,4 +106,12 @@ public final class Constants {
     public static final double CLIMBER_TRIGGER_THRESHOLD_TIME = 0.5;
   }
 
+  /**
+   * Stores constants related to the Pneumatics.
+   */
+  public final class PneumaticsConstants {
+    public static final double DEFAULT_MIN_PRESSURE = 90.0; // PLACEHOLDER
+    public static final double DEFAULT_MAX_PRESSURE = 115.0; // PLACEHOLDER
+  }
+
 }
