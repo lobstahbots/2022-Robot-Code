@@ -7,13 +7,12 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 /**
- * A subsystem that controls the Tower on a robot
+ * A subsystem that controls the Tower on a robot.
  */
 public class Tower extends SubsystemBase {
   private final CANSparkMax topLeftTowerMotor;
@@ -72,8 +71,8 @@ public class Tower extends SubsystemBase {
   }
 
   /**
-   * Sets the speed of each of the tower motors
-   * 
+   * Sets the speed of each of the tower motors.
+   *
    * @param speed The speed to set the motors to
    */
   public void setSpeed(double speed) {

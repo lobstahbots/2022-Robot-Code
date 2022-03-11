@@ -34,7 +34,7 @@ public class Pneumatics extends SubsystemBase {
 
   /**
    * Enables compressor closed loop control with analog input using specified min and max pressure.
-   * 
+   *
    * @param minPressure The minimum pressure in PSI to enable compressor
    * @param maxPressure The maximum pressure in PSI to disable compressor
    */
