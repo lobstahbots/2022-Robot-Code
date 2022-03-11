@@ -25,6 +25,7 @@ public final class Constants {
     public static final int PRIMARY_DRIVER_JOYSTICK_PORT = 0;
     public static final int SECONDARY_DRIVER_JOYSTICK_PORT = 1;
 
+    public static final int SLOWDOWN_BUTTON_NUMBER = 1; // PLACEHOLDER
     public static final int INTAKE_BUTTON_NUMBER = 0; // PLACEHOLDER
 
     public static final int OUTTAKE_BUTTON_NUMBER = 2; // WEEK0
@@ -45,6 +46,8 @@ public final class Constants {
     public static final int DRIVE_CURRENT_LIMIT = 60;
     public static final int DRIVE_TRIGGER_THRESHOLD = 60;
     public static final int DRIVE_TRIGGER_THRESHOLD_TIME = 2;
+
+    public static final double SLOWDOWN_PERCENT = 0.5;
   }
 
   /**
