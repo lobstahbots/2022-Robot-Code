@@ -32,6 +32,8 @@ public final class Constants {
     public static final int TOWER_BUTTON_NUMBER = 6; // WEEK0
     public static final int CLIMBER_UP_BUTTON_NUMBER = 4; // WEEK0
     public static final int CLIMBER_DOWN_BUTTON_NUMBER = 1; // WEEK0
+    public static final int CLIMBER_RETRACT_BUTTON_NUMBER = 0; // PLACEHOLDER
+    public static final int CLIMBER_EXTEND_BUTTON_NUMBER = 1; // PLACEHOLDER
   }
 
   /**
