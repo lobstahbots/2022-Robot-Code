@@ -107,8 +107,8 @@ public final class Constants {
     public static final int CLIMBER_TRIGGER_THRESHOLD = 100;
     public static final double CLIMBER_TRIGGER_THRESHOLD_TIME = 0.5;
 
-    public static final int CLIMBER_RETRACTED_POSITION = 0;
-    public static final int CLIMBER_EXTENDED_POSITION = 2048; // PLACEHOLDER
+    public static final double CLIMBER_RETRACTED_POSITION = 0.0;
+    public static final double CLIMBER_EXTENDED_POSITION = 2048.0; // PLACEHOLDER
   }
 
   /**

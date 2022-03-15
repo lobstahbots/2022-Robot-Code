@@ -48,4 +48,15 @@ public class Climber extends SubsystemBase {
     rightClimberMotor.set(ControlMode.PercentOutput, speed);
   }
 
+  /**
+   * Set the position of the left and right Climber motors in Position Control Mode.
+   *
+   * @param position The speed to set both Climber motors to
+   */
+  public void setPosition(double position) {
+    leftClimberMotor.set(ControlMode.Position, position);
+    rightClimberMotor.set(ControlMode.Position, position);
+  }
+
+
 }

@@ -20,6 +20,7 @@ import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.TowerConstants;
 import frc.robot.commands.auton.SimpleAutonCommand;
 import frc.robot.commands.climber.RunClimberCommand;
+import frc.robot.commands.climber.RunClimberToPositionCommand;
 import frc.robot.commands.drive.StopDriveCommand;
 import frc.robot.commands.drive.TankDriveCommand;
 import frc.robot.commands.intake.ExtendIntakeCommand;
@@ -115,6 +116,12 @@ public class RobotContainer {
         .whileHeld(new TankDriveCommand(driveBase,
             () -> DriveConstants.SLOWDOWN_PERCENT * primaryDriverJoystick.getRawAxis(1),
             () -> DriveConstants.SLOWDOWN_PERCENT * primaryDriverJoystick.getRawAxis(3)));
+    climberRetractButton
+        .whileHeld(
+            new RunClimberToPositionCommand(climber, ClimberConstants.CLIMBER_RETRACTED_POSITION));
+    climberEntendButton
+        .whileHeld(
+            new RunClimberToPositionCommand(climber, ClimberConstants.CLIMBER_EXTENDED_POSITION));
   }
 
   // A simple auto routine.
