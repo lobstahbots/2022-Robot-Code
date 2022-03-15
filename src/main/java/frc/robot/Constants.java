@@ -59,8 +59,8 @@ public final class Constants {
     public static final int INTAKE_MOTOR_ID = 0; // PLACEHOLDER
     public static final int INTAKE_TOP_FORWARD_CHANNEL = 0; // PLACEHOLDER
     public static final int INTAKE_TOP_REVERSE_CHANNEL = 1; // PLACEHOLDER
-    public static final int INTAKE_BOTTOM_FORWARD_CHANNEL = 0; // PLACEHOLDER
-    public static final int INTAKE_BOTTOM_REVERSE_CHANNEL = 1; // PLACEHOLDER
+    public static final int INTAKE_BOTTOM_FORWARD_CHANNEL = 2; // PLACEHOLDER
+    public static final int INTAKE_BOTTOM_REVERSE_CHANNEL = 3; // PLACEHOLDER
 
     public static final double INTAKE_SOLENOIDS_DELAY_TIME = 1.0; // PLACEHOLDER
 
@@ -85,10 +85,10 @@ public final class Constants {
    */
   public final class TowerConstants {
     public static final double TOWER_SPEED = 1.0; // PLACEHOLDER
-    public static final int TOP_LEFT_TOWER_MOTOR_ID = 0; // PLACEHOLDER
-    public static final int BOTTOM_LEFT_TOWER_MOTOR_ID = 1; // PLACEHOLDER
-    public static final int TOP_RIGHT_TOWER_MOTOR_ID = 2; // PLACEHOLDER
-    public static final int BOTTOM_RIGHT_TOWER_MOTOR_ID = 3; // PLACEHOLDER
+    public static final int TOP_LEFT_TOWER_MOTOR_ID = 4; // PLACEHOLDER
+    public static final int BOTTOM_LEFT_TOWER_MOTOR_ID = 5; // PLACEHOLDER
+    public static final int TOP_RIGHT_TOWER_MOTOR_ID = 6; // PLACEHOLDER
+    public static final int BOTTOM_RIGHT_TOWER_MOTOR_ID = 7; // PLACEHOLDER
 
     public static final int TOWER_CURRENT_LIMIT = 25;
   }

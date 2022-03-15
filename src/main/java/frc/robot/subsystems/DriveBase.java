@@ -120,4 +120,20 @@ public class DriveBase extends SubsystemBase {
   public void tankDrive(double leftSpeed, double rightSpeed) {
     differentialDrive.tankDrive(leftSpeed, rightSpeed);
   }
+
+  public double getLeftFrontOutput() {
+    return leftFrontMotor.get();
+  }
+
+  public double getRightFrontOutput() {
+    return rightFrontMotor.get();
+  }
+
+  public double getLeftBackOutput() {
+    return leftBackMotor.get();
+  }
+
+  public double getRightBackOutput() {
+    return rightBackMotor.get();
+  }
 }
