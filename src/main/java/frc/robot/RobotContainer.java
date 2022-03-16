@@ -81,7 +81,7 @@ public class RobotContainer {
       new JoystickButton(secondaryDriverJoystick, IOConstants.CLIMBER_DOWN_BUTTON_NUMBER);
   private final JoystickButton climberRetractButton =
       new JoystickButton(secondaryDriverJoystick, IOConstants.CLIMBER_RETRACT_BUTTON_NUMBER);
-  private final JoystickButton climberEntendButton =
+  private final JoystickButton climberExtendButton =
       new JoystickButton(secondaryDriverJoystick, IOConstants.CLIMBER_EXTEND_BUTTON_NUMBER);
 
   /**
@@ -119,7 +119,7 @@ public class RobotContainer {
     climberRetractButton
         .whileHeld(
             new RunClimberToPositionCommand(climber, ClimberConstants.CLIMBER_RETRACTED_POSITION));
-    climberEntendButton
+    climberExtendButton
         .whileHeld(
             new RunClimberToPositionCommand(climber, ClimberConstants.CLIMBER_EXTENDED_POSITION));
   }
