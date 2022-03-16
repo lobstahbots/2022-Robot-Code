@@ -31,12 +31,13 @@ import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Outtake;
 import frc.robot.subsystems.Tower;
+import frc.robot.subsystems.Pneumatics;
+import frc.robot.subsystems.Electronics;
 
 /**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
- * subsystems, commands, and button mappings) should be declared here.
+ * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
+ * little robot logic should actually be handled in the {@link Robot} periodic methods (other than the scheduler calls).
+ * Instead, the structure of the robot (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
@@ -59,6 +60,8 @@ public class RobotContainer {
       TowerConstants.BOTTOM_RIGHT_TOWER_MOTOR_ID);
   private final Climber climber =
       new Climber(ClimberConstants.LEFT_CLIMBER_MOTOR_ID, ClimberConstants.RIGHT_CLIMBER_MOTOR_ID);
+  private final Electronics electronics = new Electronics();
+  private final Pneumatics pneumatics = new Pneumatics();
 
   private final GenericHID primaryDriverJoystick =
       new GenericHID(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
@@ -90,10 +93,9 @@ public class RobotContainer {
   }
 
   /**
-   * Use this method to define your button->command mappings. Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses
-   * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
-   * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   * Use this method to define your button->command mappings. Buttons can be created by instantiating a
+   * {@link GenericHID} or one of its subclasses ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and
+   * then passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
     outtakeButton
@@ -150,9 +152,9 @@ public class RobotContainer {
   }
 
   /**
-   * Robot.java should run this method when teleop starts. This method should be used to set the
-   * default commands for subsystems while in teleop. If you set a default here, set a corresponding
-   * auton default in setAutonDefaultCommands().
+   * Robot.java should run this method when teleop starts. This method should be used to set the default commands for
+   * subsystems while in teleop. If you set a default here, set a corresponding auton default in
+   * setAutonDefaultCommands().
    */
   public void setTeleopDefaultCommands() {
     driveBase.setDefaultCommand(
@@ -163,9 +165,9 @@ public class RobotContainer {
   }
 
   /**
-   * Robot.java should run this method when auton starts. This method should be used to set the
-   * default commands for subsystems while in auton. If you set a default here, set a corresponding
-   * teleop default in setTeleopDefaultCommands().
+   * Robot.java should run this method when auton starts. This method should be used to set the default commands for
+   * subsystems while in auton. If you set a default here, set a corresponding teleop default in
+   * setTeleopDefaultCommands().
    */
   public void setAutonDefaultCommands() {
     driveBase.setDefaultCommand(new StopDriveCommand(driveBase));

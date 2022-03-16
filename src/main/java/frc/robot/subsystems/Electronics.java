@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**
@@ -15,10 +16,11 @@ public class Electronics extends SubsystemBase {
   private final PowerDistribution powerDistributionHub;
 
   /**
-   * Creates an Electronics subsystem with the default module.
+   * Creates an Electronics subsystem.
    */
   public Electronics() {
     powerDistributionHub = new PowerDistribution();
+    CommandScheduler.getInstance().registerSubsystem(this);
   }
 
   /**

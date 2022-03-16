@@ -66,7 +66,7 @@
               "_title": "Drivetrain Right Back Current: "
             }
           },
-          "7,0": {
+          "7,5": {
             "size": [
               1,
               1
@@ -77,7 +77,7 @@
               "_title": "Intake Current: "
             }
           },
-          "6,1": {
+          "6,3": {
             "size": [
               2,
               1
@@ -88,7 +88,7 @@
               "_title": "Intake Solenoid Top Extension: "
             }
           },
-          "6,2": {
+          "6,4": {
             "size": [
               2,
               1
@@ -99,7 +99,7 @@
               "_title": "Intake Solenoid Bottom Extension: "
             }
           },
-          "6,0": {
+          "6,5": {
             "size": [
               1,
               1
@@ -175,6 +175,28 @@
               "_source0": "network_table:///SmartDashboard/Climber Right Current: ",
               "_title": "Climber Right Current: "
             }
+          },
+          "6,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Total Current: ",
+              "_title": "Total Current: "
+            }
+          },
+          "6,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Compressor Current: ",
+              "_title": "Compressor Current: "
+            }
           }
         }
       }
@@ -249,6 +271,157 @@
                   "Wheels/Number of wheels": 4,
                   "Wheels/Wheel diameter": 80.0,
                   "Visuals/Show velocity vectors": true
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Compressor[1]/Enabled",
+                  "_title": "LiveWindow/Ungrouped/Compressor[1]/Enabled",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/SwitchableChannel",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/SwitchableChannel",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Voltage",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Voltage"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan10",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan10"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan11",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan11"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan12",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan12"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan13",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan13"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan16",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan16"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan14",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan14"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan17",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan17"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan18",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan18"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan15",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan15"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan19",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan19"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/TotalCurrent",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/TotalCurrent"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Compressor[1]/Pressure switch",
+                  "_title": "LiveWindow/Ungrouped/Compressor[1]/Pressure switch",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan20",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan20"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan21",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan21"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan22",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan22"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan23",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan23"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan0",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan0"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan4",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan4"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan8",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan8"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan3",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan3"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan9",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan9"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan1",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan1"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan2",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan2"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan7",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan7"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan5",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan5"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PowerDistribution[0]/Chan6",
+                  "_title": "LiveWindow/Ungrouped/PowerDistribution[0]/Chan6"
                 }
               ]
             }
