@@ -79,8 +79,8 @@ public class Climber extends SubsystemBase {
    *
    */
   public boolean isRetracted() {
-    if (Math.abs(leftClimberMotor.getSelectedSensorPosition(1)
-        - Constants.ClimberConstants.CLIMBER_RETRACTED_POSITION) < Constants.ClimberConstants.CLIMBER_RETRACTED_POSITION_ERROR) {
+    if (Math.abs(getLeftMotorPosition()
+        - Constants.ClimberConstants.CLIMBER_RETRACTED_POSITION) < Constants.ClimberConstants.CLIMBER_RETRACTED_POSITION_ACCEPTABLE_ERROR) {
       return true;
     } else {
       return false;
@@ -92,8 +92,8 @@ public class Climber extends SubsystemBase {
    *
    */
   public boolean isExtended() {
-    if (Math.abs(leftClimberMotor.getSelectedSensorPosition(1)
-        - Constants.ClimberConstants.CLIMBER_EXTENDED_POSITION) < Constants.ClimberConstants.CLIMBER_EXTENDED_POSITION_ERROR) {
+    if (Math.abs(getLeftMotorPosition()
+        - Constants.ClimberConstants.CLIMBER_EXTENDED_POSITION) < Constants.ClimberConstants.CLIMBER_EXTENDED_POSITION_ACCEPTABLE_ERROR) {
       return true;
     } else {
       return false;
@@ -105,8 +105,7 @@ public class Climber extends SubsystemBase {
    *
    */
   public boolean isAligned() {
-    if (Math.abs(leftClimberMotor.getSelectedSensorPosition(1)
-        - rightClimberMotor.getSelectedSensorPosition(1)) < Constants.ClimberConstants.CLIMBER_ALIGNMENT_ERROR) {
+    if (Math.abs(getAlignmentDifference()) < Constants.ClimberConstants.CLIMBER_ALIGNMENT_ACCEPTABLE_ERROR) {
       return true;
     } else {
       return false;
@@ -114,11 +113,11 @@ public class Climber extends SubsystemBase {
   }
 
   /**
-   * Returns difference in position between the left and right climber motors.
+   * Returns the right motor position subtracted from the left motor position.
    *
    */
   public double getAlignmentDifference() {
-    return leftClimberMotor.getSelectedSensorPosition(1) - rightClimberMotor.getSelectedSensorPosition(1);
+    return getLeftMotorPosition() - getRightMotorPosition();
   }
 
 
