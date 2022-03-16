@@ -38,6 +38,9 @@ public class Electronics extends SubsystemBase {
   }
 
   @Override
+  /**
+   * Displays PDH total current on SmartDashboard.
+   */
   public void periodic() {
     SmartDashboard.putNumber("Total Current: ", this.getTotalCurrent());
   }

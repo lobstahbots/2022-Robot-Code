@@ -82,12 +82,4 @@ public class Tower extends SubsystemBase {
     topRightTowerMotor.set(speed);
     bottomRightTowerMotor.set(speed);
   }
-
-  @Override
-  public void periodic() {
-    SmartDashboard.putNumber("Top Left Tower Current: ", topLeftTowerMotor.getOutputCurrent());
-    SmartDashboard.putNumber("Top Right Tower Current: ", topRightTowerMotor.getOutputCurrent());
-    SmartDashboard.putNumber("Bottom Left Tower Current: ", bottomLeftTowerMotor.getOutputCurrent());
-    SmartDashboard.putNumber("Bottom Right Tower Current: ", bottomRightTowerMotor.getOutputCurrent());
-  }
 }

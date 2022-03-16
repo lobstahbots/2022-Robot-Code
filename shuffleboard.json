@@ -22,138 +22,6 @@
               "_title": "SendableChooser[0]"
             }
           },
-          "0,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drivetrain Left Front Current: ",
-              "_title": "Drivetrain Left Front Current: "
-            }
-          },
-          "0,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drivetrain Left Back Current: ",
-              "_title": "Drivetrain Left Back Current: "
-            }
-          },
-          "0,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drivetrain Right Front Current: ",
-              "_title": "Drivetrain Right Front Current: "
-            }
-          },
-          "0,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drivetrain Right Back Current: ",
-              "_title": "Drivetrain Right Back Current: "
-            }
-          },
-          "7,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Intake Current: ",
-              "_title": "Intake Current: "
-            }
-          },
-          "6,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Intake Solenoid Top Extension: ",
-              "_title": "Intake Solenoid Top Extension: "
-            }
-          },
-          "6,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Intake Solenoid Bottom Extension: ",
-              "_title": "Intake Solenoid Bottom Extension: "
-            }
-          },
-          "6,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Outtake Current: ",
-              "_title": "Outtake Current: "
-            }
-          },
-          "9,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Top Left Tower Current: ",
-              "_title": "Top Left Tower Current: "
-            }
-          },
-          "9,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Top Right Tower Current: ",
-              "_title": "Top Right Tower Current: "
-            }
-          },
-          "9,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Bottom Left Tower Current: ",
-              "_title": "Bottom Left Tower Current: "
-            }
-          },
-          "9,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Bottom Right Tower Current: ",
-              "_title": "Bottom Right Tower Current: "
-            }
-          },
           "3,0": {
             "size": [
               2,
@@ -196,6 +64,52 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Compressor Current: ",
               "_title": "Compressor Current: "
+            }
+          },
+          "0,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drivetrain Left Speed: ",
+              "_title": "Drivetrain Left Speed: "
+            }
+          },
+          "0,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drivetrain Right Speed: ",
+              "_title": "Drivetrain Right Speed: "
+            }
+          },
+          "3,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Intake Is Extended: ",
+              "_title": "Intake Is Extended: ",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "6,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Outtake Speed: ",
+              "_title": "Outtake Speed: "
             }
           }
         }
@@ -483,8 +397,8 @@
     }
   ],
   "windowGeometry": {
-    "x": 0.0,
-    "y": 0.0,
+    "x": -36.0,
+    "y": 31.0,
     "width": 1920.0,
     "height": 1050.0
   }

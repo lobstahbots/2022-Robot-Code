@@ -123,10 +123,11 @@ public class DriveBase extends SubsystemBase {
   }
 
   @Override
+  /**
+   * Displays left and right motor group speeds on SmartDashboard.
+   */
   public void periodic() {
-    SmartDashboard.putNumber("Drivetrain Left Front Current: ", leftFrontMotor.getSupplyCurrent());
-    SmartDashboard.putNumber("Drivetrain Left Back Current: ", leftBackMotor.getSupplyCurrent());
-    SmartDashboard.putNumber("Drivetrain Right Front Current: ", rightFrontMotor.getSupplyCurrent());
-    SmartDashboard.putNumber("Drivetrain Right Back Current: ", rightBackMotor.getSupplyCurrent());
+    SmartDashboard.putNumber("Drivetrain Left Speed: ", leftFrontMotor.get());
+    SmartDashboard.putNumber("Drivetrain Right Speed: ", rightFrontMotor.get());
   }
 }

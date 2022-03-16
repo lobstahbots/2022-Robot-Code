@@ -134,9 +134,10 @@ public class Intake extends SubsystemBase {
   }
 
   @Override
+  /**
+   * Displays whether or not the intake is extended on SmartDashboard.
+   */
   public void periodic() {
-    SmartDashboard.putNumber("Intake Current: ", intakeMotor.getSupplyCurrent());
-    SmartDashboard.putString("Intake Solenoid Top Extension: ", this.getTopExtension().toString());
-    SmartDashboard.putString("Intake Solenoid Bottom Extension: ", this.getBottomExtension().toString());
+    SmartDashboard.putBoolean("Intake Is Extended: ", this.isExtended());
   }
 }

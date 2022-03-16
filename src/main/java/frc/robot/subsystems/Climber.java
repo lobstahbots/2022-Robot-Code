@@ -50,6 +50,9 @@ public class Climber extends SubsystemBase {
   }
 
   @Override
+  /**
+   * Displays left and right climber motor currents on SmartDashboard.
+   */
   public void periodic() {
     SmartDashboard.putNumber("Climber Left Current: ", leftClimberMotor.getSupplyCurrent());
     SmartDashboard.putNumber("Climber Right Current: ", rightClimberMotor.getSupplyCurrent());

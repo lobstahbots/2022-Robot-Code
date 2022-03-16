@@ -54,8 +54,11 @@ public class Outtake extends SubsystemBase {
   }
 
   @Override
+  /**
+   * Displays the outtake motor speed on SmartDashboard.
+   */
   public void periodic() {
-    SmartDashboard.putNumber("Outtake Current: ", outtakeMotor.getOutputCurrent());
+    SmartDashboard.putNumber("Outtake Speed: ", outtakeMotor.get());
   }
 
 }
