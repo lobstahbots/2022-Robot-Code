@@ -7,6 +7,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -121,19 +122,11 @@ public class DriveBase extends SubsystemBase {
     differentialDrive.tankDrive(leftSpeed, rightSpeed);
   }
 
-  public double getLeftFrontOutput() {
-    return leftFrontMotor.get();
-  }
-
-  public double getRightFrontOutput() {
-    return rightFrontMotor.get();
-  }
-
-  public double getLeftBackOutput() {
-    return leftBackMotor.get();
-  }
-
-  public double getRightBackOutput() {
-    return rightBackMotor.get();
+  @Override
+  public void periodic() {
+    SmartDashboard.putNumber("Drivetrain Left Front Current: ", leftFrontMotor.getSupplyCurrent());
+    SmartDashboard.putNumber("Drivetrain Left Back Current: ", leftBackMotor.getSupplyCurrent());
+    SmartDashboard.putNumber("Drivetrain Right Front Current: ", rightFrontMotor.getSupplyCurrent());
+    SmartDashboard.putNumber("Drivetrain Right Back Current: ", rightBackMotor.getSupplyCurrent());
   }
 }

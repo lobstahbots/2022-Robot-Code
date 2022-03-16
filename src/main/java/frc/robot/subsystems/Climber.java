@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -48,4 +49,9 @@ public class Climber extends SubsystemBase {
     rightClimberMotor.set(ControlMode.PercentOutput, speed);
   }
 
+  @Override
+  public void periodic() {
+    SmartDashboard.putNumber("Climber Left Current: ", leftClimberMotor.getSupplyCurrent());
+    SmartDashboard.putNumber("Climber Right Current: ", rightClimberMotor.getSupplyCurrent());
+  }
 }

@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -28,8 +29,8 @@ public class Intake extends SubsystemBase {
   private final WPI_TalonSRX intakeMotor;
 
   /**
-   * Constructs an Intake with a {@link VictorSPX} with the given CAN ID and a
-   * {@link DoubleSolenoid} with the given forward and reverse channels.
+   * Constructs an Intake with a {@link VictorSPX} with the given CAN ID and a {@link DoubleSolenoid} with the given
+   * forward and reverse channels.
    *
    * @param intakeMotorID The CAN ID of the intake motor
    * @param topForwardChannel The forward channel of the top solenoid
@@ -130,5 +131,12 @@ public class Intake extends SubsystemBase {
         new InstantCommand(() -> topSolenoid.set(DoubleSolenoid.Value.kForward)),
         new WaitCommand(Constants.IntakeConstants.INTAKE_SOLENOIDS_DELAY_TIME),
         new InstantCommand(() -> bottomSolenoid.set(DoubleSolenoid.Value.kForward)));
+  }
+
+  @Override
+  public void periodic() {
+    SmartDashboard.putNumber("Intake Current: ", intakeMotor.getSupplyCurrent());
+    SmartDashboard.putString("Intake Solenoid Top Extension: ", this.getTopExtension().toString());
+    SmartDashboard.putString("Intake Solenoid Bottom Extension: ", this.getBottomExtension().toString());
   }
 }

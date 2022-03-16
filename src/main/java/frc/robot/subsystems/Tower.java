@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -21,8 +22,8 @@ public class Tower extends SubsystemBase {
   private final CANSparkMax bottomRightTowerMotor;
 
   /**
-   * Constructs a Tower with a {@link CANSparkMax} at each of the given CAN IDs. Motors on right
-   * side run in opposite direction to motors on left side.
+   * Constructs a Tower with a {@link CANSparkMax} at each of the given CAN IDs. Motors on right side run in opposite
+   * direction to motors on left side.
    *
    * @param topLeftTowerMotorId The CAN ID of the top left Tower motor
    * @param bottomLeftTowerMotorId The CAN ID of the bottom left Tower motor
@@ -41,8 +42,8 @@ public class Tower extends SubsystemBase {
   }
 
   /**
-   * Constructs a Tower with a {@link CANSparkMax} at each of the given CAN IDs and with the given
-   * {@link MotorType}. Motors on right side run in opposite direction to motors on left side.
+   * Constructs a Tower with a {@link CANSparkMax} at each of the given CAN IDs and with the given {@link MotorType}.
+   * Motors on right side run in opposite direction to motors on left side.
    *
    * @param topLeftTowerMotorId The CAN ID of the top left Tower motor
    * @param bottomLeftTowerMotorId The CAN ID of the bottom left Tower motor
@@ -82,4 +83,11 @@ public class Tower extends SubsystemBase {
     bottomRightTowerMotor.set(speed);
   }
 
+  @Override
+  public void periodic() {
+    SmartDashboard.putNumber("Top Left Tower Current: ", topLeftTowerMotor.getOutputCurrent());
+    SmartDashboard.putNumber("Top Right Tower Current: ", topRightTowerMotor.getOutputCurrent());
+    SmartDashboard.putNumber("Bottom Left Tower Current: ", bottomLeftTowerMotor.getOutputCurrent());
+    SmartDashboard.putNumber("Bottom Right Tower Current: ", bottomRightTowerMotor.getOutputCurrent());
+  }
 }

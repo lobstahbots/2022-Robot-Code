@@ -7,8 +7,6 @@ package frc.robot.commands.drive;
 import frc.robot.subsystems.DriveBase;
 import java.util.function.Supplier;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 /**
  * Drives a {@link DriveBase} using arcade drive controls.
  */
@@ -46,8 +44,6 @@ public class TankDriveCommand extends DriveCommand {
   @Override
   public void execute() {
     driveBase.tankDrive(leftSpeedSupplier.get(), rightSpeedSupplier.get());
-    SmartDashboard.putNumber("Left Speed: ", driveBase.getLeftFrontOutput());
-    SmartDashboard.putNumber("Right Speed: ", driveBase.getRightFrontOutput());
   }
 
   @Override
