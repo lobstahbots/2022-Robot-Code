@@ -108,7 +108,10 @@ public final class Constants {
     public static final double CLIMBER_TRIGGER_THRESHOLD_TIME = 0.5;
 
     public static final double CLIMBER_RETRACTED_POSITION = 0.0;
+    public static final double CLIMBER_RETRACTED_POSITION_ERROR = 256.0; // PLACEHOLDER
     public static final double CLIMBER_EXTENDED_POSITION = 2048.0; // PLACEHOLDER
+    public static final double CLIMBER_EXTENDED_POSITION_ERROR = 256.0; // PLACEHOLDER
+    public static final double CLIMBER_ALIGNMENT_ERROR = 256.0; // PLACEHOLDER
   }
 
   /**

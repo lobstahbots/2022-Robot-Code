@@ -58,5 +58,68 @@ public class Climber extends SubsystemBase {
     rightClimberMotor.set(ControlMode.Position, position);
   }
 
+  /**
+   * Get the position of the left Climber motor.
+   *
+   */
+  public double getLeftMotorPosition() {
+    return leftClimberMotor.getSelectedSensorPosition(1);
+  }
+
+  /**
+   * Get the position of the right Climber motor.
+   *
+   */
+  public double getRightMotorPosition() {
+    return rightClimberMotor.getSelectedSensorPosition(1);
+  }
+
+  /**
+   * Returns true if the position of the left climber motor is close enough to the retracted position.
+   *
+   */
+  public boolean isRetracted() {
+    if (Math.abs(leftClimberMotor.getSelectedSensorPosition(1)
+        - Constants.ClimberConstants.CLIMBER_RETRACTED_POSITION) < Constants.ClimberConstants.CLIMBER_RETRACTED_POSITION_ERROR) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Returns true if the position of the left climber motor is close enough to the extended position.
+   *
+   */
+  public boolean isExtended() {
+    if (Math.abs(leftClimberMotor.getSelectedSensorPosition(1)
+        - Constants.ClimberConstants.CLIMBER_EXTENDED_POSITION) < Constants.ClimberConstants.CLIMBER_EXTENDED_POSITION_ERROR) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Returns true if the absolute value distance in position between the two climbers is below a certain value.
+   *
+   */
+  public boolean isAligned() {
+    if (Math.abs(leftClimberMotor.getSelectedSensorPosition(1)
+        - rightClimberMotor.getSelectedSensorPosition(1)) < Constants.ClimberConstants.CLIMBER_ALIGNMENT_ERROR) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Returns difference in position between the left and right climber motors.
+   *
+   */
+  public double getAlignmentDifference() {
+    return leftClimberMotor.getSelectedSensorPosition(1) - rightClimberMotor.getSelectedSensorPosition(1);
+  }
+
 
 }
