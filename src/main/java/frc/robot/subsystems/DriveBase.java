@@ -83,11 +83,11 @@ public class DriveBase extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // Update the odometry in the periodic block
+    // Updates the odometry in the periodic block
     odometry.update(
         gyro.getRotation2d(), leftFrontMotor.getSelectedSensorPosition(0),
         rightFrontMotor.getSelectedSensorPosition(0));
-    // Displays left and right motor group speeds on SmartDashboard.
+    // Displays the left and right motor group speeds on SmartDashboard.
     SmartDashboard.putNumber("Drivetrain Left Speed: ", leftFrontMotor.get());
     SmartDashboard.putNumber("Drivetrain Right Speed: ", rightFrontMotor.get());
   }
