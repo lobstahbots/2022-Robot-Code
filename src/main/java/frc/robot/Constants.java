@@ -112,6 +112,8 @@ public final class Constants {
     public static final double CLIMBER_EXTENDED_POSITION = 2048.0; // PLACEHOLDER
     public static final double CLIMBER_EXTENDED_POSITION_ACCEPTABLE_ERROR = 256.0; // PLACEHOLDER
     public static final double CLIMBER_ALIGNMENT_ACCEPTABLE_ERROR = 256.0; // PLACEHOLDER
+
+    public static final int CLIMBER_SENSOR_PIDIDX_VALUE = 1;
   }
 
   /**

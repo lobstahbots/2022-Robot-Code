@@ -63,7 +63,7 @@ public class Climber extends SubsystemBase {
    *
    */
   public double getLeftMotorPosition() {
-    return leftClimberMotor.getSelectedSensorPosition(1);
+    return leftClimberMotor.getSelectedSensorPosition(Constants.ClimberConstants.CLIMBER_SENSOR_PIDIDX_VALUE);
   }
 
   /**
@@ -71,7 +71,7 @@ public class Climber extends SubsystemBase {
    *
    */
   public double getRightMotorPosition() {
-    return rightClimberMotor.getSelectedSensorPosition(1);
+    return rightClimberMotor.getSelectedSensorPosition(Constants.ClimberConstants.CLIMBER_SENSOR_PIDIDX_VALUE);
   }
 
   /**
