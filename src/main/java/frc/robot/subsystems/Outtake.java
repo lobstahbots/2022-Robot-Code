@@ -6,7 +6,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.OuttakeConstants;
 
 /**
  * A subsystem that controls the Outtake on a robot.
@@ -34,10 +34,10 @@ public class Outtake extends SubsystemBase {
    */
   public Outtake(int outtakeId, int outtakeId2, MotorType motorType) {
     outtakeMotor = new CANSparkMax(outtakeId, motorType);
-    outtakeMotor.setSmartCurrentLimit(Constants.OuttakeConstants.OUTTAKE_CURRENT_LIMIT);
+    outtakeMotor.setSmartCurrentLimit(OuttakeConstants.CURRENT_LIMIT);
     outtakeMotor.setIdleMode(IdleMode.kBrake);
     outtakeMotor2 = new CANSparkMax(outtakeId2, motorType);
-    outtakeMotor2.setSmartCurrentLimit(Constants.OuttakeConstants.OUTTAKE_CURRENT_LIMIT);
+    outtakeMotor2.setSmartCurrentLimit(OuttakeConstants.CURRENT_LIMIT);
     outtakeMotor2.setIdleMode(IdleMode.kBrake);
     CommandScheduler.getInstance().registerSubsystem(this);
   }
