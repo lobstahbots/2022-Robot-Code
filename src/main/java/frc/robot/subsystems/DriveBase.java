@@ -87,6 +87,9 @@ public class DriveBase extends SubsystemBase {
     odometry.update(
         gyro.getRotation2d(), leftFrontMotor.getSelectedSensorPosition(0),
         rightFrontMotor.getSelectedSensorPosition(0));
+    // Displays left and right motor group speeds on SmartDashboard.
+    SmartDashboard.putNumber("Drivetrain Left Speed: ", leftFrontMotor.get());
+    SmartDashboard.putNumber("Drivetrain Right Speed: ", rightFrontMotor.get());
   }
 
   /**
@@ -176,14 +179,6 @@ public class DriveBase extends SubsystemBase {
   public void tankDrive(double leftSpeed, double rightSpeed) {
     differentialDrive.tankDrive(leftSpeed, rightSpeed);
   }
-
-  @Override
-  /**
-   * Displays left and right motor group speeds on SmartDashboard.
-   */
-  public void periodic() {
-    SmartDashboard.putNumber("Drivetrain Left Speed: ", leftFrontMotor.get());
-    SmartDashboard.putNumber("Drivetrain Right Speed: ", rightFrontMotor.get());
 
   /**
    * Controls the left and right sides of the drive with voltages.

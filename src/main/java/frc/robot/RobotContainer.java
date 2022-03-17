@@ -168,53 +168,46 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(AutonConstants.kTrackwidthMeters);
+    DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(AutonConstants.K_TRACK_WIDTH_METERS);
     var autoVoltageConstraint =
         new DifferentialDriveVoltageConstraint(
             new SimpleMotorFeedforward(
-                AutonConstants.ksVolts,
-                AutonConstants.kvVoltSecondsPerMeter,
-                AutonConstants.kaVoltSecondsSquaredPerMeter),
+                AutonConstants.KS_VOLTS,
+                AutonConstants.KV_VOLT_SECONDS_PER_METER,
+                AutonConstants.KA_VOLT_SECONDS_SQUARED_PER_METER),
             kDriveKinematics, 10);
 
     TrajectoryConfig config =
         new TrajectoryConfig(
-            AutonConstants.kMaxSpeedMetersPerSecond,
-            AutonConstants.kMaxAccelerationMetersPerSecondSquared)
-                // Add kinematics to ensure max speed is actually obeyed
+            AutonConstants.K_MAX_SPEED_METERS_PER_SECOND,
+            AutonConstants.K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED)
                 .setKinematics(kDriveKinematics)
-                // Apply the voltage constraint
                 .addConstraint(autoVoltageConstraint);
 
     // An example trajectory to follow. All units in meters.
     Trajectory exampleTrajectory =
         TrajectoryGenerator.generateTrajectory(
-            // Start at the origin facing the +X direction
             new Pose2d(0, 0, new Rotation2d(0)),
-            // Pass through these two interior waypoints, making an 's' curve path
             List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
-            // End 3 meters straight ahead of where we started, facing forward
             new Pose2d(3, 0, new Rotation2d(0)),
-            // Pass config
             config);
 
     RamseteCommand ramseteCommand =
         new RamseteCommand(
             exampleTrajectory,
             driveBase::getPose,
-            new RamseteController(AutonConstants.kRamseteB, AutonConstants.kRamseteZeta),
+            new RamseteController(AutonConstants.K_RAMSETE_B, AutonConstants.K_RAMSETE_ZETA),
             new SimpleMotorFeedforward(
-                AutonConstants.ksVolts,
-                AutonConstants.kvVoltSecondsPerMeter,
-                AutonConstants.kaVoltSecondsSquaredPerMeter),
+                AutonConstants.KS_VOLTS,
+                AutonConstants.KV_VOLT_SECONDS_PER_METER,
+                AutonConstants.KA_VOLT_SECONDS_SQUARED_PER_METER),
             kDriveKinematics,
             driveBase::getWheelSpeeds,
-            new PIDController(AutonConstants.kPDriveVel, 0, 0),
-            new PIDController(AutonConstants.kPDriveVel, 0, 0),
+            new PIDController(AutonConstants.KP_DRIVE_VEL, 0, 0),
+            new PIDController(AutonConstants.KP_DRIVE_VEL, 0, 0),
             driveBase::tankDriveVolts,
             driveBase);
 
-    // Reset odometry to the starting pose of the trajectory.
     driveBase.resetOdometry(exampleTrajectory.getInitialPose());
 
     return ramseteCommand.andThen(() -> driveBase.tankDriveVolts(0, 0));

@@ -24,17 +24,18 @@ public final class Constants {
     public static final double SIMPLE_AUTON_SPEED = 0.5; // WEEK0
     public static final double SIMPLE_AUTON_RUNTIME = 4.0; // WEEK0
     public static final double MEDIUM_AUTON_OUTTAKE_RUNTIME = 2.0; // PLACEHOLDER
-    public static final double ksVolts = 0.0; // PLACEHOLDER
-    public static final double kvVoltSecondsPerMeter = 0.0; // PLACEHOLDER
-    public static final double kaVoltSecondsSquaredPerMeter = 0.0; // PLACEHOLDER
 
-    public static final double kPDriveVel = 0.0; // PLACEHOLDER
+    public static final double KS_VOLTS = 0.0; // PLACEHOLDER
+    public static final double KV_VOLT_SECONDS_PER_METER = 0.0; // PLACEHOLDER
+    public static final double KA_VOLT_SECONDS_SQUARED_PER_METER = 0.0; // PLACEHOLDER
 
-    public static final double kTrackwidthMeters = 0.69;
-    public static final double kMaxSpeedMetersPerSecond = 3;
-    public static final double kMaxAccelerationMetersPerSecondSquared = 3;
-    public static final double kRamseteB = 2;
-    public static final double kRamseteZeta = 0.7;
+    public static final double KP_DRIVE_VEL = 0.0; // PLACEHOLDER
+
+    public static final double K_TRACK_WIDTH_METERS = 0.69;
+    public static final double K_MAX_SPEED_METERS_PER_SECOND = 3;
+    public static final double K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 3;
+    public static final double K_RAMSETE_B = 2;
+    public static final double K_RAMSETE_ZETA = 0.7;
   }
 
   /**
@@ -79,6 +80,9 @@ public final class Constants {
       public static final int RIGHT_BACK = 53; // WEEK0
     }
 
+    public static final int CURRENT_LIMIT = 60;
+    public static final int TRIGGER_THRESHOLD = 60;
+    public static final int TRIGGER_THRESHOLD_TIME = 2;
   }
 
   /**
