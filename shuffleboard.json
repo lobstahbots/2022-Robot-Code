@@ -46,7 +46,7 @@
           },
           "6,0": {
             "size": [
-              2,
+              1,
               1
             ],
             "content": {
@@ -110,6 +110,17 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Outtake Speed: ",
               "_title": "Outtake Speed: "
+            }
+          },
+          "6,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Compressor Pressure: ",
+              "_title": "Compressor Pressure: "
             }
           }
         }
@@ -397,8 +408,8 @@
     }
   ],
   "windowGeometry": {
-    "x": -36.0,
-    "y": 31.0,
+    "x": 21.0,
+    "y": 17.0,
     "width": 1920.0,
     "height": 1050.0
   }

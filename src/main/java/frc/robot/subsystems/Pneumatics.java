@@ -82,9 +82,10 @@ public class Pneumatics extends SubsystemBase {
 
   @Override
   /**
-   * Displays the compressor current on SmartDashboard.
+   * Displays the compressor current and stored pressure on SmartDashboard.
    */
   public void periodic() {
     SmartDashboard.putNumber("Compressor Current: ", this.getCompressorCurrent());
+    SmartDashboard.putNumber("Compressor Pressure: ", this.getStoredPressure());
   }
 }
