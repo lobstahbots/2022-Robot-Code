@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean constants. This
  * class should not be used for any other purpose. All constants should be declared globally (i.e. public static). Do
@@ -22,6 +24,17 @@ public final class Constants {
     public static final double SIMPLE_AUTON_SPEED = 0.5; // WEEK0
     public static final double SIMPLE_AUTON_RUNTIME = 4.0; // WEEK0
     public static final double MEDIUM_AUTON_OUTTAKE_RUNTIME = 2.0; // PLACEHOLDER
+    public static final double ksVolts = 0.0; // PLACEHOLDER
+    public static final double kvVoltSecondsPerMeter = 0.0; // PLACEHOLDER
+    public static final double kaVoltSecondsSquaredPerMeter = 0.0; // PLACEHOLDER
+
+    public static final double kPDriveVel = 0.0; // PLACEHOLDER
+
+    public static final double kTrackwidthMeters = 0.69;
+    public static final double kMaxSpeedMetersPerSecond = 3;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+    public static final double kRamseteB = 2;
+    public static final double kRamseteZeta = 0.7;
   }
 
   /**
@@ -66,9 +79,6 @@ public final class Constants {
       public static final int RIGHT_BACK = 53; // WEEK0
     }
 
-    public static final int CURRENT_LIMIT = 60;
-    public static final int TRIGGER_THRESHOLD = 60;
-    public static final int TRIGGER_THRESHOLD_TIME = 2;
   }
 
   /**

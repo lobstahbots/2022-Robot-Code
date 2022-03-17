@@ -186,10 +186,10 @@ public class DriveBase extends SubsystemBase {
     SmartDashboard.putNumber("Drivetrain Right Speed: ", rightFrontMotor.get());
 
   /**
-   * Controls the left and right sides of the drive directly with voltages.
+   * Controls the left and right sides of the drive with voltages.
    *
-   * @param leftVolts the commanded left output
-   * @param rightVolts the commanded right output
+   * @param leftVolts the specified left output
+   * @param rightVolts the specified right output
    */
   public void tankDriveVolts(double leftVolts, double rightVolts) {
     leftFrontMotor.setVoltage(leftVolts);
