@@ -7,7 +7,7 @@ import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.ClimberConstants;
 
 /**
  * A subsystem that controls the Climber on the robot.
@@ -26,13 +26,13 @@ public class Climber extends SubsystemBase {
     leftClimberMotor = new WPI_TalonFX(leftMotorID);
     rightClimberMotor = new WPI_TalonFX(rightMotorID);
     leftClimberMotor.configSupplyCurrentLimit(
-        new SupplyCurrentLimitConfiguration(true, Constants.ClimberConstants.CLIMBER_CURRENT_LIMIT,
-            Constants.ClimberConstants.CLIMBER_TRIGGER_THRESHOLD,
-            Constants.ClimberConstants.CLIMBER_TRIGGER_THRESHOLD_TIME));
+        new SupplyCurrentLimitConfiguration(true, ClimberConstants.CURRENT_LIMIT,
+            ClimberConstants.TRIGGER_THRESHOLD,
+            ClimberConstants.TRIGGER_THRESHOLD_TIME));
     rightClimberMotor.configSupplyCurrentLimit(
-        new SupplyCurrentLimitConfiguration(true, Constants.ClimberConstants.CLIMBER_CURRENT_LIMIT,
-            Constants.ClimberConstants.CLIMBER_TRIGGER_THRESHOLD,
-            Constants.ClimberConstants.CLIMBER_TRIGGER_THRESHOLD_TIME));
+        new SupplyCurrentLimitConfiguration(true, ClimberConstants.CURRENT_LIMIT,
+            ClimberConstants.TRIGGER_THRESHOLD,
+            ClimberConstants.TRIGGER_THRESHOLD_TIME));
     leftClimberMotor.setNeutralMode(NeutralMode.Brake);
     rightClimberMotor.setNeutralMode(NeutralMode.Brake);
     CommandScheduler.getInstance().registerSubsystem(this);

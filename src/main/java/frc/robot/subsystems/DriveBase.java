@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.DriveConstants;
 
 /**
  * A subsystem that controls the drive train (aka chassis) on a robot.
@@ -40,21 +40,21 @@ public class DriveBase extends SubsystemBase {
     rightBackMotor = new WPI_TalonFX(rightBackId);
 
     leftFrontMotor.configSupplyCurrentLimit(
-        new SupplyCurrentLimitConfiguration(true, Constants.DriveConstants.DRIVE_CURRENT_LIMIT,
-            Constants.DriveConstants.DRIVE_TRIGGER_THRESHOLD,
-            Constants.DriveConstants.DRIVE_TRIGGER_THRESHOLD_TIME));
+        new SupplyCurrentLimitConfiguration(true, DriveConstants.CURRENT_LIMIT,
+            DriveConstants.TRIGGER_THRESHOLD,
+            DriveConstants.TRIGGER_THRESHOLD_TIME));
     leftBackMotor.configSupplyCurrentLimit(
-        new SupplyCurrentLimitConfiguration(true, Constants.DriveConstants.DRIVE_CURRENT_LIMIT,
-            Constants.DriveConstants.DRIVE_TRIGGER_THRESHOLD,
-            Constants.DriveConstants.DRIVE_TRIGGER_THRESHOLD_TIME));
+        new SupplyCurrentLimitConfiguration(true, DriveConstants.CURRENT_LIMIT,
+            DriveConstants.TRIGGER_THRESHOLD,
+            DriveConstants.TRIGGER_THRESHOLD_TIME));
     rightFrontMotor.configSupplyCurrentLimit(
-        new SupplyCurrentLimitConfiguration(true, Constants.DriveConstants.DRIVE_CURRENT_LIMIT,
-            Constants.DriveConstants.DRIVE_TRIGGER_THRESHOLD,
-            Constants.DriveConstants.DRIVE_TRIGGER_THRESHOLD_TIME));
+        new SupplyCurrentLimitConfiguration(true, DriveConstants.CURRENT_LIMIT,
+            DriveConstants.TRIGGER_THRESHOLD,
+            DriveConstants.TRIGGER_THRESHOLD_TIME));
     rightBackMotor.configSupplyCurrentLimit(
-        new SupplyCurrentLimitConfiguration(true, Constants.DriveConstants.DRIVE_CURRENT_LIMIT,
-            Constants.DriveConstants.DRIVE_TRIGGER_THRESHOLD,
-            Constants.DriveConstants.DRIVE_TRIGGER_THRESHOLD_TIME));
+        new SupplyCurrentLimitConfiguration(true, DriveConstants.CURRENT_LIMIT,
+            DriveConstants.TRIGGER_THRESHOLD,
+            DriveConstants.TRIGGER_THRESHOLD_TIME));
 
     setBrakingMode(NeutralMode.Brake);
 

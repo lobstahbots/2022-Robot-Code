@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -13,11 +11,21 @@ import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants.AutonConstants;
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.IOConstants;
 import frc.robot.Constants.IntakeConstants;
+import frc.robot.Constants.OuttakeConstants;
 import frc.robot.Constants.TowerConstants;
+import frc.robot.Constants.ClimberConstants.ClimberMotorCANIDs;
+import frc.robot.Constants.DriveConstants.DriveMotorCANIDs;
+import frc.robot.Constants.IOConstants.DriverAxes;
+import frc.robot.Constants.IOConstants.DriverButtons;
+import frc.robot.Constants.IOConstants.OperatorButtons;
+import frc.robot.Constants.IntakeConstants.IntakeSolenoidChannels;
+import frc.robot.Constants.OuttakeConstants.OuttakeMotorCANIDs;
+import frc.robot.Constants.TowerConstants.TowerMotorCANIDs;
 import frc.robot.commands.auton.SimpleAutonCommand;
 import frc.robot.commands.climber.RunClimberCommand;
 import frc.robot.commands.climber.RunClimberToPositionCommand;
@@ -32,6 +40,7 @@ import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Outtake;
 import frc.robot.subsystems.Tower;
+import overclocked.stl.io.OverclockedController;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
@@ -39,101 +48,93 @@ import frc.robot.subsystems.Tower;
  * Instead, the structure of the robot (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final DriveBase driveBase = new DriveBase(DriveConstants.DRIVE_LEFT_FRONT_MOTOR_ID,
-      DriveConstants.DRIVE_LEFT_BACK_MOTOR_ID, DriveConstants.DRIVE_RIGHT_FRONT_MOTOR_ID,
-      DriveConstants.DRIVE_RIGHT_BACK_MOTOR_ID);
+  private final DriveBase driveBase = new DriveBase(
+      DriveMotorCANIDs.LEFT_FRONT,
+      DriveMotorCANIDs.LEFT_BACK,
+      DriveMotorCANIDs.RIGHT_FRONT,
+      DriveMotorCANIDs.RIGHT_BACK);
   private final Intake intake = new Intake(
-      IntakeConstants.INTAKE_MOTOR_ID,
-      IntakeConstants.INTAKE_TOP_FORWARD_CHANNEL,
-      IntakeConstants.INTAKE_TOP_REVERSE_CHANNEL,
-      IntakeConstants.INTAKE_BOTTOM_FORWARD_CHANNEL,
-      IntakeConstants.INTAKE_BOTTOM_REVERSE_CHANNEL);
+      IntakeConstants.MOTOR_ID,
+      IntakeSolenoidChannels.TOP_FORWARD,
+      IntakeSolenoidChannels.TOP_REVERSE,
+      IntakeSolenoidChannels.BOTTOM_FORWARD,
+      IntakeSolenoidChannels.BOTTOM_REVERSE);
   private final Outtake outtake = new Outtake(
-      Constants.OuttakeConstants.OUTTAKE_MOTOR_ID1,
-      Constants.OuttakeConstants.OUTTAKE_MOTOR_ID2);
+      OuttakeMotorCANIDs.TOP,
+      OuttakeMotorCANIDs.BOTTOM);
   private final Tower tower = new Tower(
-      TowerConstants.TOP_LEFT_TOWER_MOTOR_ID,
-      TowerConstants.BOTTOM_LEFT_TOWER_MOTOR_ID,
-      TowerConstants.TOP_RIGHT_TOWER_MOTOR_ID,
-      TowerConstants.BOTTOM_RIGHT_TOWER_MOTOR_ID);
-  private final Climber climber =
-      new Climber(ClimberConstants.LEFT_CLIMBER_MOTOR_ID, ClimberConstants.RIGHT_CLIMBER_MOTOR_ID);
+      TowerMotorCANIDs.TOP_LEFT,
+      TowerMotorCANIDs.BOTTOM_LEFT,
+      TowerMotorCANIDs.TOP_RIGHT,
+      TowerMotorCANIDs.BOTTOM_RIGHT);
+  private final Climber climber = new Climber(
+      ClimberMotorCANIDs.LEFT,
+      ClimberMotorCANIDs.RIGHT);
 
-  private final GenericHID primaryDriverJoystick =
-      new GenericHID(IOConstants.PRIMARY_DRIVER_JOYSTICK_PORT);
-  private final GenericHID secondaryDriverJoystick =
-      new GenericHID(IOConstants.SECONDARY_DRIVER_JOYSTICK_PORT);
+  private final OverclockedController driverJoystick = new OverclockedController(IOConstants.DRIVER_JOYSTICK_INDEX);
+  private final OverclockedController operatorJoystick = new OverclockedController(IOConstants.OPERATOR_JOYSTICK_INDEX);
 
-  private final JoystickButton slowdownButton =
-      new JoystickButton(primaryDriverJoystick, IOConstants.SLOWDOWN_BUTTON_NUMBER);
+  private final JoystickButton slowdownButton = driverJoystick.button(DriverButtons.SLOWDOWN);
 
-  private final JoystickButton intakeButton =
-      new JoystickButton(secondaryDriverJoystick, IOConstants.INTAKE_BUTTON_NUMBER);
-  private final JoystickButton outtakeButton =
-      new JoystickButton(secondaryDriverJoystick,
-          Constants.IOConstants.OUTTAKE_BUTTON_NUMBER);
-  private final JoystickButton towerButton =
-      new JoystickButton(secondaryDriverJoystick, IOConstants.TOWER_BUTTON_NUMBER);
-  private final JoystickButton climberUpButton =
-      new JoystickButton(secondaryDriverJoystick, IOConstants.CLIMBER_UP_BUTTON_NUMBER);
-  private final JoystickButton climberDownButton =
-      new JoystickButton(secondaryDriverJoystick, IOConstants.CLIMBER_DOWN_BUTTON_NUMBER);
-  private final JoystickButton climberRetractButton =
-      new JoystickButton(secondaryDriverJoystick, IOConstants.CLIMBER_RETRACT_BUTTON_NUMBER);
-  private final JoystickButton climberExtendButton =
-      new JoystickButton(secondaryDriverJoystick, IOConstants.CLIMBER_EXTEND_BUTTON_NUMBER);
+  private final JoystickButton intakeButton = operatorJoystick.button(OperatorButtons.INTAKE);
+  private final JoystickButton outtakeButton = operatorJoystick.button(OperatorButtons.OUTTAKE);
+  private final JoystickButton towerButton = operatorJoystick.button(OperatorButtons.TOWER);
+  private final JoystickButton climberUpButton = operatorJoystick.button(OperatorButtons.CLIMBER_UP);
+  private final JoystickButton climberDownButton = operatorJoystick.button(OperatorButtons.CLIMBER_DOWN);
+  private final JoystickButton climberRetractButton = operatorJoystick.button(OperatorButtons.CLIMBER_RETRACT_BUTTON_NUMBER);
+  private final JoystickButton climberExtendButton = operatorJoystick.button(OperatorButtons..CLIMBER_EXTEND_BUTTON_NUMBER);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    // Configure the button bindings
     configureButtonBindings();
     configureSmartDash();
   }
 
   /**
-   * Use this method to define your button->command mappings. Buttons can be created by instantiating a
-   * {@link GenericHID} or one of its subclasses ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and
-   * then passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   * Use this method to define your button->command mappings.
    */
   private void configureButtonBindings() {
-    outtakeButton
-        .whileHeld(new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED));
-    towerButton
-        .whileHeld(new RunTowerCommand(tower, TowerConstants.TOWER_SPEED));
-    climberUpButton
-        .whileHeld(
-            new RunClimberCommand(climber, ClimberConstants.CLIMBER_SPEED));
-    climberDownButton
-        .whileHeld(
-            new RunClimberCommand(climber, -ClimberConstants.CLIMBER_SPEED));
-    intakeButton
-        .whileHeld(new SequentialCommandGroup(new ExtendIntakeCommand(intake),
-            new SpinIntakeCommand(intake, IntakeConstants.INTAKE_SPEED)));
-    slowdownButton
-        .whileHeld(new TankDriveCommand(driveBase,
-            () -> DriveConstants.SLOWDOWN_PERCENT * primaryDriverJoystick.getRawAxis(1),
-            () -> DriveConstants.SLOWDOWN_PERCENT * primaryDriverJoystick.getRawAxis(3)));
+    outtakeButton.whileHeld(new RunOuttakeCommand(outtake, OuttakeConstants.SPEED));
+
+    towerButton.whileHeld(new RunTowerCommand(tower, TowerConstants.SPEED));
+
+    climberUpButton.whileHeld(new RunClimberCommand(climber, ClimberConstants.SPEED));
+    climberDownButton.whileHeld(new RunClimberCommand(climber, -ClimberConstants.SPEED));
+
+    intakeButton.whileHeld(new SequentialCommandGroup(
+        new ExtendIntakeCommand(intake),
+        new SpinIntakeCommand(intake, IntakeConstants.SPEED)));
+
+    slowdownButton.whileHeld(new TankDriveCommand(
+        driveBase,
+        () -> DriveConstants.SLOWDOWN_PERCENT * driverJoystick.getRawAxis(DriverAxes.LEFT),
+        () -> DriveConstants.SLOWDOWN_PERCENT * driverJoystick.getRawAxis(DriverAxes.RIGHT)));
     climberRetractButton
         .whileHeld(
             new RunClimberToPositionCommand(climber, ClimberConstants.CLIMBER_RETRACTED_POSITION));
     climberExtendButton
         .whileHeld(
             new RunClimberToPositionCommand(climber, ClimberConstants.CLIMBER_EXTENDED_POSITION));
+   
   }
 
   // A simple auto routine.
-  private final Command simpleAuto =
-      new SimpleAutonCommand(driveBase, Constants.SIMPLE_AUTON_SPEED,
-          Constants.SIMPLE_AUTON_RUNTIME);
+  private final Command simpleAuton =
+      new SimpleAutonCommand(
+          driveBase,
+          AutonConstants.SIMPLE_AUTON_SPEED,
+          AutonConstants.SIMPLE_AUTON_RUNTIME);
 
   // A medium auto routine.
-  private final Command mediumAuto =
-      new ParallelDeadlineGroup(new WaitCommand(Constants.MEDIUM_AUTON_OUTTAKE_RUNTIME),
-          new RunOuttakeCommand(outtake, Constants.OuttakeConstants.OUTTAKE_SPEED),
-          simpleAuto);
+  private final Command mediumAuton =
+      new SequentialCommandGroup(
+          new ParallelDeadlineGroup(
+              new WaitCommand(AutonConstants.MEDIUM_AUTON_OUTTAKE_RUNTIME),
+              new RunOuttakeCommand(outtake, OuttakeConstants.SPEED)),
+          simpleAuton);
+
 
   private final SendableChooser<Command> autonChooser = new SendableChooser<>();
 
@@ -141,11 +142,9 @@ public class RobotContainer {
    * Use this method to run tasks that configure sendables and other smartdashboard items.
    */
   private void configureSmartDash() {
-    // Add commands to the autonomous command chooser
-    autonChooser.setDefaultOption("Simple Auton", simpleAuto);
-    autonChooser.addOption("Medium Auto", mediumAuto);
+    autonChooser.setDefaultOption("Simple Auton", simpleAuton);
+    autonChooser.addOption("Medium Auton", mediumAuton);
 
-    // Put the chooser on the dashboard
     SmartDashboard.putData(autonChooser);
   }
 
@@ -167,8 +166,8 @@ public class RobotContainer {
     driveBase.setDefaultCommand(
         new TankDriveCommand(
             driveBase,
-            () -> primaryDriverJoystick.getRawAxis(1),
-            () -> primaryDriverJoystick.getRawAxis(3)));
+            () -> driverJoystick.getRawAxis(DriverAxes.LEFT),
+            () -> driverJoystick.getRawAxis(DriverAxes.RIGHT)));
   }
 
   /**
