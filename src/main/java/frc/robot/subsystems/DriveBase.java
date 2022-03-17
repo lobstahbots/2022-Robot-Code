@@ -9,6 +9,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -29,7 +30,7 @@ public class DriveBase extends SubsystemBase {
 
   private final DifferentialDrive differentialDrive;
 
-  private final AHRS gyro = new AHRS(SPI.Port.kMXP);
+  private final Gyro gyro = new AHRS(SPI.Port.kMXP);
 
 
   /**
