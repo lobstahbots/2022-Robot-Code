@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.Constants;
+import frc.robot.Constants.IntakeConstants;
 
 /**
  * A subsystem that controls the intake on a robot.
@@ -46,9 +46,10 @@ public class Intake extends SubsystemBase {
         new DoubleSolenoid(PneumaticsModuleType.REVPH, bottomForwardChannel, bottomReverseChannel);
     intakeMotor = new WPI_TalonSRX(intakeMotorID);
     intakeMotor.configSupplyCurrentLimit(
-        new SupplyCurrentLimitConfiguration(true, Constants.IntakeConstants.INTAKE_CURRENT_LIMIT,
-            Constants.IntakeConstants.INTAKE_TRIGGER_THRESHOLD,
-            Constants.IntakeConstants.INTAKE_TRIGGER_THRESHOLD_TIME));
+        new SupplyCurrentLimitConfiguration(true,
+            IntakeConstants.CURRENT_LIMIT,
+            IntakeConstants.TRIGGER_THRESHOLD,
+            IntakeConstants.TRIGGER_THRESHOLD_TIME));
     intakeMotor.setNeutralMode(NeutralMode.Brake);
     CommandScheduler.getInstance().registerSubsystem(this);
   }
@@ -110,7 +111,7 @@ public class Intake extends SubsystemBase {
   public Command getRetractionCommand() {
     return new SequentialCommandGroup(
         new InstantCommand(() -> bottomSolenoid.set(DoubleSolenoid.Value.kReverse)),
-        new WaitCommand(Constants.IntakeConstants.INTAKE_SOLENOIDS_DELAY_TIME),
+        new WaitCommand(IntakeConstants.SOLENOID_DELAY_TIME),
         new InstantCommand(() -> topSolenoid.set(DoubleSolenoid.Value.kReverse)));
   }
 
@@ -129,7 +130,7 @@ public class Intake extends SubsystemBase {
   public Command getExtensionCommand() {
     return new SequentialCommandGroup(
         new InstantCommand(() -> topSolenoid.set(DoubleSolenoid.Value.kForward)),
-        new WaitCommand(Constants.IntakeConstants.INTAKE_SOLENOIDS_DELAY_TIME),
+        new WaitCommand(IntakeConstants.SOLENOID_DELAY_TIME),
         new InstantCommand(() -> bottomSolenoid.set(DoubleSolenoid.Value.kForward)));
   }
 

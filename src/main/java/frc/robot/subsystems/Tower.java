@@ -9,7 +9,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.TowerConstants;
 
 /**
  * A subsystem that controls the Tower on a robot.
@@ -53,17 +53,17 @@ public class Tower extends SubsystemBase {
   public Tower(int topLeftTowerMotorId, int bottomLeftTowerMotorId, int topRightTowerMotorId,
       int bottomRightTowerMotorId, MotorType motorType) {
     topLeftTowerMotor = new CANSparkMax(topLeftTowerMotorId, motorType);
-    topLeftTowerMotor.setSmartCurrentLimit(Constants.TowerConstants.TOWER_CURRENT_LIMIT);
+    topLeftTowerMotor.setSmartCurrentLimit(TowerConstants.CURRENT_LIMIT);
     topLeftTowerMotor.setIdleMode(IdleMode.kBrake);
     bottomLeftTowerMotor = new CANSparkMax(bottomLeftTowerMotorId, motorType);
-    bottomLeftTowerMotor.setSmartCurrentLimit(Constants.TowerConstants.TOWER_CURRENT_LIMIT);
+    bottomLeftTowerMotor.setSmartCurrentLimit(TowerConstants.CURRENT_LIMIT);
     bottomLeftTowerMotor.setIdleMode(IdleMode.kBrake);
     topRightTowerMotor = new CANSparkMax(topRightTowerMotorId, motorType);
-    topRightTowerMotor.setSmartCurrentLimit(Constants.TowerConstants.TOWER_CURRENT_LIMIT);
+    topRightTowerMotor.setSmartCurrentLimit(TowerConstants.CURRENT_LIMIT);
     topRightTowerMotor.setIdleMode(IdleMode.kBrake);
     topRightTowerMotor.setInverted(true);
     bottomRightTowerMotor = new CANSparkMax(bottomRightTowerMotorId, motorType);
-    bottomRightTowerMotor.setSmartCurrentLimit(Constants.TowerConstants.TOWER_CURRENT_LIMIT);
+    bottomRightTowerMotor.setSmartCurrentLimit(TowerConstants.CURRENT_LIMIT);
     bottomRightTowerMotor.setIdleMode(IdleMode.kBrake);
     bottomRightTowerMotor.setInverted(true);
 
