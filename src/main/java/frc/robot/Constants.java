@@ -48,14 +48,6 @@ public final class Constants {
 
       public static final int TOWER = 6; // WEEK0
 
-
-      public static final int OUTTAKE_BUTTON_NUMBER = 2; // WEEK0
-      public static final int TOWER_BUTTON_NUMBER = 6; // WEEK0
-      public static final int CLIMBER_UP_BUTTON_NUMBER = 4; // WEEK0
-      public static final int CLIMBER_DOWN_BUTTON_NUMBER = 1; // WEEK0
-      public static final int CLIMBER_RETRACT_BUTTON_NUMBER = 0; // PLACEHOLDER
-      public static final int CLIMBER_EXTEND_BUTTON_NUMBER = 1; // PLACEHOLDER
-
       public static final int CLIMBER_UP = 4; // WEEK0
       public static final int CLIMBER_DOWN = 1; // WEEK0
       public static final int OUTTAKE_BUTTON_NUMBER = 2; // WEEK0
@@ -150,12 +142,13 @@ public final class Constants {
     public static final int CURRENT_LIMIT = 85;
     public static final int TRIGGER_THRESHOLD = 100;
     public static final double TRIGGER_THRESHOLD_TIME = 0.5;
-    
+
     public static final double CLIMBER_RETRACTED_POSITION = 0.0;
     public static final double CLIMBER_RETRACTED_POSITION_ACCEPTABLE_ERROR = 256.0; // PLACEHOLDER
     public static final double CLIMBER_EXTENDED_POSITION = 2048.0; // PLACEHOLDER
     public static final double CLIMBER_EXTENDED_POSITION_ACCEPTABLE_ERROR = 256.0; // PLACEHOLDER
     public static final double CLIMBER_ALIGNMENT_ACCEPTABLE_ERROR = 256.0; // PLACEHOLDER
+    public static final int CLIMBER_SENSOR_PIDIDX_VALUE = 1; // PLACEHOLDER
   }
 
   /**

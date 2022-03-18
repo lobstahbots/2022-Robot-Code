@@ -13,18 +13,18 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.AutonConstants;
 import frc.robot.Constants.ClimberConstants;
-import frc.robot.Constants.DriveConstants;
-import frc.robot.Constants.IOConstants;
-import frc.robot.Constants.IntakeConstants;
-import frc.robot.Constants.OuttakeConstants;
-import frc.robot.Constants.TowerConstants;
 import frc.robot.Constants.ClimberConstants.ClimberMotorCANIDs;
+import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.DriveConstants.DriveMotorCANIDs;
+import frc.robot.Constants.IOConstants;
 import frc.robot.Constants.IOConstants.DriverAxes;
 import frc.robot.Constants.IOConstants.DriverButtons;
 import frc.robot.Constants.IOConstants.OperatorButtons;
+import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.IntakeConstants.IntakeSolenoidChannels;
+import frc.robot.Constants.OuttakeConstants;
 import frc.robot.Constants.OuttakeConstants.OuttakeMotorCANIDs;
+import frc.robot.Constants.TowerConstants;
 import frc.robot.Constants.TowerConstants.TowerMotorCANIDs;
 import frc.robot.commands.auton.SimpleAutonCommand;
 import frc.robot.commands.climber.RunClimberCommand;
@@ -81,8 +81,10 @@ public class RobotContainer {
   private final JoystickButton towerButton = operatorJoystick.button(OperatorButtons.TOWER);
   private final JoystickButton climberUpButton = operatorJoystick.button(OperatorButtons.CLIMBER_UP);
   private final JoystickButton climberDownButton = operatorJoystick.button(OperatorButtons.CLIMBER_DOWN);
-  private final JoystickButton climberRetractButton = operatorJoystick.button(OperatorButtons.CLIMBER_RETRACT_BUTTON_NUMBER);
-  private final JoystickButton climberExtendButton = operatorJoystick.button(OperatorButtons..CLIMBER_EXTEND_BUTTON_NUMBER);
+  private final JoystickButton climberRetractButton =
+      operatorJoystick.button(OperatorButtons.CLIMBER_RETRACT_BUTTON_NUMBER);
+  private final JoystickButton climberExtendButton =
+      operatorJoystick.button(OperatorButtons.CLIMBER_EXTEND_BUTTON_NUMBER);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -117,7 +119,7 @@ public class RobotContainer {
     climberExtendButton
         .whileHeld(
             new RunClimberToPositionCommand(climber, ClimberConstants.CLIMBER_EXTENDED_POSITION));
-   
+
   }
 
   // A simple auto routine.
