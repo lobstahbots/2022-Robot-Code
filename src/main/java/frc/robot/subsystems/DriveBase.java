@@ -3,6 +3,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -35,9 +37,18 @@ public class DriveBase extends SubsystemBase {
    */
   public DriveBase(int leftFrontId, int leftBackId, int rightFrontId, int rightBackId) {
     leftFrontMotor = new WPI_TalonFX(leftFrontId);
+    leftFrontMotor.setInverted(TalonFXInvertType.Clockwise);
+    leftFrontMotor.set(TalonFXControlMode.PercentOutput, 0);
     leftBackMotor = new WPI_TalonFX(leftBackId);
+    leftBackMotor.setInverted(TalonFXInvertType.Clockwise);
+    leftBackMotor.set(TalonFXControlMode.PercentOutput, 0);
+
     rightFrontMotor = new WPI_TalonFX(rightFrontId);
+    rightFrontMotor.setInverted(TalonFXInvertType.CounterClockwise);
+    rightFrontMotor.set(TalonFXControlMode.PercentOutput, 0);
     rightBackMotor = new WPI_TalonFX(rightBackId);
+    rightBackMotor.setInverted(TalonFXInvertType.CounterClockwise);
+    rightBackMotor.set(TalonFXControlMode.PercentOutput, 0);
 
     leftFrontMotor.configSupplyCurrentLimit(
         new SupplyCurrentLimitConfiguration(true, DriveConstants.CURRENT_LIMIT,
@@ -56,7 +67,8 @@ public class DriveBase extends SubsystemBase {
             DriveConstants.TRIGGER_THRESHOLD,
             DriveConstants.TRIGGER_THRESHOLD_TIME));
 
-    setBrakingMode(NeutralMode.Brake);
+
+    setBrakingMode(NeutralMode.Coast);
 
     differentialDrive =
         new DifferentialDrive(

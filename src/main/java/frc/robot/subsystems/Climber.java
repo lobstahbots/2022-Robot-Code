@@ -4,6 +4,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -24,7 +25,9 @@ public class Climber extends SubsystemBase {
    */
   public Climber(int leftMotorID, int rightMotorID) {
     leftClimberMotor = new WPI_TalonFX(leftMotorID);
+    leftClimberMotor.setInverted(TalonFXInvertType.Clockwise);
     rightClimberMotor = new WPI_TalonFX(rightMotorID);
+    rightClimberMotor.setInverted(TalonFXInvertType.Clockwise);
     leftClimberMotor.configSupplyCurrentLimit(
         new SupplyCurrentLimitConfiguration(true, ClimberConstants.CURRENT_LIMIT,
             ClimberConstants.TRIGGER_THRESHOLD,
