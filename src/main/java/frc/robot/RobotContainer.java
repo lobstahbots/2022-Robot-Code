@@ -28,6 +28,7 @@ import frc.robot.Constants.TowerConstants;
 import frc.robot.Constants.TowerConstants.TowerMotorCANIDs;
 import frc.robot.commands.auton.SimpleAutonCommand;
 import frc.robot.commands.climber.RunClimberCommand;
+import frc.robot.commands.climber.RunOneClimberCommand;
 import frc.robot.commands.drive.StopDriveCommand;
 import frc.robot.commands.drive.TankDriveCommand;
 import frc.robot.commands.intake.ExtendIntakeCommand;
@@ -81,6 +82,10 @@ public class RobotContainer {
   private final JoystickButton towerButton = operatorJoystick.button(OperatorButtons.TOWER);
   private final JoystickButton climberUpButton = operatorJoystick.button(OperatorButtons.CLIMBER_UP);
   private final JoystickButton climberDownButton = operatorJoystick.button(OperatorButtons.CLIMBER_DOWN);
+  private final JoystickButton leftClimberUpButton = operatorJoystick.button(OperatorButtons.LEFT_CLIMBER_UP);
+  private final JoystickButton leftClimberDownButton = operatorJoystick.button(OperatorButtons.LEFT_CLIMBER_DOWN);
+  private final JoystickButton rightClimberUpButton = operatorJoystick.button(OperatorButtons.RIGHT_CLIMBER_UP);
+  private final JoystickButton rightClimberDownButton = operatorJoystick.button(OperatorButtons.RIGHT_CLIMBER_DOWN);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -100,6 +105,10 @@ public class RobotContainer {
 
     climberUpButton.whileHeld(new RunClimberCommand(climber, ClimberConstants.SPEED));
     climberDownButton.whileHeld(new RunClimberCommand(climber, -ClimberConstants.SPEED));
+    leftClimberUpButton.whileHeld(new RunOneClimberCommand(climber, ClimberConstants.SPEED, 0));
+    leftClimberDownButton.whileHeld(new RunOneClimberCommand(climber, -ClimberConstants.SPEED, 0));
+    rightClimberUpButton.whileHeld(new RunOneClimberCommand(climber, ClimberConstants.SPEED, 1));
+    rightClimberDownButton.whileHeld(new RunOneClimberCommand(climber, -ClimberConstants.SPEED, 1));
 
     intakeButton.whileHeld(new SequentialCommandGroup(
         new ExtendIntakeCommand(intake),

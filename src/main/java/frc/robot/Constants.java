@@ -51,6 +51,14 @@ public final class Constants {
 
       public static final int CLIMBER_UP = 4; // WEEK0
       public static final int CLIMBER_DOWN = 1; // WEEK0
+
+      public static final int LEFT_CLIMBER_UP = 0;
+
+      public static final int LEFT_CLIMBER_DOWN = 0;
+
+      public static final int RIGHT_CLIMBER_UP = 0;
+
+      public static final int RIGHT_CLIMBER_DOWN = 0;
     }
   }
 
