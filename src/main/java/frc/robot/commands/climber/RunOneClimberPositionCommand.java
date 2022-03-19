@@ -13,32 +13,32 @@ import frc.robot.subsystems.Climber;
 /**
  * Runs the {@link Climber}.
  */
-public class RunOneClimberCommand extends CommandBase {
+public class RunOneClimberPositionCommand extends CommandBase {
   private final Climber climber;
-  private final Supplier<Double> speedSupplier;
+  private final Supplier<Double> positionSupplier;
   private final int leftOrRight;
 
   /**
    * Runs the {@link Climber} at the given speed.
    *
    * @param climber The {@link Climber} to run
-   * @param speed The speed to run at
+   * @param position The position to go to
    * @param leftOrRight 0 controls left motor, 1 controls right
    */
-  public RunOneClimberCommand(Climber climber, double speed, int leftOrRight) {
-    this(climber, () -> speed, leftOrRight);
+  public RunOneClimberPositionCommand(Climber climber, double position, int leftOrRight) {
+    this(climber, () -> position, leftOrRight);
   }
 
   /**
    * Runs the {@link Climber} at the speed given by the supplier.
    *
    * @param climber The {@link Climber} to run
-   * @param speedSupplier Supplier for the speed to run at
+   * @param positionSupplier Supplier for the position to go to
    * @param leftOrRight 0 controls left motor, 1 controls right
    */
-  public RunOneClimberCommand(Climber climber, Supplier<Double> speedSupplier, int leftOrRight) {
+  public RunOneClimberPositionCommand(Climber climber, Supplier<Double> positionSupplier, int leftOrRight) {
     this.climber = climber;
-    this.speedSupplier = speedSupplier;
+    this.positionSupplier = positionSupplier;
     this.leftOrRight = leftOrRight;
     addRequirements(this.climber);
   }
@@ -46,9 +46,9 @@ public class RunOneClimberCommand extends CommandBase {
   @Override
   public void execute() {
     if (leftOrRight == 0) {
-      climber.setLeftSpeed(speedSupplier.get());
+      climber.setLeftSpeed(positionSupplier.get());
     } else if (leftOrRight == 1) {
-      climber.setRightSpeed(speedSupplier.get());
+      climber.setRightSpeed(positionSupplier.get());
     }
   }
 
