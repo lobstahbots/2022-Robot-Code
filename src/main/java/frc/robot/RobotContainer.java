@@ -13,18 +13,18 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.AutonConstants;
 import frc.robot.Constants.ClimberConstants;
-import frc.robot.Constants.DriveConstants;
-import frc.robot.Constants.IOConstants;
-import frc.robot.Constants.IntakeConstants;
-import frc.robot.Constants.OuttakeConstants;
-import frc.robot.Constants.TowerConstants;
 import frc.robot.Constants.ClimberConstants.ClimberMotorCANIDs;
+import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.DriveConstants.DriveMotorCANIDs;
+import frc.robot.Constants.IOConstants;
 import frc.robot.Constants.IOConstants.DriverAxes;
 import frc.robot.Constants.IOConstants.DriverButtons;
 import frc.robot.Constants.IOConstants.OperatorButtons;
+import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.IntakeConstants.IntakeSolenoidChannels;
+import frc.robot.Constants.OuttakeConstants;
 import frc.robot.Constants.OuttakeConstants.OuttakeMotorCANIDs;
+import frc.robot.Constants.TowerConstants;
 import frc.robot.Constants.TowerConstants.TowerMotorCANIDs;
 import frc.robot.commands.auton.SimpleAutonCommand;
 import frc.robot.commands.climber.RunClimberCommand;
@@ -73,7 +73,8 @@ public class RobotContainer {
   private final OverclockedController driverJoystick = new OverclockedController(IOConstants.DRIVER_JOYSTICK_INDEX);
   private final OverclockedController operatorJoystick = new OverclockedController(IOConstants.OPERATOR_JOYSTICK_INDEX);
 
-  private final JoystickButton slowdownButton = driverJoystick.button(DriverButtons.SLOWDOWN);
+  private final JoystickButton slowdownButton1 = driverJoystick.button(DriverButtons.SLOWDOWN1);
+  private final JoystickButton slowdownButton2 = driverJoystick.button(DriverButtons.SLOWDOWN2);
 
   private final JoystickButton intakeButton = operatorJoystick.button(OperatorButtons.INTAKE);
   private final JoystickButton outtakeButton = operatorJoystick.button(OperatorButtons.OUTTAKE);
@@ -104,10 +105,16 @@ public class RobotContainer {
         new ExtendIntakeCommand(intake),
         new SpinIntakeCommand(intake, IntakeConstants.SPEED)));
 
-    slowdownButton.whileHeld(new TankDriveCommand(
+    slowdownButton1.whileHeld(new TankDriveCommand(
         driveBase,
-        () -> DriveConstants.SLOWDOWN_PERCENT * driverJoystick.getRawAxis(DriverAxes.LEFT),
-        () -> DriveConstants.SLOWDOWN_PERCENT * driverJoystick.getRawAxis(DriverAxes.RIGHT)));
+        () -> DriveConstants.SLOWDOWN_PERCENT1 * driverJoystick.getRawAxis(DriverAxes.LEFT),
+        () -> DriveConstants.SLOWDOWN_PERCENT1 * driverJoystick.getRawAxis(DriverAxes.RIGHT)));
+
+    slowdownButton2.whileHeld(new TankDriveCommand(
+        driveBase,
+        () -> DriveConstants.SLOWDOWN_PERCENT2 * driverJoystick.getRawAxis(DriverAxes.LEFT),
+        () -> DriveConstants.SLOWDOWN_PERCENT2 * driverJoystick.getRawAxis(DriverAxes.RIGHT)));
+
   }
 
   // A simple auto routine.
@@ -148,9 +155,9 @@ public class RobotContainer {
   }
 
   /**
-   * Robot.java should run this method when teleop starts. This method should be used to set the
-   * default commands for subsystems while in teleop. If you set a default here, set a corresponding
-   * auton default in setAutonDefaultCommands().
+   * Robot.java should run this method when teleop starts. This method should be used to set the default commands for
+   * subsystems while in teleop. If you set a default here, set a corresponding auton default in
+   * setAutonDefaultCommands().
    */
   public void setTeleopDefaultCommands() {
     driveBase.setDefaultCommand(
@@ -161,9 +168,9 @@ public class RobotContainer {
   }
 
   /**
-   * Robot.java should run this method when auton starts. This method should be used to set the
-   * default commands for subsystems while in auton. If you set a default here, set a corresponding
-   * teleop default in setTeleopDefaultCommands().
+   * Robot.java should run this method when auton starts. This method should be used to set the default commands for
+   * subsystems while in auton. If you set a default here, set a corresponding teleop default in
+   * setTeleopDefaultCommands().
    */
   public void setAutonDefaultCommands() {
     driveBase.setDefaultCommand(new StopDriveCommand(driveBase));

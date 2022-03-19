@@ -31,7 +31,8 @@ public final class Constants {
     public static final int DRIVER_JOYSTICK_INDEX = 0;
 
     public static final class DriverButtons {
-      public static final int SLOWDOWN = 1; // PLACEHOLDER
+      public static final int SLOWDOWN1 = 1; // PLACEHOLDER
+      public static final int SLOWDOWN2 = 2; // PLACEHOLDER
     }
 
     public static final class DriverAxes {
@@ -57,7 +58,8 @@ public final class Constants {
    * Stores constants related to the DriveBase.
    */
   public static final class DriveConstants {
-    public static final double SLOWDOWN_PERCENT = 0.5;
+    public static final double SLOWDOWN_PERCENT1 = 0.8;
+    public static final double SLOWDOWN_PERCENT2 = 0.25;
 
     public static final class DriveMotorCANIDs {
       public static final int LEFT_FRONT = 54; // WEEK0
