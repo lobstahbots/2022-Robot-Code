@@ -31,13 +31,13 @@ public final class Constants {
     public static final int DRIVER_JOYSTICK_INDEX = 0;
 
     public static final class DriverButtons {
-      public static final int SLOWDOWN1 = 5; // PLACEHOLDER
-      public static final int SLOWDOWN2 = 6; // PLACEHOLDER
+      public static final int SLOWDOWN1 = 6; // PLACEHOLDER
+      public static final int SLOWDOWN2 = 5; // PLACEHOLDER
     }
 
     public static final class DriverAxes {
       public static final int LEFT = 1; // PLACEHOLDER
-      public static final int RIGHT = 3; // PLACEHOLDER
+      public static final int RIGHT = 5; // PLACEHOLDER
     }
 
     public static final int OPERATOR_JOYSTICK_INDEX = 1;
@@ -45,9 +45,9 @@ public final class Constants {
     public static final class OperatorButtons {
       public static final int INTAKE = 3; // PLACEHOLDER
 
-      public static final int OUTTAKE = 2; // WEEK0
+      public static final int OUTTAKE = 1; // WEEK0
 
-      public static final int TOWER = 1; // WEEK0
+      public static final int TOWER = 2; // WEEK0
 
       public static final int CLIMBER_UP = 6; // WEEK0
       public static final int CLIMBER_DOWN = 5; // WEEK0
@@ -66,8 +66,8 @@ public final class Constants {
    * Stores constants related to the DriveBase.
    */
   public static final class DriveConstants {
-    public static final double SLOWDOWN_PERCENT1 = 0.8;
-    public static final double SLOWDOWN_PERCENT2 = 0.25;
+    public static final double SLOWDOWN_PERCENT1 = 0.75;
+    public static final double SLOWDOWN_PERCENT2 = 0.5;
 
     public static final class DriveMotorCANIDs {
       public static final int LEFT_FRONT = 42; // WEEK0

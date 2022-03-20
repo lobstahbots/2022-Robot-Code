@@ -38,17 +38,13 @@ public class DriveBase extends SubsystemBase {
   public DriveBase(int leftFrontId, int leftBackId, int rightFrontId, int rightBackId) {
     leftFrontMotor = new WPI_TalonFX(leftFrontId);
     leftFrontMotor.setInverted(TalonFXInvertType.Clockwise);
-    leftFrontMotor.set(TalonFXControlMode.PercentOutput, 0);
     leftBackMotor = new WPI_TalonFX(leftBackId);
     leftBackMotor.setInverted(TalonFXInvertType.Clockwise);
-    leftBackMotor.set(TalonFXControlMode.PercentOutput, 0);
 
     rightFrontMotor = new WPI_TalonFX(rightFrontId);
     rightFrontMotor.setInverted(TalonFXInvertType.CounterClockwise);
-    rightFrontMotor.set(TalonFXControlMode.PercentOutput, 0);
     rightBackMotor = new WPI_TalonFX(rightBackId);
     rightBackMotor.setInverted(TalonFXInvertType.CounterClockwise);
-    rightBackMotor.set(TalonFXControlMode.PercentOutput, 0);
 
     leftFrontMotor.configSupplyCurrentLimit(
         new SupplyCurrentLimitConfiguration(true, DriveConstants.CURRENT_LIMIT,
