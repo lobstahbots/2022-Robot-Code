@@ -19,9 +19,9 @@ public final class Constants {
    * Stores constants related to autonomous routines.
    */
   public static final class AutonConstants {
-    public static final double SIMPLE_AUTON_SPEED = 0.6; // WEEK0
-    public static final double SIMPLE_AUTON_RUNTIME = 5.0; // WEEK0
-    public static final double MEDIUM_AUTON_OUTTAKE_RUNTIME = 2.0; // PLACEHOLDER
+    public static final double SIMPLE_AUTON_SPEED = 0.7; // WEEK0
+    public static final double SIMPLE_AUTON_RUNTIME = 3.0; // WEEK0
+    public static final double MEDIUM_AUTON_OUTTAKE_RUNTIME = 3.0; // PLACEHOLDER
   }
 
   /**
@@ -107,7 +107,7 @@ public final class Constants {
    * Stores constants related to the Outtake.
    */
   public static final class OuttakeConstants {
-    public static final double SPEED = 0.3; // PLACEHOLDER
+    public static final double SPEED = 0.4; // PLACEHOLDER
 
     public static final class OuttakeMotorCANIDs {
       public static final int TOP = 62; // PLACEHOLDER
