@@ -30,7 +30,7 @@ public class RunOneClimberPositionCommand extends CommandBase {
   }
 
   /**
-   * Runs the {@link Climber} at the speed given by the supplier.
+   * Runs the {@link Climber} at the position given by the supplier.
    *
    * @param climber The {@link Climber} to run
    * @param positionSupplier Supplier for the position to go to
@@ -46,9 +46,9 @@ public class RunOneClimberPositionCommand extends CommandBase {
   @Override
   public void execute() {
     if (leftOrRight == 0) {
-      climber.setLeftSpeed(positionSupplier.get());
+      climber.setLeftPosition(positionSupplier.get());
     } else if (leftOrRight == 1) {
-      climber.setRightSpeed(positionSupplier.get());
+      climber.setRightPosition(positionSupplier.get());
     }
   }
 
