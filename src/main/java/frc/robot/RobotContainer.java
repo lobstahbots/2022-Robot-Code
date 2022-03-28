@@ -7,7 +7,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -61,11 +60,11 @@ public class RobotContainer {
   private final Outtake outtake = new Outtake(
       OuttakeMotorCANIDs.TOP,
       OuttakeMotorCANIDs.BOTTOM);
-  private final Tower tower = new Tower(
-      TowerMotorCANIDs.TOP_LEFT,
-      TowerMotorCANIDs.BOTTOM_LEFT,
-      TowerMotorCANIDs.TOP_RIGHT,
-      TowerMotorCANIDs.BOTTOM_RIGHT);
+  // private final Tower tower = new Tower(
+  // TowerMotorCANIDs.TOP_LEFT,
+  // TowerMotorCANIDs.BOTTOM_LEFT,
+  // TowerMotorCANIDs.TOP_RIGHT,
+  // TowerMotorCANIDs.BOTTOM_RIGHT);
   private final Climber climber = new Climber(
       ClimberMotorCANIDs.LEFT,
       ClimberMotorCANIDs.RIGHT);
@@ -76,15 +75,11 @@ public class RobotContainer {
   private final JoystickButton slowdownButton1 = driverJoystick.button(DriverButtons.SLOWDOWN1);
   private final JoystickButton slowdownButton2 = driverJoystick.button(DriverButtons.SLOWDOWN2);
 
-  private final JoystickButton intakeButton = operatorJoystick.button(OperatorButtons.INTAKE);
+  // private final JoystickButton intakeButton = operatorJoystick.button(OperatorButtons.INTAKE);
   private final JoystickButton outtakeButton = operatorJoystick.button(OperatorButtons.OUTTAKE);
-  private final JoystickButton towerButton = operatorJoystick.button(OperatorButtons.TOWER);
+  // private final JoystickButton towerButton = operatorJoystick.button(OperatorButtons.TOWER);
   private final JoystickButton climberUpButton = operatorJoystick.button(OperatorButtons.CLIMBER_UP);
   private final JoystickButton climberDownButton = operatorJoystick.button(OperatorButtons.CLIMBER_DOWN);
-  // private final JoystickButton leftClimberUpButton = operatorJoystick.button(OperatorButtons.LEFT_CLIMBER_UP);
-  // private final JoystickButton leftClimberDownButton = operatorJoystick.button(OperatorButtons.LEFT_CLIMBER_DOWN);
-  // private final JoystickButton rightClimberUpButton = operatorJoystick.button(OperatorButtons.RIGHT_CLIMBER_UP);
-  // private final JoystickButton rightClimberDownButton = operatorJoystick.button(OperatorButtons.RIGHT_CLIMBER_DOWN);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -100,16 +95,10 @@ public class RobotContainer {
   private void configureButtonBindings() {
     outtakeButton.whileHeld(new RunOuttakeCommand(outtake, -OuttakeConstants.SPEED));
 
-    towerButton.whileHeld(new RunTowerCommand(tower, -TowerConstants.SPEED));
+    // towerButton.whileHeld(new RunTowerCommand(tower, -TowerConstants.SPEED));
 
     climberUpButton.whileHeld(new RunClimberCommand(climber, -ClimberConstants.SPEED));
     climberDownButton.whileHeld(new RunClimberCommand(climber, ClimberConstants.SPEED));
-    // leftClimberUpButton.whileHeld(new RunOneClimberCommand(climber, ClimberConstants.SPEED, 0));
-    // leftClimberDownButton.whileHeld(new RunOneClimberCommand(climber, -ClimberConstants.SPEED, 0));
-    // rightClimberUpButton.whileHeld(new RunOneClimberCommand(climber, ClimberConstants.SPEED, 1));
-    // rightClimberDownButton.whileHeld(new RunOneClimberCommand(climber, -ClimberConstants.SPEED, 1));
-
-
     /*
      * intakeButton.whileHeld(new SequentialCommandGroup( new ExtendIntakeCommand(intake), new SpinIntakeCommand(intake,
      * IntakeConstants.SPEED)));
