@@ -34,11 +34,15 @@ public class Outtake extends SubsystemBase {
    */
   public Outtake(int outtakeId, int outtakeId2, MotorType motorType) {
     outtakeMotor = new CANSparkMax(outtakeId, motorType);
+    outtakeMotor.restoreFactoryDefaults();
     outtakeMotor.setSmartCurrentLimit(OuttakeConstants.CURRENT_LIMIT);
-    outtakeMotor.setIdleMode(IdleMode.kBrake);
+    outtakeMotor.setIdleMode(IdleMode.kCoast);
+    outtakeMotor.burnFlash();
     outtakeMotor2 = new CANSparkMax(outtakeId2, motorType);
+    outtakeMotor2.restoreFactoryDefaults();
     outtakeMotor2.setSmartCurrentLimit(OuttakeConstants.CURRENT_LIMIT);
-    outtakeMotor2.setIdleMode(IdleMode.kBrake);
+    outtakeMotor2.setIdleMode(IdleMode.kCoast);
+    outtakeMotor2.burnFlash();
     CommandScheduler.getInstance().registerSubsystem(this);
   }
 

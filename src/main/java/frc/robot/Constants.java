@@ -69,6 +69,8 @@ public final class Constants {
     public static final double SLOWDOWN_PERCENT1 = 0.75;
     public static final double SLOWDOWN_PERCENT2 = 0.5;
 
+    public static final double ACCELERATION_RATE_LIMIT = 1.6;
+
     public static final class DriveMotorCANIDs {
       public static final int LEFT_FRONT = 42; // WEEK0
       public static final int LEFT_BACK = 41; // WEEK0

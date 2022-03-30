@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClimberConstants;
@@ -38,6 +39,9 @@ public class Climber extends SubsystemBase {
             ClimberConstants.TRIGGER_THRESHOLD_TIME));
     leftClimberMotor.setNeutralMode(NeutralMode.Brake);
     rightClimberMotor.setNeutralMode(NeutralMode.Brake);
+
+    leftClimberMotor.setSelectedSensorPosition(0);
+    rightClimberMotor.setSelectedSensorPosition(0);
     CommandScheduler.getInstance().registerSubsystem(this);
   }
 
@@ -85,6 +89,12 @@ public class Climber extends SubsystemBase {
    */
   public void setRightPosition(double position) {
     rightClimberMotor.set(ControlMode.Position, position);
+  }
+
+  @Override
+  public void periodic() {
+    SmartDashboard.putNumber("Left Climber Motor Position", leftClimberMotor.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Right Climber Motor Position", rightClimberMotor.getSelectedSensorPosition());
   }
 
 }
