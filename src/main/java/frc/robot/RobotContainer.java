@@ -116,14 +116,14 @@ public class RobotContainer {
 
   }
 
-  // A simple auto routine.
+  // An auton routine that just drives.
   private final Command driveAuton =
       new SimpleAutonCommand(
           driveBase,
           AutonConstants.SIMPLE_AUTON_SPEED,
           AutonConstants.SIMPLE_AUTON_RUNTIME);
 
-  // A medium auto routine.
+  // An auton routine that drives and shoots.
   private final Command driveShootAuton =
       new SequentialCommandGroup(
           new ParallelDeadlineGroup(
@@ -134,11 +134,13 @@ public class RobotContainer {
               AutonConstants.SIMPLE_AUTON_SPEED,
               AutonConstants.SIMPLE_AUTON_RUNTIME));
 
+  // An auton routine that just shoots.
   private final Command shootAuton =
       new ParallelDeadlineGroup(
           new WaitCommand(AutonConstants.MEDIUM_AUTON_OUTTAKE_RUNTIME),
           new RunOuttakeCommand(outtake, -OuttakeConstants.SPEED));
 
+  // An auton routine that does nothing.
   private final Command doNothingAuton = new WaitCommand(AutonConstants.SIMPLE_AUTON_RUNTIME);
 
 
