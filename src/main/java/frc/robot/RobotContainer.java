@@ -117,14 +117,14 @@ public class RobotContainer {
   }
 
   // A simple auto routine.
-  private final Command simpleAuton =
+  private final Command driveAuton =
       new SimpleAutonCommand(
           driveBase,
           AutonConstants.SIMPLE_AUTON_SPEED,
           AutonConstants.SIMPLE_AUTON_RUNTIME);
 
   // A medium auto routine.
-  private final Command mediumAuton =
+  private final Command driveShootAuton =
       new SequentialCommandGroup(
           new ParallelDeadlineGroup(
               new WaitCommand(AutonConstants.MEDIUM_AUTON_OUTTAKE_RUNTIME),
@@ -134,6 +134,13 @@ public class RobotContainer {
               AutonConstants.SIMPLE_AUTON_SPEED,
               AutonConstants.SIMPLE_AUTON_RUNTIME));
 
+  private final Command shootAuton =
+      new ParallelDeadlineGroup(
+          new WaitCommand(AutonConstants.MEDIUM_AUTON_OUTTAKE_RUNTIME),
+          new RunOuttakeCommand(outtake, -OuttakeConstants.SPEED));
+
+  private final Command doNothingAuton = new WaitCommand(AutonConstants.SIMPLE_AUTON_RUNTIME);
+
 
   private final SendableChooser<Command> autonChooser = new SendableChooser<>();
 
@@ -141,8 +148,10 @@ public class RobotContainer {
    * Use this method to run tasks that configure sendables and other smartdashboard items.
    */
   private void configureSmartDash() {
-    autonChooser.setDefaultOption("Simple Auton", simpleAuton);
-    autonChooser.addOption("Medium Auton", mediumAuton);
+    autonChooser.setDefaultOption("Drive Auton", driveAuton);
+    autonChooser.addOption("Shoot Auton", shootAuton);
+    autonChooser.addOption("Drive and Shoot Auton", driveShootAuton);
+    autonChooser.addOption("Do Nothing Auton", doNothingAuton);
 
     SmartDashboard.putData(autonChooser);
   }
