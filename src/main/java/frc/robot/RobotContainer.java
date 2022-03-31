@@ -148,9 +148,9 @@ public class RobotContainer {
    * Use this method to run tasks that configure sendables and other smartdashboard items.
    */
   private void configureSmartDash() {
-    autonChooser.setDefaultOption("Drive Auton", driveAuton);
+    autonChooser.setDefaultOption("Drive And Shoot Auton", driveShootAuton);
     autonChooser.addOption("Shoot Auton", shootAuton);
-    autonChooser.addOption("Drive and Shoot Auton", driveShootAuton);
+    autonChooser.addOption("Drive Auton", driveAuton);
     autonChooser.addOption("Do Nothing Auton", doNothingAuton);
 
     SmartDashboard.putData(autonChooser);
