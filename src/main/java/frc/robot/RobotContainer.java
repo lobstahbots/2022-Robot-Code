@@ -25,6 +25,7 @@ import frc.robot.Constants.OuttakeConstants;
 import frc.robot.Constants.OuttakeConstants.OuttakeMotorCANIDs;
 
 import frc.robot.commands.climber.RunClimberCommand;
+import frc.robot.commands.climber.RunClimberToPositionCommand;
 import frc.robot.commands.drive.StopDriveCommand;
 import frc.robot.commands.drive.StraightDriveCommand;
 import frc.robot.commands.drive.TankDriveCommand;
@@ -65,6 +66,8 @@ public class RobotContainer {
   private final JoystickButton outtakeButton = operatorJoystick.button(OperatorButtons.OUTTAKE);
   private final JoystickButton climberUpButton = operatorJoystick.button(OperatorButtons.CLIMBER_UP);
   private final JoystickButton climberDownButton = operatorJoystick.button(OperatorButtons.CLIMBER_DOWN);
+  private final JoystickButton climberRetractButton = operatorJoystick.button(OperatorButtons.CLIMBER_RETRACT);
+  private final JoystickButton climberExtendButton = operatorJoystick.button(OperatorButtons.CLIMBER_EXTEND);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -82,6 +85,9 @@ public class RobotContainer {
 
     climberUpButton.whileHeld(new RunClimberCommand(climber, -ClimberConstants.SPEED));
     climberDownButton.whileHeld(new RunClimberCommand(climber, ClimberConstants.SPEED));
+
+    climberRetractButton.whileHeld(new RunClimberToPositionCommand(climber, 0));
+    climberExtendButton.whileHeld(new RunClimberToPositionCommand(climber, -170000));
 
     slowdownButton1.whileHeld(new TankDriveCommand(
         driveBase,
@@ -115,6 +121,9 @@ public class RobotContainer {
                   driveBase,
                   AutonConstants.SIMPLE_AUTON_SPEED)));
 
+  private final Command shootAuton = new TimedCommand(AutonConstants.MEDIUM_AUTON_OUTTAKE_RUNTIME,
+      new RunOuttakeCommand(outtake, -OuttakeConstants.SPEED));
+
 
   private final SendableChooser<Command> autonChooser = new SendableChooser<>();
 
@@ -124,6 +133,7 @@ public class RobotContainer {
   private void configureSmartDash() {
     autonChooser.setDefaultOption("Simple Auton", simpleAuton);
     autonChooser.addOption("Medium Auton", mediumAuton);
+    autonChooser.addOption("Shooting Auton", shootAuton);
 
     SmartDashboard.putData(autonChooser);
   }

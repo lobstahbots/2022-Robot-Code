@@ -51,14 +51,8 @@ public final class Constants {
 
       public static final int CLIMBER_UP = 6; // WEEK0
       public static final int CLIMBER_DOWN = 5; // WEEK0
-
-      public static final int LEFT_CLIMBER_UP = 0;
-
-      public static final int LEFT_CLIMBER_DOWN = 0;
-
-      public static final int RIGHT_CLIMBER_UP = 0;
-
-      public static final int RIGHT_CLIMBER_DOWN = 0;
+      public static final int CLIMBER_RETRACT = 11;
+      public static final int CLIMBER_EXTEND = 12;
     }
   }
 
@@ -149,6 +143,21 @@ public final class Constants {
     public static final int CURRENT_LIMIT = 85;
     public static final int TRIGGER_THRESHOLD = 100;
     public static final double TRIGGER_THRESHOLD_TIME = 0.5;
+
+    public static final class ClimberPIDConstants {
+      public static final double kP_LEFT = 0.1;
+      public static final double kP_RIGHT = 0;
+      public static final double kD_LEFT = 0;
+      public static final double kD_RIGHT = 0;
+      public static final double kI_LEFT = 0;
+      public static final double kI_RIGHT = 0;
+
+      public static final int timeoutMs = 0;
+      public static final int kSlotIdx = 0;
+      public static final int CURVE_STRENGTH = 1;
+      public static final int ACCELERATION = 400000;
+      public static final int VELOCITY = 400000;
+    }
   }
 
   /**
