@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.AutonConstants;
 import frc.robot.Constants.ClimberConstants;
@@ -102,7 +102,7 @@ public class RobotContainer {
   }
 
   // A simple auto routine.
-  private final Command simpleAuton =
+  private final Command driveAuton =
       new TimedCommand(
           AutonConstants.SIMPLE_AUTON_RUNTIME,
           new StraightDriveCommand(
@@ -110,7 +110,7 @@ public class RobotContainer {
               AutonConstants.SIMPLE_AUTON_SPEED));
 
   // A medium auto routine.
-  private final Command mediumAuton =
+  private final Command driveShootAuton =
       new SequentialCommandGroup(
           new TimedCommand(
               AutonConstants.MEDIUM_AUTON_OUTTAKE_RUNTIME,
@@ -124,6 +124,8 @@ public class RobotContainer {
   private final Command shootAuton = new TimedCommand(AutonConstants.MEDIUM_AUTON_OUTTAKE_RUNTIME,
       new RunOuttakeCommand(outtake, -OuttakeConstants.SPEED));
 
+  private final Command doNothingAuton = new WaitCommand(AutonConstants.SIMPLE_AUTON_RUNTIME);
+
 
   private final SendableChooser<Command> autonChooser = new SendableChooser<>();
 
@@ -131,9 +133,10 @@ public class RobotContainer {
    * Use this method to run tasks that configure sendables and other smartdashboard items.
    */
   private void configureSmartDash() {
-    autonChooser.setDefaultOption("Simple Auton", simpleAuton);
-    autonChooser.addOption("Medium Auton", mediumAuton);
+    autonChooser.setDefaultOption("Drive And Shoot Auton", driveShootAuton);
+    autonChooser.addOption("Drive Auton", driveAuton);
     autonChooser.addOption("Shooting Auton", shootAuton);
+    autonChooser.addOption("Do Nothing Auton", doNothingAuton);
 
     SmartDashboard.putData(autonChooser);
   }

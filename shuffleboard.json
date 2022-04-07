@@ -21,6 +21,28 @@
               "_source0": "network_table:///SmartDashboard/SendableChooser[0]",
               "_title": "SendableChooser[0]"
             }
+          },
+          "0,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Right Climber Motor Position",
+              "_title": "Right Climber Motor Position"
+            }
+          },
+          "0,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Left Climber Motor Position",
+              "_title": "Left Climber Motor Position"
+            }
           }
         }
       }
@@ -120,6 +142,18 @@
                   "_source0": "network_table:///LiveWindow/Ungrouped/Talon FX [32]",
                   "_title": "Talon FX [32]",
                   "Visuals/Orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Motor Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/MotorControllerGroup[2]",
+                  "_title": "MotorControllerGroup[2]",
+                  "Visuals/Orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Motor Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/MotorControllerGroup[1]",
+                  "_title": "MotorControllerGroup[1]",
+                  "Visuals/Orientation": "HORIZONTAL"
                 }
               ]
             }
@@ -168,9 +202,9 @@
     }
   ],
   "windowGeometry": {
-    "x": 0.0,
-    "y": 0.0,
-    "width": 1920.0,
-    "height": 1050.0
+    "x": -8.0,
+    "y": -8.0,
+    "width": 1936.0,
+    "height": 1066.0
   }
 }

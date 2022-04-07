@@ -63,7 +63,7 @@ public final class Constants {
     public static final double SLOWDOWN_PERCENT1 = 0.75;
     public static final double SLOWDOWN_PERCENT2 = 0.5;
 
-    public static final double ACCELERATION_RATE_LIMIT = 1.6;
+    public static final double ACCELERATION_RATE_LIMIT = 2.1;
 
     public static final class DriveMotorCANIDs {
       public static final int LEFT_FRONT = 42; // WEEK0
@@ -73,8 +73,8 @@ public final class Constants {
     }
 
     public static final int CURRENT_LIMIT = 60;
-    public static final int TRIGGER_THRESHOLD = 60;
-    public static final int TRIGGER_THRESHOLD_TIME = 2;
+    public static final int TRIGGER_THRESHOLD = 80;
+    public static final double TRIGGER_THRESHOLD_TIME = 0.5;
   }
 
   /**
@@ -146,15 +146,15 @@ public final class Constants {
 
     public static final class ClimberPIDConstants {
       public static final double kP_LEFT = 0.1;
-      public static final double kP_RIGHT = 0;
-      public static final double kD_LEFT = 0;
-      public static final double kD_RIGHT = 0;
+      public static final double kP_RIGHT = 0.1;
+      public static final double kD_LEFT = 0.01;
+      public static final double kD_RIGHT = 0.01;
       public static final double kI_LEFT = 0;
       public static final double kI_RIGHT = 0;
 
       public static final int timeoutMs = 0;
       public static final int kSlotIdx = 0;
-      public static final int CURVE_STRENGTH = 1;
+      public static final int CURVE_STRENGTH = 0;
       public static final int ACCELERATION = 400000;
       public static final int VELOCITY = 400000;
     }
