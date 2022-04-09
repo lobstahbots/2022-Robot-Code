@@ -17,7 +17,7 @@ public class StraightDriveCommand extends TankDriveCommand {
    * Drives the driveBase in a (roughly) straight line.
    *
    * @param driveBase The {@link DriveBase} to drive
-   * @param speedSupplier Supplier forspeed
+   * @param speedSupplier Supplier for speed
    */
   public StraightDriveCommand(DriveBase driveBase,
       Supplier<Double> speedSupplier) {
