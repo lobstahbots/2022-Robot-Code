@@ -3,13 +3,14 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
+import overclocked.stl.motorcontrol.OverclockedDifferentialDrive;
 
 /**
  * A subsystem that controls the drive train (aka chassis) on a robot.
@@ -23,7 +24,7 @@ public class DriveBase extends SubsystemBase {
 
   private NeutralMode motorNeutralMode;
 
-  private final DifferentialDrive differentialDrive;
+  private final OverclockedDifferentialDrive differentialDrive;
 
   /**
    * Constructs a DriveBase with a {@link TalonFX} at each of the given CAN IDs.
@@ -35,9 +36,14 @@ public class DriveBase extends SubsystemBase {
    */
   public DriveBase(int leftFrontId, int leftBackId, int rightFrontId, int rightBackId) {
     leftFrontMotor = new WPI_TalonFX(leftFrontId);
+    leftFrontMotor.setInverted(TalonFXInvertType.Clockwise);
     leftBackMotor = new WPI_TalonFX(leftBackId);
+    leftBackMotor.setInverted(TalonFXInvertType.Clockwise);
+
     rightFrontMotor = new WPI_TalonFX(rightFrontId);
+    rightFrontMotor.setInverted(TalonFXInvertType.CounterClockwise);
     rightBackMotor = new WPI_TalonFX(rightBackId);
+    rightBackMotor.setInverted(TalonFXInvertType.CounterClockwise);
 
     leftFrontMotor.configSupplyCurrentLimit(
         new SupplyCurrentLimitConfiguration(true, DriveConstants.CURRENT_LIMIT,
@@ -56,12 +62,14 @@ public class DriveBase extends SubsystemBase {
             DriveConstants.TRIGGER_THRESHOLD,
             DriveConstants.TRIGGER_THRESHOLD_TIME));
 
+
     setBrakingMode(NeutralMode.Brake);
 
     differentialDrive =
-        new DifferentialDrive(
+        new OverclockedDifferentialDrive(
             new MotorControllerGroup(leftFrontMotor, leftBackMotor),
-            new MotorControllerGroup(rightFrontMotor, rightBackMotor));
+            new MotorControllerGroup(rightFrontMotor, rightBackMotor),
+            DriveConstants.ACCELERATION_RATE_LIMIT);
 
     CommandScheduler.getInstance().registerSubsystem(this);
   }
@@ -98,7 +106,7 @@ public class DriveBase extends SubsystemBase {
    * Sets the motor speeds to 0.
    */
   public void stopDrive() {
-    differentialDrive.tankDrive(0, 0);
+    differentialDrive.stopMotor();
   }
 
   /**

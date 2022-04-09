@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 import frc.robot.subsystems.DriveBase;
 
 /**
- * Drives a {@link DriveBase} using arcade drive controls.
+ * Drives a {@link DriveBase} using tank drive controls.
  */
 public class TankDriveCommand extends DriveCommand {
 
