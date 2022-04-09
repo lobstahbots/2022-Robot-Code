@@ -7,10 +7,19 @@ package frc.robot.commands.climber;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
 
+/**
+ * Moves a {@link Climber} to a given position.
+ */
 public class RunClimberToPositionCommand extends CommandBase {
   private final Climber climber;
   private final int position;
 
+  /**
+   * Creates a command that moves a {@link Climber} to a given position.
+   *
+   * @param climber The {@link Climber} to move.
+   * @param position The position to move to.
+   */
   public RunClimberToPositionCommand(Climber climber, int position) {
     this.climber = climber;
     this.position = position;
