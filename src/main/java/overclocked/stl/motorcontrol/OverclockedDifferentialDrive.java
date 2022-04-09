@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 
 /** 
  * An extension of the {@link DifferentialDrive} class that adds slew rate limiting.
- * */
+ */
 public class OverclockedDifferentialDrive extends DifferentialDrive {
   private final DampenedMotorController left;
   private final DampenedMotorController right;
