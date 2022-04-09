@@ -167,10 +167,6 @@ public class RobotContainer {
             driveBase,
             () -> driverJoystick.getRawAxis(DriverAxes.LEFT),
             () -> driverJoystick.getRawAxis(DriverAxes.RIGHT)));
-
-    // climber.setDefaultCommand(new ParallelCommandGroup(
-    // new RunOneClimberCommand(climber, () -> ClimberConstants.SPEED * operatorJoystick.getRawAxis(1), 0),
-    // new RunOneClimberCommand(climber, () -> ClimberConstants.SPEED * operatorJoystick.getRawAxis(5), 1)));
   }
 
   /**
