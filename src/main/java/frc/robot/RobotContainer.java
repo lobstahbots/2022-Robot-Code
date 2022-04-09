@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.AutonConstants;
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.ClimberConstants.ClimberMotorCANIDs;
+import frc.robot.Constants.ClimberConstants.ClimberPositions;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.DriveConstants.DriveMotorCANIDs;
 import frc.robot.Constants.IOConstants;
@@ -86,8 +87,8 @@ public class RobotContainer {
     climberUpButton.whileHeld(new RunClimberCommand(climber, -ClimberConstants.SPEED));
     climberDownButton.whileHeld(new RunClimberCommand(climber, ClimberConstants.SPEED));
 
-    climberRetractButton.whileHeld(new RunClimberToPositionCommand(climber, 0));
-    climberExtendButton.whileHeld(new RunClimberToPositionCommand(climber, -170000));
+    climberRetractButton.whileHeld(new RunClimberToPositionCommand(climber, ClimberPositions.RETRACTED));
+    climberExtendButton.whileHeld(new RunClimberToPositionCommand(climber, ClimberPositions.EXTENDED));
 
     slowdownButton1.whileHeld(new TankDriveCommand(
         driveBase,

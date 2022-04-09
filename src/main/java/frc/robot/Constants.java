@@ -144,6 +144,11 @@ public final class Constants {
     public static final int TRIGGER_THRESHOLD = 100;
     public static final double TRIGGER_THRESHOLD_TIME = 0.5;
 
+    public static final class ClimberPositions {
+      public static final int RETRACTED = 0;
+      public static final int EXTENDED = -170000;
+    }
+
     public static final class ClimberPIDConstants {
       public static final double kP_LEFT = 0.1;
       public static final double kP_RIGHT = 0.1;
