@@ -103,7 +103,7 @@ public final class Constants {
    * Stores constants related to the Outtake.
    */
   public static final class OuttakeConstants {
-    public static final double SPEED = 0.4;
+    public static final double SPEED = -0.4;
 
     public static final class OuttakeMotorCANIDs {
       public static final int TOP = 62;
