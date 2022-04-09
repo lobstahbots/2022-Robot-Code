@@ -129,7 +129,7 @@ public class RobotContainer {
                   driveBase,
                   AutonConstants.SIMPLE_AUTON_SPEED)));
 
-
+// An auto routine that does nothing.
   private final Command doNothingAuton = null;
 
 
