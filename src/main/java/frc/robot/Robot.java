@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.util.net.PortForwarder;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -19,21 +20,22 @@ public class Robot extends TimedRobot {
   private RobotContainer robotContainer;
 
   /**
-   * This function is run when the robot is first started up and should be used for any
-   * initialization code.
+   * This function is run when the robot is first started up and should be used for any initialization code.
    */
   @Override
   public void robotInit() {
     robotContainer = new RobotContainer();
+    PortForwarder.add(5801, "limelight.local", 5801);
+    PortForwarder.add(5800, "limelight.local", 5800);
+    PortForwarder.add(5805, "limelight.local", 5805);
   }
 
   /**
-   * This function is called every robot packet, no matter the mode. Use this for items like
-   * diagnostics that you want ran during disabled, autonomous, teleoperated AND test.
+   * This function is called every robot packet, no matter the mode. Use this for items like diagnostics that you want
+   * ran during disabled, autonomous, teleoperated AND test.
    *
    * <p>
-   * This runs after the mode specific periodic functions, but before LiveWindow and SmartDashboard
-   * integrated updating.
+   * This runs after the mode specific periodic functions, but before LiveWindow and SmartDashboard integrated updating.
    */
   @Override
   public void robotPeriodic() {
