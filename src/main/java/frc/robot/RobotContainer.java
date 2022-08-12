@@ -7,35 +7,20 @@ package frc.robot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.AutonConstants;
-import frc.robot.Constants.ClimberConstants;
-import frc.robot.Constants.ClimberConstants.ClimberMotorCANIDs;
-import frc.robot.Constants.ClimberConstants.ClimberPositions;
+
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.DriveConstants.DriveMotorCANIDs;
 import frc.robot.Constants.IOConstants;
 import frc.robot.Constants.IOConstants.DriverAxes;
 import frc.robot.Constants.IOConstants.DriverButtons;
-import frc.robot.Constants.IOConstants.OperatorButtons;
 
-import frc.robot.Constants.OuttakeConstants;
-import frc.robot.Constants.OuttakeConstants.OuttakeMotorCANIDs;
-
-import frc.robot.commands.climber.RunClimberCommand;
-import frc.robot.commands.climber.RunClimberToPositionCommand;
 import frc.robot.commands.drive.StopDriveCommand;
 import frc.robot.commands.drive.StraightDriveCommand;
 import frc.robot.commands.drive.TankDriveCommand;
 
-import frc.robot.commands.outtake.RunOuttakeCommand;
-
-import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveBase;
-import frc.robot.subsystems.Outtake;
-
 import overclocked.stl.command.TimedCommand;
 import overclocked.stl.io.OverclockedController;
 
@@ -58,16 +43,9 @@ public class RobotContainer {
   // ClimberMotorCANIDs.RIGHT);
 
   private final OverclockedController driverJoystick = new OverclockedController(IOConstants.DRIVER_JOYSTICK_INDEX);
-  private final OverclockedController operatorJoystick = new OverclockedController(IOConstants.OPERATOR_JOYSTICK_INDEX);
 
   private final JoystickButton slowdownButton1 = driverJoystick.button(DriverButtons.SLOWDOWN1);
   private final JoystickButton slowdownButton2 = driverJoystick.button(DriverButtons.SLOWDOWN2);
-
-  private final JoystickButton outtakeButton = operatorJoystick.button(OperatorButtons.OUTTAKE);
-  private final JoystickButton climberUpButton = operatorJoystick.button(OperatorButtons.CLIMBER_UP);
-  private final JoystickButton climberDownButton = operatorJoystick.button(OperatorButtons.CLIMBER_DOWN);
-  private final JoystickButton climberRetractButton = operatorJoystick.button(OperatorButtons.CLIMBER_RETRACT);
-  private final JoystickButton climberExtendButton = operatorJoystick.button(OperatorButtons.CLIMBER_EXTEND);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -81,13 +59,6 @@ public class RobotContainer {
    * Use this method to define your button->command mappings.
    */
   private void configureButtonBindings() {
-    // outtakeButton.whileHeld(new RunOuttakeCommand(outtake, OuttakeConstants.SPEED));
-
-    // climberUpButton.whileHeld(new RunClimberCommand(climber, -ClimberConstants.SPEED));
-    // climberDownButton.whileHeld(new RunClimberCommand(climber, ClimberConstants.SPEED));
-
-    // climberRetractButton.whileHeld(new RunClimberToPositionCommand(climber, ClimberPositions.RETRACTED));
-    // climberExtendButton.whileHeld(new RunClimberToPositionCommand(climber, ClimberPositions.EXTENDED));
 
     slowdownButton1.whileHeld(new TankDriveCommand(
         driveBase,
@@ -109,26 +80,6 @@ public class RobotContainer {
               driveBase,
               AutonConstants.SIMPLE_AUTON_SPEED));
 
-  // A simple auto routine that shoots a ball.
-  // private final Command shootAuton =
-  // new TimedCommand(
-  // AutonConstants.MEDIUM_AUTON_OUTTAKE_RUNTIME,
-  // new RunOuttakeCommand(
-  // outtake,
-  // OuttakeConstants.SPEED));
-
-  // A medium auto routine that drives in a straight line and shoots a ball.
-  // private final Command driveShootAuton =
-  // new SequentialCommandGroup(
-  // new TimedCommand(
-  // AutonConstants.MEDIUM_AUTON_OUTTAKE_RUNTIME,
-  // new RunOuttakeCommand(outtake, -OuttakeConstants.SPEED)),
-  // new TimedCommand(
-  // AutonConstants.SIMPLE_AUTON_RUNTIME,
-  // new StraightDriveCommand(
-  // driveBase,
-  // AutonConstants.SIMPLE_AUTON_SPEED)));
-
   // An auto routine that does nothing.
   private final Command doNothingAuton = null;
 
@@ -139,9 +90,7 @@ public class RobotContainer {
    * Use this method to run tasks that configure sendables and other smartdashboard items.
    */
   private void configureSmartDash() {
-    // autonChooser.setDefaultOption("Drive And Shoot Auton", driveShootAuton);
     autonChooser.addOption("Drive Auton", driveAuton);
-    // autonChooser.addOption("Shooting Auton", shootAuton);
     autonChooser.addOption("Do Nothing Auton", doNothingAuton);
 
     SmartDashboard.putData(autonChooser);
