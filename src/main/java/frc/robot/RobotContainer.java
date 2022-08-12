@@ -50,12 +50,12 @@ public class RobotContainer {
       DriveMotorCANIDs.LEFT_BACK,
       DriveMotorCANIDs.RIGHT_FRONT,
       DriveMotorCANIDs.RIGHT_BACK);
-  private final Outtake outtake = new Outtake(
-      OuttakeMotorCANIDs.TOP,
-      OuttakeMotorCANIDs.BOTTOM);
-  private final Climber climber = new Climber(
-      ClimberMotorCANIDs.LEFT,
-      ClimberMotorCANIDs.RIGHT);
+  // private final Outtake outtake = new Outtake(
+  // OuttakeMotorCANIDs.TOP,
+  // OuttakeMotorCANIDs.BOTTOM);
+  // private final Climber climber = new Climber(
+  // ClimberMotorCANIDs.LEFT,
+  // ClimberMotorCANIDs.RIGHT);
 
   private final OverclockedController driverJoystick = new OverclockedController(IOConstants.DRIVER_JOYSTICK_INDEX);
   private final OverclockedController operatorJoystick = new OverclockedController(IOConstants.OPERATOR_JOYSTICK_INDEX);
@@ -81,13 +81,13 @@ public class RobotContainer {
    * Use this method to define your button->command mappings.
    */
   private void configureButtonBindings() {
-    outtakeButton.whileHeld(new RunOuttakeCommand(outtake, OuttakeConstants.SPEED));
+    // outtakeButton.whileHeld(new RunOuttakeCommand(outtake, OuttakeConstants.SPEED));
 
-    climberUpButton.whileHeld(new RunClimberCommand(climber, -ClimberConstants.SPEED));
-    climberDownButton.whileHeld(new RunClimberCommand(climber, ClimberConstants.SPEED));
+    // climberUpButton.whileHeld(new RunClimberCommand(climber, -ClimberConstants.SPEED));
+    // climberDownButton.whileHeld(new RunClimberCommand(climber, ClimberConstants.SPEED));
 
-    climberRetractButton.whileHeld(new RunClimberToPositionCommand(climber, ClimberPositions.RETRACTED));
-    climberExtendButton.whileHeld(new RunClimberToPositionCommand(climber, ClimberPositions.EXTENDED));
+    // climberRetractButton.whileHeld(new RunClimberToPositionCommand(climber, ClimberPositions.RETRACTED));
+    // climberExtendButton.whileHeld(new RunClimberToPositionCommand(climber, ClimberPositions.EXTENDED));
 
     slowdownButton1.whileHeld(new TankDriveCommand(
         driveBase,
@@ -110,26 +110,26 @@ public class RobotContainer {
               AutonConstants.SIMPLE_AUTON_SPEED));
 
   // A simple auto routine that shoots a ball.
-  private final Command shootAuton =
-      new TimedCommand(
-          AutonConstants.MEDIUM_AUTON_OUTTAKE_RUNTIME,
-          new RunOuttakeCommand(
-              outtake,
-              OuttakeConstants.SPEED));
+  // private final Command shootAuton =
+  // new TimedCommand(
+  // AutonConstants.MEDIUM_AUTON_OUTTAKE_RUNTIME,
+  // new RunOuttakeCommand(
+  // outtake,
+  // OuttakeConstants.SPEED));
 
   // A medium auto routine that drives in a straight line and shoots a ball.
-  private final Command driveShootAuton =
-      new SequentialCommandGroup(
-          new TimedCommand(
-              AutonConstants.MEDIUM_AUTON_OUTTAKE_RUNTIME,
-              new RunOuttakeCommand(outtake, -OuttakeConstants.SPEED)),
-          new TimedCommand(
-              AutonConstants.SIMPLE_AUTON_RUNTIME,
-              new StraightDriveCommand(
-                  driveBase,
-                  AutonConstants.SIMPLE_AUTON_SPEED)));
+  // private final Command driveShootAuton =
+  // new SequentialCommandGroup(
+  // new TimedCommand(
+  // AutonConstants.MEDIUM_AUTON_OUTTAKE_RUNTIME,
+  // new RunOuttakeCommand(outtake, -OuttakeConstants.SPEED)),
+  // new TimedCommand(
+  // AutonConstants.SIMPLE_AUTON_RUNTIME,
+  // new StraightDriveCommand(
+  // driveBase,
+  // AutonConstants.SIMPLE_AUTON_SPEED)));
 
-// An auto routine that does nothing.
+  // An auto routine that does nothing.
   private final Command doNothingAuton = null;
 
 
@@ -139,9 +139,9 @@ public class RobotContainer {
    * Use this method to run tasks that configure sendables and other smartdashboard items.
    */
   private void configureSmartDash() {
-    autonChooser.setDefaultOption("Drive And Shoot Auton", driveShootAuton);
+    // autonChooser.setDefaultOption("Drive And Shoot Auton", driveShootAuton);
     autonChooser.addOption("Drive Auton", driveAuton);
-    autonChooser.addOption("Shooting Auton", shootAuton);
+    // autonChooser.addOption("Shooting Auton", shootAuton);
     autonChooser.addOption("Do Nothing Auton", doNothingAuton);
 
     SmartDashboard.putData(autonChooser);
