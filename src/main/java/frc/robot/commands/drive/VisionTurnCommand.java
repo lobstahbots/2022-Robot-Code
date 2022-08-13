@@ -4,6 +4,7 @@
 
 package frc.robot.commands.drive;
 
+import frc.robot.Constants.LimelightConstants;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Limelight;
 
@@ -23,7 +24,10 @@ public class VisionTurnCommand extends DriveCommand {
   @Override
   public void execute() {
     double error = limelight.getTx();
-
+    double speed = error * LimelightConstants.TURN_Kp;
+    speed = Math.min(speed, LimelightConstants.MAX_TURN_SPEED);
+    speed = Math.max(speed, LimelightConstants.MIN_TURN_SPEED);
+    driveBase.tankDrive(speed, -speed);
   }
 
   // Called once the command ends or is interrupted.
@@ -35,6 +39,7 @@ public class VisionTurnCommand extends DriveCommand {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return Math.abs(limelight.getTx()) < LimelightConstants.TURN_ERROR_THRESHOLD;
+
   }
 }

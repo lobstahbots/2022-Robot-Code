@@ -1,6 +1,7 @@
 
 package frc.robot.commands.drive;
 
+import frc.robot.Constants.LimelightConstants;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Limelight;
 
@@ -18,7 +19,9 @@ public class VisionDriveCommand extends DriveCommand {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    driveBase.tankDrive(LimelightConstants.DRIVE_SPEED, LimelightConstants.DRIVE_SPEED);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -29,6 +32,6 @@ public class VisionDriveCommand extends DriveCommand {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return limelight.getTa() < LimelightConstants.AREA_THRESHOLD;
   }
 }

@@ -41,6 +41,13 @@ public final class Constants {
     }
   }
 
+  public static final class LimelightConstants {
+    public static final double TURN_Kp = 0.1;
+    public static final double TURN_ERROR_THRESHOLD = 1;
+    public static final double DRIVE_SPEED = 0.7;
+    public static final double AREA_THRESHOLD =
+  }
+
   /**
    * Stores constants related to the DriveBase.
    */
