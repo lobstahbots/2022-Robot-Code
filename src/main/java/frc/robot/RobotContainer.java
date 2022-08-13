@@ -19,8 +19,9 @@ import frc.robot.Constants.IOConstants.DriverButtons;
 import frc.robot.commands.drive.StopDriveCommand;
 import frc.robot.commands.drive.StraightDriveCommand;
 import frc.robot.commands.drive.TankDriveCommand;
-
+import frc.robot.commands.drive.VisionDriveCommand;
 import frc.robot.subsystems.DriveBase;
+import frc.robot.subsystems.Limelight;
 import overclocked.stl.command.TimedCommand;
 import overclocked.stl.io.OverclockedController;
 
@@ -35,6 +36,9 @@ public class RobotContainer {
       DriveMotorCANIDs.LEFT_BACK,
       DriveMotorCANIDs.RIGHT_FRONT,
       DriveMotorCANIDs.RIGHT_BACK);
+
+  private final Limelight limelight = new Limelight();
+
   // private final Outtake outtake = new Outtake(
   // OuttakeMotorCANIDs.TOP,
   // OuttakeMotorCANIDs.BOTTOM);
@@ -84,6 +88,8 @@ public class RobotContainer {
   // An auto routine that does nothing.
   private final Command doNothingAuton = null;
 
+  private final Command visionTrackAuton = new VisionDriveCommand(driveBase, limelight);
+
 
   private final SendableChooser<Command> autonChooser = new SendableChooser<>();
 
@@ -93,6 +99,7 @@ public class RobotContainer {
   private void configureSmartDash() {
     autonChooser.addOption("Drive Auton", driveAuton);
     autonChooser.addOption("Do Nothing Auton", doNothingAuton);
+    autonChooser.addOption("Vision Track Auton", visionTrackAuton);
 
     SmartDashboard.putData(autonChooser);
   }
