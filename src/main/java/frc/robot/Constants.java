@@ -51,7 +51,7 @@ public final class Constants {
     public static final double MIN_DRIVE_SPEED = 0.15;
     public static final double DESIRED_HEIGHT = 37.5;
     public static final double MIN_EXPECTED_HEIGHT = 16;
-    public static final double HEIGHT_DEADBAND = 1;
+    public static final double HEIGHT_DEADBAND = 1.5;
 
   }
 
