@@ -31,11 +31,11 @@ public class Limelight extends SubsystemBase {
     return ty.getDouble(0.0);
   }
 
-  public double getTv() {
-    return tv.getDouble(0.0);
+  public boolean hasTarget() {
+    return tv.getDouble(0.0) == 1;
   }
 
-  public double getTvert() {
+  public double getTargetHeight() {
     return tvert.getDouble(0.0);
   }
 

@@ -42,13 +42,17 @@ public final class Constants {
   }
 
   public static final class LimelightConstants {
-    public static final double TURN_Kp = 0.01;
-    public static final double MIN_TURN_SPEED = 0.1;
+    public static final double MIN_TURN_SPEED = 0.06;
     public static final double MAX_TURN_SPEED = 0.35;
-    public static final double X_ERROR_DEADBAND = 2;
+    public static final double X_ERROR_DEADBAND = 1;
     public static final double MAX_EXPECTED_X_ERROR = 20;
-    public static final double DRIVE_SPEED = 0.2;
-    public static final double TVERT_THRESHOLD = 35;
+
+    public static final double MAX_DRIVE_SPEED = 0.4;
+    public static final double MIN_DRIVE_SPEED = 0.15;
+    public static final double DESIRED_HEIGHT = 37.5;
+    public static final double MIN_EXPECTED_HEIGHT = 16;
+    public static final double HEIGHT_DEADBAND = 1;
+
   }
 
   /**
@@ -61,10 +65,10 @@ public final class Constants {
     public static final double ACCELERATION_RATE_LIMIT = 2.1;
 
     public static final class DriveMotorCANIDs {
-      public static final int LEFT_FRONT = 44;
-      public static final int LEFT_BACK = 43;
-      public static final int RIGHT_FRONT = 42;
-      public static final int RIGHT_BACK = 41;
+      public static final int RIGHT_FRONT = 44;
+      public static final int RIGHT_BACK = 43;
+      public static final int LEFT_FRONT = 42;
+      public static final int LEFT_BACK = 41;
     }
 
     public static final int CURRENT_LIMIT = 60;
