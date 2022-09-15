@@ -61,10 +61,10 @@ public final class Constants {
     public static final double ACCELERATION_RATE_LIMIT = 2.1;
 
     public static final class DriveMotorCANIDs {
-      public static final int LEFT_FRONT = 42;
-      public static final int LEFT_BACK = 41;
-      public static final int RIGHT_FRONT = 44;
-      public static final int RIGHT_BACK = 43;
+      public static final int LEFT_FRONT = 44;
+      public static final int LEFT_BACK = 43;
+      public static final int RIGHT_FRONT = 42;
+      public static final int RIGHT_BACK = 41;
     }
 
     public static final int CURRENT_LIMIT = 60;

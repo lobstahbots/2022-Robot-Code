@@ -4,6 +4,7 @@
 
 package frc.robot.commands.drive;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Limelight;
@@ -26,24 +27,31 @@ public class VisionMotionControllerCommand extends CommandBase {
   public void initialize() {
     driveCommand = new VisionDriveCommand(driveBase, limelight);
     turnCommand = new VisionTurnCommand(driveBase, limelight);
+    driveBase.setBrakingMode(NeutralMode.Coast);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (!turnCommand.isFinished()) {
-      if (driveCommand.isScheduled()) {
-        driveCommand.cancel();
-      }
-
-      if (!turnCommand.isScheduled()) {
-        turnCommand.schedule();
-      }
+    if (limelight.getTv() != 1) {
+      driveCommand.cancel();
+      turnCommand.cancel();
     } else {
-      if (!driveCommand.isScheduled()) {
-        driveCommand.schedule();
+      if (!turnCommand.isFinished()) {
+        if (driveCommand.isScheduled()) {
+          driveCommand.cancel();
+        }
+
+        if (!turnCommand.isScheduled()) {
+          turnCommand.schedule();
+        }
+      } else {
+        if (!driveCommand.isScheduled()) {
+          driveCommand.schedule();
+        }
       }
     }
+
   }
 
   // Called once the command ends or is interrupted.
@@ -57,6 +65,6 @@ public class VisionMotionControllerCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return turnCommand.isFinished() && driveCommand.isFinished();
+    return false; // turnCommand.isFinished() && driveCommand.isFinished();
   }
 }

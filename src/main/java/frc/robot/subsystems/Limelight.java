@@ -11,6 +11,7 @@ public class Limelight extends SubsystemBase {
   private final NetworkTableEntry tx;
   private final NetworkTableEntry ty;
   private final NetworkTableEntry tvert;
+  private final NetworkTableEntry tv;
   private final NetworkTableEntry led;
 
   public Limelight() {
@@ -18,6 +19,7 @@ public class Limelight extends SubsystemBase {
     tx = table.getEntry("tx");
     ty = table.getEntry("ty");
     tvert = table.getEntry("tvert");
+    tv = table.getEntry("tv");
     led = table.getEntry("ledMode");
   }
 
@@ -27,6 +29,10 @@ public class Limelight extends SubsystemBase {
 
   public double getTy() {
     return ty.getDouble(0.0);
+  }
+
+  public double getTv() {
+    return tv.getDouble(0.0);
   }
 
   public double getTvert() {
