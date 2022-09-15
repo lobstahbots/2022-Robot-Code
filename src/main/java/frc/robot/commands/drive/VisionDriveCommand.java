@@ -20,7 +20,8 @@ public class VisionDriveCommand extends DriveCommand {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveBase.tankDrive(LimelightConstants.DRIVE_SPEED, LimelightConstants.DRIVE_SPEED);
+    driveBase.arcadeDrive(LimelightConstants.DRIVE_SPEED, 0, false);
+    System.out.println("Driving");
   }
 
   // Called once the command ends or is interrupted.
@@ -32,6 +33,6 @@ public class VisionDriveCommand extends DriveCommand {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return limelight.getTa() < LimelightConstants.AREA_THRESHOLD;
+    return limelight.getTvert() > LimelightConstants.TVERT_THRESHOLD;
   }
 }

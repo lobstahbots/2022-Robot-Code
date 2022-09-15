@@ -18,7 +18,6 @@ public class StopDriveCommand extends DriveCommand {
    */
   public StopDriveCommand(DriveBase driveBase) {
     super(driveBase);
-    addRequirements(this.driveBase);
   }
 
   @Override

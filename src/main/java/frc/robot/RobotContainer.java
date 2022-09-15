@@ -19,7 +19,7 @@ import frc.robot.Constants.IOConstants.DriverButtons;
 import frc.robot.commands.drive.StopDriveCommand;
 import frc.robot.commands.drive.StraightDriveCommand;
 import frc.robot.commands.drive.TankDriveCommand;
-import frc.robot.commands.drive.VisionDriveCommand;
+import frc.robot.commands.drive.VisionMotionControllerCommand;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Limelight;
 import overclocked.stl.command.TimedCommand;
@@ -68,12 +68,14 @@ public class RobotContainer {
     slowdownButton1.whileHeld(new TankDriveCommand(
         driveBase,
         () -> DriveConstants.SLOWDOWN_PERCENT1 * driverJoystick.getRawAxis(DriverAxes.LEFT),
-        () -> DriveConstants.SLOWDOWN_PERCENT1 * driverJoystick.getRawAxis(DriverAxes.RIGHT)));
+        () -> DriveConstants.SLOWDOWN_PERCENT1 * driverJoystick.getRawAxis(DriverAxes.RIGHT),
+        true));
 
     slowdownButton2.whileHeld(new TankDriveCommand(
         driveBase,
         () -> DriveConstants.SLOWDOWN_PERCENT2 * driverJoystick.getRawAxis(DriverAxes.LEFT),
-        () -> DriveConstants.SLOWDOWN_PERCENT2 * driverJoystick.getRawAxis(DriverAxes.RIGHT)));
+        () -> DriveConstants.SLOWDOWN_PERCENT2 * driverJoystick.getRawAxis(DriverAxes.RIGHT),
+        true));
 
   }
 
@@ -83,12 +85,12 @@ public class RobotContainer {
           AutonConstants.SIMPLE_AUTON_RUNTIME,
           new StraightDriveCommand(
               driveBase,
-              AutonConstants.SIMPLE_AUTON_SPEED));
+              AutonConstants.SIMPLE_AUTON_SPEED, false));
 
   // An auto routine that does nothing.
   private final Command doNothingAuton = null;
 
-  private final Command visionTrackAuton = new VisionDriveCommand(driveBase, limelight);
+  private final Command visionTrackAuton = new VisionMotionControllerCommand(driveBase, limelight);
 
 
   private final SendableChooser<Command> autonChooser = new SendableChooser<>();
@@ -123,7 +125,8 @@ public class RobotContainer {
         new TankDriveCommand(
             driveBase,
             () -> driverJoystick.getRawAxis(DriverAxes.LEFT),
-            () -> driverJoystick.getRawAxis(DriverAxes.RIGHT)));
+            () -> driverJoystick.getRawAxis(DriverAxes.RIGHT),
+            true));
   }
 
   /**

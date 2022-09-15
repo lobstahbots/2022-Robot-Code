@@ -15,6 +15,7 @@ public class ArcadeDriveCommand extends DriveCommand {
 
   private final Supplier<Double> linearSpeedSupplier;
   private final Supplier<Double> angularSpeedSupplier;
+  private final boolean squaredInputs;
 
   /**
    * Drives the driveBase at the linear and angular speeds returned by their respective Suppliers.
@@ -22,12 +23,14 @@ public class ArcadeDriveCommand extends DriveCommand {
    * @param driveBase The {@link DriveBase} to drive
    * @param linearSpeedSupplier Supplier for linear speed
    * @param angularSpeedSupplier Supplier for angular speed
+   * @param squaredInputs Whether to drive with squared inputs
    */
   public ArcadeDriveCommand(DriveBase driveBase, Supplier<Double> linearSpeedSupplier,
-      Supplier<Double> angularSpeedSupplier) {
+      Supplier<Double> angularSpeedSupplier, boolean squaredInputs) {
     super(driveBase);
     this.linearSpeedSupplier = linearSpeedSupplier;
     this.angularSpeedSupplier = angularSpeedSupplier;
+    this.squaredInputs = squaredInputs;
     addRequirements(this.driveBase);
   }
 
@@ -37,14 +40,15 @@ public class ArcadeDriveCommand extends DriveCommand {
    * @param driveBase The {@link DriveBase} to drive
    * @param linearSpeed The linear speed
    * @param angularSpeed The angular speed
+   * @param squaredInputs Whether to drive with squared inputs
    */
-  public ArcadeDriveCommand(DriveBase driveBase, double linearSpeed, double angularSpeed) {
-    this(driveBase, () -> linearSpeed, () -> angularSpeed);
+  public ArcadeDriveCommand(DriveBase driveBase, double linearSpeed, double angularSpeed, boolean squaredInputs) {
+    this(driveBase, () -> linearSpeed, () -> angularSpeed, squaredInputs);
   }
 
   @Override
   public void execute() {
-    driveBase.arcadeDrive(linearSpeedSupplier.get(), angularSpeedSupplier.get());
+    driveBase.arcadeDrive(linearSpeedSupplier.get(), angularSpeedSupplier.get(), squaredInputs);
   }
 
   @Override

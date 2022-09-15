@@ -4,9 +4,11 @@
 
 package frc.robot.commands.drive;
 
+import edu.wpi.first.math.MathUtil;
 import frc.robot.Constants.LimelightConstants;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Limelight;
+import overclocked.stl.math.OverclockedMath;
 
 public class VisionTurnCommand extends DriveCommand {
   protected final Limelight limelight;
@@ -24,10 +26,18 @@ public class VisionTurnCommand extends DriveCommand {
   @Override
   public void execute() {
     double error = limelight.getTx();
-    double speed = error * LimelightConstants.TURN_Kp;
-    speed = Math.min(speed, LimelightConstants.MAX_TURN_SPEED);
-    speed = Math.max(speed, LimelightConstants.MIN_TURN_SPEED);
-    driveBase.tankDrive(speed, -speed);
+    double speed = 0;
+
+    if (error > 0) {
+      speed = -OverclockedMath.scaleNumberToRange(error, LimelightConstants.X_ERROR_DEADBAND,
+          LimelightConstants.MAX_EXPECTED_X_ERROR, LimelightConstants.MIN_TURN_SPEED,
+          LimelightConstants.MAX_TURN_SPEED);
+    } else {
+      speed = -OverclockedMath.scaleNumberToRange(error, -LimelightConstants.MAX_EXPECTED_X_ERROR,
+          -LimelightConstants.X_ERROR_DEADBAND, -LimelightConstants.MAX_TURN_SPEED, -LimelightConstants.MIN_TURN_SPEED);
+    }
+
+    driveBase.arcadeDrive(0, speed, false);
   }
 
   // Called once the command ends or is interrupted.
@@ -39,7 +49,7 @@ public class VisionTurnCommand extends DriveCommand {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(limelight.getTx()) < LimelightConstants.TURN_ERROR_THRESHOLD;
+    return Math.abs(limelight.getTx()) < LimelightConstants.X_ERROR_DEADBAND;
 
   }
 }

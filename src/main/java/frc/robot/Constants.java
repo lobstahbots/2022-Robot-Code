@@ -42,12 +42,13 @@ public final class Constants {
   }
 
   public static final class LimelightConstants {
-    public static final double TURN_Kp = 0.1;
+    public static final double TURN_Kp = 0.01;
     public static final double MIN_TURN_SPEED = 0.1;
-    public static final double MAX_TURN_SPEED = 0.1;
-    public static final double TURN_ERROR_THRESHOLD = 1;
-    public static final double DRIVE_SPEED = 0.7;
-    public static final double AREA_THRESHOLD = 0.8;
+    public static final double MAX_TURN_SPEED = 0.35;
+    public static final double X_ERROR_DEADBAND = 2;
+    public static final double MAX_EXPECTED_X_ERROR = 20;
+    public static final double DRIVE_SPEED = 0.2;
+    public static final double TVERT_THRESHOLD = 35;
   }
 
   /**

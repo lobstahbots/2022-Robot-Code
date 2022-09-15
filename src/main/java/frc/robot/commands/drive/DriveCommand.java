@@ -19,6 +19,7 @@ public abstract class DriveCommand extends CommandBase {
    * @param driveBase The {@link DriveBase} to control
    */
   public DriveCommand(DriveBase driveBase) {
+    addRequirements(driveBase);
     this.driveBase = driveBase;
   }
 }

@@ -15,6 +15,7 @@ public class TankDriveCommand extends DriveCommand {
 
   private final Supplier<Double> leftSpeedSupplier;
   private final Supplier<Double> rightSpeedSupplier;
+  private final boolean squaredInputs;
 
   /**
    * Drives the driveBase at the left and right speeds returned by their respective Suppliers.
@@ -22,13 +23,14 @@ public class TankDriveCommand extends DriveCommand {
    * @param driveBase The {@link DriveBase} to drive
    * @param leftSpeedSupplier Supplier for left speed
    * @param rightSpeedSupplier Supplier for right speed
+   * @param squaredInputs Whether to drive with squared inputs
    */
   public TankDriveCommand(DriveBase driveBase, Supplier<Double> leftSpeedSupplier,
-      Supplier<Double> rightSpeedSupplier) {
+      Supplier<Double> rightSpeedSupplier, boolean squaredInputs) {
     super(driveBase);
     this.leftSpeedSupplier = leftSpeedSupplier;
     this.rightSpeedSupplier = rightSpeedSupplier;
-    addRequirements(this.driveBase);
+    this.squaredInputs = squaredInputs;
   }
 
   /**
@@ -37,14 +39,15 @@ public class TankDriveCommand extends DriveCommand {
    * @param driveBase The {@link DriveBase} to drive
    * @param leftSpeed The left speed
    * @param rightSpeed The right speed
+   * @param squaredInputs Whether to drive with squared inputs
    */
-  public TankDriveCommand(DriveBase driveBase, double leftSpeed, double rightSpeed) {
-    this(driveBase, () -> leftSpeed, () -> rightSpeed);
+  public TankDriveCommand(DriveBase driveBase, double leftSpeed, double rightSpeed, boolean squaredInputs) {
+    this(driveBase, () -> leftSpeed, () -> rightSpeed, squaredInputs);
   }
 
   @Override
   public void execute() {
-    driveBase.tankDrive(leftSpeedSupplier.get(), rightSpeedSupplier.get());
+    driveBase.tankDrive(leftSpeedSupplier.get(), rightSpeedSupplier.get(), squaredInputs);
   }
 
   @Override

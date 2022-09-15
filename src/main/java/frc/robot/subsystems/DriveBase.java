@@ -114,9 +114,10 @@ public class DriveBase extends SubsystemBase {
    *
    * @param linearSpeed The linear speed
    * @param angularSpeed The angular speed
+   * @param squaredInputs Whether to drive with squared inputs
    */
-  public void arcadeDrive(double linearSpeed, double angularSpeed) {
-    differentialDrive.arcadeDrive(linearSpeed, angularSpeed);
+  public void arcadeDrive(double linearSpeed, double angularSpeed, boolean squaredInputs) {
+    differentialDrive.arcadeDrive(linearSpeed, angularSpeed, squaredInputs);
   }
 
   /**
@@ -124,8 +125,9 @@ public class DriveBase extends SubsystemBase {
    *
    * @param leftSpeed The left speed
    * @param rightSpeed The right speed
+   * @param squaredInputs Whether to drive with squared inputs
    */
-  public void tankDrive(double leftSpeed, double rightSpeed) {
-    differentialDrive.tankDrive(leftSpeed, rightSpeed);
+  public void tankDrive(double leftSpeed, double rightSpeed, boolean squaredInputs) {
+    differentialDrive.tankDrive(leftSpeed, rightSpeed, squaredInputs);
   }
 }
