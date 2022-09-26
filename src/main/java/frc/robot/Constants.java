@@ -61,6 +61,7 @@ public final class Constants {
   public static final class DriveConstants {
     public static final double SLOWDOWN_PERCENT1 = 0.75;
     public static final double SLOWDOWN_PERCENT2 = 0.5;
+    public static final double SLOWDOWN_PERCENT_ACTIVITY_FAIR = 0.5;
 
     public static final double ACCELERATION_RATE_LIMIT = 2.1;
 

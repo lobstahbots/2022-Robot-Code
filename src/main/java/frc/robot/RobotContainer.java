@@ -67,14 +67,18 @@ public class RobotContainer {
 
     slowdownButton1.whileHeld(new TankDriveCommand(
         driveBase,
-        () -> DriveConstants.SLOWDOWN_PERCENT1 * -driverJoystick.getRawAxis(DriverAxes.LEFT),
-        () -> DriveConstants.SLOWDOWN_PERCENT1 * -driverJoystick.getRawAxis(DriverAxes.RIGHT),
+        () -> DriveConstants.SLOWDOWN_PERCENT_ACTIVITY_FAIR * DriveConstants.SLOWDOWN_PERCENT1
+            * -driverJoystick.getRawAxis(DriverAxes.LEFT),
+        () -> DriveConstants.SLOWDOWN_PERCENT_ACTIVITY_FAIR * DriveConstants.SLOWDOWN_PERCENT1
+            * -driverJoystick.getRawAxis(DriverAxes.RIGHT),
         true));
 
     slowdownButton2.whileHeld(new TankDriveCommand(
         driveBase,
-        () -> DriveConstants.SLOWDOWN_PERCENT2 * -driverJoystick.getRawAxis(DriverAxes.LEFT),
-        () -> DriveConstants.SLOWDOWN_PERCENT2 * -driverJoystick.getRawAxis(DriverAxes.RIGHT),
+        () -> DriveConstants.SLOWDOWN_PERCENT_ACTIVITY_FAIR * DriveConstants.SLOWDOWN_PERCENT2
+            * -driverJoystick.getRawAxis(DriverAxes.LEFT),
+        () -> DriveConstants.SLOWDOWN_PERCENT_ACTIVITY_FAIR * DriveConstants.SLOWDOWN_PERCENT2
+            * -driverJoystick.getRawAxis(DriverAxes.RIGHT),
         true));
 
   }
@@ -124,8 +128,8 @@ public class RobotContainer {
     driveBase.setDefaultCommand(
         new TankDriveCommand(
             driveBase,
-            () -> -driverJoystick.getRawAxis(DriverAxes.LEFT),
-            () -> -driverJoystick.getRawAxis(DriverAxes.RIGHT),
+            () -> DriveConstants.SLOWDOWN_PERCENT_ACTIVITY_FAIR * -driverJoystick.getRawAxis(DriverAxes.LEFT),
+            () -> DriveConstants.SLOWDOWN_PERCENT_ACTIVITY_FAIR * -driverJoystick.getRawAxis(DriverAxes.RIGHT),
             true));
   }
 
