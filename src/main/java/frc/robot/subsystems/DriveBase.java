@@ -6,6 +6,11 @@ import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -25,6 +30,10 @@ public class DriveBase extends SubsystemBase {
   private NeutralMode motorNeutralMode;
 
   private final OverclockedDifferentialDrive differentialDrive;
+
+  private final DifferentialDriveOdometry odometry;
+  private final Gyro gyro = new ADXRS450_Gyro();
+
 
   /**
    * Constructs a DriveBase with a {@link TalonFX} at each of the given CAN IDs.
@@ -71,6 +80,8 @@ public class DriveBase extends SubsystemBase {
             new MotorControllerGroup(rightFrontMotor, rightBackMotor),
             DriveConstants.ACCELERATION_RATE_LIMIT);
 
+    odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
+
     CommandScheduler.getInstance().registerSubsystem(this);
   }
 
@@ -100,6 +111,87 @@ public class DriveBase extends SubsystemBase {
     rightFrontMotor.setNeutralMode(mode);
     rightBackMotor.setNeutralMode(mode);
     motorNeutralMode = mode;
+  }
+
+  /**
+   * Returns the currently-estimated pose of the robot.
+   *
+   * @return The pose.
+   */
+  public Pose2d getPose() {
+    return odometry.getPoseMeters();
+  }
+
+  /**
+   * Returns the current wheel speeds of the robot.
+   *
+   * @return The current wheel speeds.
+   */
+  public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+    return new DifferentialDriveWheelSpeeds(leftFrontMotor.getSelectedSensorVelocity(0),
+        rightFrontMotor.getSelectedSensorVelocity(0));
+  }
+
+  /**
+   * Resets the odometry to the specified pose.
+   *
+   * @param pose The pose to which to set the odometry.
+   */
+  public void resetOdometry(Pose2d pose) {
+    resetEncoders();
+    odometry.resetPosition(pose, gyro.getRotation2d());
+  }
+
+  /** Resets the drive encoders to currently read a position of 0. */
+  public void resetEncoders() {
+    leftFrontMotor.setSelectedSensorPosition(0);
+    rightFrontMotor.setSelectedSensorPosition(0);
+  }
+
+  /**
+   * Gets the average distance of the two encoders.
+   *
+   * @return the average of the two encoder readings
+   */
+  public double getAverageEncoderDistance() {
+    return (leftFrontMotor.getSelectedSensorPosition(0) + rightFrontMotor.getSelectedSensorPosition(0)) / 2.0;
+  }
+
+  /** Zeroes the heading of the robot. */
+  public void zeroHeading() {
+    gyro.reset();
+  }
+
+  /**
+   * Controls the left and right sides of the drive directly with voltages.
+   *
+   * @param leftVolts the commanded left output
+   * @param rightVolts the commanded right output
+   */
+  public void tankDriveVolts(double leftVolts, double rightVolts) {
+    leftFrontMotor.setVoltage(leftVolts);
+    leftBackMotor.setVoltage(leftVolts);
+    rightFrontMotor.setVoltage(rightVolts);
+    rightBackMotor.setVoltage(rightVolts);
+    differentialDrive.feed();
+  }
+
+  /**
+   * Returns the heading of the robot.
+   *
+   * @return the robot's heading in degrees, from -180 to 180
+   */
+  public double getHeading() {
+    return gyro.getRotation2d().getDegrees();
+  }
+
+  /**
+   * Returns the turn rate of the robot.
+   *
+   * @return The turn rate of the robot, in degrees per second
+   */
+  public double getTurnRate() {
+    return -gyro.getRate();
   }
 
   /**
