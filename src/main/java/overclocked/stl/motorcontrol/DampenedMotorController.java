@@ -79,11 +79,16 @@ public class DampenedMotorController implements MotorController {
      * to the last speed, but inverted. This allows the motor controller to respect
      * the rate limit, and not perform a full speed invert immediately.
      */
-    lastSpeed = -lastSpeed;
-    dampener.reset(lastSpeed);
-    controller.stopMotor();
-    controller.setInverted(isInverted);
-    controller.set(lastSpeed);
+
+    if (isInverted != controller.getInverted()) {
+      lastSpeed = -lastSpeed;
+      dampener.reset(lastSpeed);
+      controller.stopMotor();
+      controller.setInverted(isInverted);
+      controller.set(lastSpeed);
+    }
+
+
   }
 
   @Override
