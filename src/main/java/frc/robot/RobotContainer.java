@@ -9,6 +9,7 @@ import java.util.List;
 import com.pathplanner.lib.PathConstraints;
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
+import com.pathplanner.lib.PathPlannerTrajectory.PathPlannerState;
 import com.pathplanner.lib.commands.PPRamseteCommand;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
@@ -122,6 +123,7 @@ public class RobotContainer {
     autonChooser.addOption("Do Nothing Auton", doNothingAuton);
     autonChooser.addOption("Vision Track Auton", visionTrackAuton);
     autonChooser.addOption("Path Follow Auton", pathFollowAuton);
+    autonChooser.setDefaultOption("Path Follow Auton", pathFollowAuton);
 
     SmartDashboard.putData(autonChooser);
   }
@@ -161,7 +163,8 @@ public class RobotContainer {
             // Pass config
             config);
 
-    PathPlannerTrajectory trajectory = PathPlanner.loadPath("Example Path", constraints);
+    PathPlannerTrajectory trajectory = PathPlanner.loadPath("New Path", constraints);
+    PathPlannerState exampleState = (PathPlannerState) trajectory.sample(1.2);
 
     PPRamseteCommand ramseteCommand =
         new PPRamseteCommand(
@@ -184,7 +187,8 @@ public class RobotContainer {
     driveBase.resetOdometry(trajectory.getInitialPose());
 
     // Run path following command, then stop at the end.
-    return ramseteCommand.andThen(() -> driveBase.tankDriveVolts(0, 0));
+    return ramseteCommand.andThen(() -> driveBase.tankDriveVolts(0, 0))
+        .andThen(() -> System.out.println(exampleState.velocityMetersPerSecond));
   }
 
   /**
