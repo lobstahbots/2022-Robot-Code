@@ -6,6 +6,10 @@ package frc.robot;
 
 import java.util.List;
 
+import com.pathplanner.lib.PathConstraints;
+import com.pathplanner.lib.PathPlanner;
+import com.pathplanner.lib.PathPlannerTrajectory;
+import com.pathplanner.lib.commands.PPRamseteCommand;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -143,6 +147,8 @@ public class RobotContainer {
                 // Apply the voltage constraint
                 .addConstraint(autoVoltageConstraint);
 
+    PathConstraints constraints = new PathConstraints(AutonConstants.MAX_DRIVE_SPEED, AutonConstants.MAX_ACCELERATION);
+
     // An example trajectory to follow. All units in meters.
     Trajectory exampleTrajectory =
         TrajectoryGenerator.generateTrajectory(
@@ -155,9 +161,11 @@ public class RobotContainer {
             // Pass config
             config);
 
-    RamseteCommand ramseteCommand =
-        new RamseteCommand(
-            exampleTrajectory,
+    PathPlannerTrajectory trajectory = PathPlanner.loadPath("Example Path", constraints);
+
+    PPRamseteCommand ramseteCommand =
+        new PPRamseteCommand(
+            trajectory,
             driveBase::getPose,
             new RamseteController(AutonConstants.RAMSETE_B, AutonConstants.RAMSETE_ZETA),
             new SimpleMotorFeedforward(
@@ -173,7 +181,7 @@ public class RobotContainer {
             driveBase);
 
     // Reset odometry to the starting pose of the trajectory.
-    driveBase.resetOdometry(exampleTrajectory.getInitialPose());
+    driveBase.resetOdometry(trajectory.getInitialPose());
 
     // Run path following command, then stop at the end.
     return ramseteCommand.andThen(() -> driveBase.tankDriveVolts(0, 0));
