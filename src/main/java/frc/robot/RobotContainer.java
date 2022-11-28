@@ -11,6 +11,7 @@ import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.PathPlannerTrajectory.PathPlannerState;
 import com.pathplanner.lib.commands.PPRamseteCommand;
+import com.pathplanner.lib.server.PathPlannerServer;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -21,9 +22,14 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.AutonConstants;
@@ -69,6 +75,16 @@ public class RobotContainer {
   private final JoystickButton slowdownButton1 = driverJoystick.button(DriverButtons.SLOWDOWN1);
   private final JoystickButton slowdownButton2 = driverJoystick.button(DriverButtons.SLOWDOWN2);
 
+  private NetworkTable table = NetworkTableInstance.getDefault().getTable("troubleshooting");
+  NetworkTableEntry leftReference = table.getEntry("left_reference");
+  NetworkTableEntry leftMeasurement = table.getEntry("left_measurement");
+  NetworkTableEntry rightReference = table.getEntry("right_reference");
+  NetworkTableEntry rightMeasurement = table.getEntry("right_measurement");
+
+  PathPlannerTrajectory newPath =
+      PathPlanner.loadPath("New Path",
+          new PathConstraints(AutonConstants.MAX_DRIVE_SPEED, AutonConstants.MAX_ACCELERATION));
+
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -76,6 +92,7 @@ public class RobotContainer {
   public RobotContainer() {
     configureButtonBindings();
     configureSmartDash();
+    PathPlannerServer.startServer(5811);
   }
 
   /**
@@ -110,7 +127,7 @@ public class RobotContainer {
 
   private final Command visionTrackAuton = new VisionCommand(driveBase, limelight);
 
-  private final Command pathFollowAuton = getTrajectoryCommand();
+  private final Command pathFollowAuton = getTrajectoryCommand(newPath, true).andThen(() -> driveBase.stopDrive());;
 
 
   private final SendableChooser<Command> autonChooser = new SendableChooser<>();
@@ -125,70 +142,48 @@ public class RobotContainer {
     autonChooser.addOption("Path Follow Auton", pathFollowAuton);
     autonChooser.setDefaultOption("Path Follow Auton", pathFollowAuton);
 
+    SmartDashboard.putNumber("Gyro Value", driveBase.getHeading().getDegrees());
+
     SmartDashboard.putData(autonChooser);
   }
 
-  private Command getTrajectoryCommand() {
-    // Create a voltage constraint to ensure we don't accelerate too fast
-    var autoVoltageConstraint =
-        new DifferentialDriveVoltageConstraint(
-            new SimpleMotorFeedforward(
-                DriveConstants.KS,
-                DriveConstants.KV,
-                DriveConstants.KA),
-            DriveConstants.KINEMATICS,
-            10);
 
-    // Create config for trajectory
-    TrajectoryConfig config =
-        new TrajectoryConfig(
-            AutonConstants.MAX_DRIVE_SPEED,
-            AutonConstants.MAX_ACCELERATION)
-                // Add kinematics to ensure max speed is actually obeyed
-                .setKinematics(DriveConstants.KINEMATICS)
-                // Apply the voltage constraint
-                .addConstraint(autoVoltageConstraint);
+  public Command getTrajectoryCommand(PathPlannerTrajectory traj, boolean isFirstPath) {
+    RamseteController ramsete = new RamseteController();
+    ramsete.setEnabled(false);
 
-    PathConstraints constraints = new PathConstraints(AutonConstants.MAX_DRIVE_SPEED, AutonConstants.MAX_ACCELERATION);
+    PIDController leftController = new PIDController(DriveConstants.KP, DriveConstants.KI, DriveConstants.KD);
+    PIDController rightController = new PIDController(DriveConstants.KP, DriveConstants.KI, DriveConstants.KD);
 
-    // An example trajectory to follow. All units in meters.
-    Trajectory exampleTrajectory =
-        TrajectoryGenerator.generateTrajectory(
-            // Start at the origin facing the +X direction
-            new Pose2d(0, 0, new Rotation2d(0)),
-            // Pass through these two interior waypoints, making an 's' curve path
-            List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
-            // End 3 meters straight ahead of where we started, facing forward
-            new Pose2d(3, 0, new Rotation2d(0)),
-            // Pass config
-            config);
-
-    PathPlannerTrajectory trajectory = PathPlanner.loadPath("New Path", constraints);
-    PathPlannerState exampleState = (PathPlannerState) trajectory.sample(1.2);
-
-    PPRamseteCommand ramseteCommand =
+    return new SequentialCommandGroup(
+        new InstantCommand(() -> {
+          // Reset odometry for the first path you run during auto
+          if (isFirstPath) {
+            driveBase.resetOdometry(traj.getInitialPose());
+          }
+        }),
         new PPRamseteCommand(
-            trajectory,
-            driveBase::getPose,
-            new RamseteController(AutonConstants.RAMSETE_B, AutonConstants.RAMSETE_ZETA),
-            new SimpleMotorFeedforward(
-                DriveConstants.KS,
-                DriveConstants.KV,
-                DriveConstants.KA),
-            DriveConstants.KINEMATICS,
-            driveBase::getWheelSpeeds,
-            new PIDController(DriveConstants.KP, 0, 0),
-            new PIDController(DriveConstants.KP, 0, 0),
-            // RamseteCommand passes volts to the callback
-            driveBase::tankDriveVolts,
-            driveBase);
+            traj,
+            driveBase::getPose, // Pose supplier
+            ramsete,
+            new SimpleMotorFeedforward(DriveConstants.KS, DriveConstants.KV, DriveConstants.KA),
+            DriveConstants.KINEMATICS, // DifferentialDriveKinematics
+            driveBase::getWheelSpeeds, // DifferentialDriveWheelSpeeds supplier
+            leftController, // Left controller. Tune these values for your robot. Leaving them 0 will only use
+                            // feedforwards.
+            rightController, // Right controller (usually the same values as left controller)
+            (leftVolts, rightVolts) -> {
+              driveBase.tankDriveVolts(leftVolts, rightVolts);
 
-    // Reset odometry to the starting pose of the trajectory.
-    driveBase.resetOdometry(trajectory.getInitialPose());
+              leftMeasurement.setNumber(driveBase.getWheelSpeeds().leftMetersPerSecond);
+              leftReference.setNumber(leftController.getSetpoint());
 
-    // Run path following command, then stop at the end.
-    return ramseteCommand.andThen(() -> driveBase.tankDriveVolts(0, 0))
-        .andThen(() -> System.out.println(exampleState.velocityMetersPerSecond));
+              rightMeasurement.setNumber(driveBase.getWheelSpeeds().rightMetersPerSecond);
+              rightReference.setNumber(rightController.getSetpoint());
+
+            }, // Voltage biconsumer
+            driveBase // Requires this drive subsystem
+        ));
   }
 
   /**

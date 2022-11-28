@@ -1,16 +1,18 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -32,7 +34,15 @@ public class DriveBase extends SubsystemBase {
   private final OverclockedDifferentialDrive differentialDrive;
 
   private final DifferentialDriveOdometry odometry;
-  private final Gyro gyro = new ADXRS450_Gyro();
+  private final AHRS gyro = new AHRS();
+
+  private final int kCountsPerRev = 2048; // Encoder counts per revolution of the motor shaft.
+  private final double kSensorGearRatio = 1; // Gear ratio is the ratio between the *encoder* and the wheels. On the
+                                             // AndyMark drivetrain, encoders mount 1:1 with the gearbox shaft.
+  private final double kGearRatio = 10.71; // Switch kSensorGearRatio to this gear ratio if encoder is on the motor
+                                           // instead of on the gearbox.
+  private final double kWheelRadiusInches = 6;
+  private final int k100msPerSecond = 10;
 
 
   /**
@@ -71,6 +81,11 @@ public class DriveBase extends SubsystemBase {
             DriveConstants.TRIGGER_THRESHOLD,
             DriveConstants.TRIGGER_THRESHOLD_TIME));
 
+    leftFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    leftBackMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    rightFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    rightBackMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+
 
     setBrakingMode(NeutralMode.Brake);
 
@@ -80,7 +95,13 @@ public class DriveBase extends SubsystemBase {
             new MotorControllerGroup(rightFrontMotor, rightBackMotor),
             DriveConstants.ACCELERATION_RATE_LIMIT);
 
+    resetEncoders();
+
     odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
+
+    rightFrontMotor.setInverted(TalonFXInvertType.CounterClockwise);
+    rightBackMotor.setInverted(TalonFXInvertType.CounterClockwise);
+
 
     CommandScheduler.getInstance().registerSubsystem(this);
   }
@@ -119,6 +140,7 @@ public class DriveBase extends SubsystemBase {
    * @return The pose.
    */
   public Pose2d getPose() {
+    odometry.update(getHeading(), getLeftEncoderDistanceMeters(), getRightEncoderDistanceMeters());
     return odometry.getPoseMeters();
   }
 
@@ -128,8 +150,9 @@ public class DriveBase extends SubsystemBase {
    * @return The current wheel speeds.
    */
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-    return new DifferentialDriveWheelSpeeds(leftFrontMotor.getSelectedSensorVelocity(0),
-        rightFrontMotor.getSelectedSensorVelocity(0));
+    return new DifferentialDriveWheelSpeeds(
+        nativeUnitsToVelocityMetersPerSecond(leftFrontMotor.getSelectedSensorVelocity()),
+        nativeUnitsToVelocityMetersPerSecond(rightFrontMotor.getSelectedSensorVelocity()));
   }
 
   /**
@@ -139,13 +162,23 @@ public class DriveBase extends SubsystemBase {
    */
   public void resetOdometry(Pose2d pose) {
     resetEncoders();
-    odometry.resetPosition(pose, gyro.getRotation2d());
+    odometry.resetPosition(pose, new Rotation2d(gyro.getYaw()));
   }
 
   /** Resets the drive encoders to currently read a position of 0. */
   public void resetEncoders() {
     leftFrontMotor.setSelectedSensorPosition(0);
+    leftBackMotor.setSelectedSensorPosition(0);
     rightFrontMotor.setSelectedSensorPosition(0);
+    rightBackMotor.setSelectedSensorPosition(0);
+  }
+
+  public double getLeftEncoderDistanceMeters() {
+    return nativeUnitsToDistanceMeters(leftFrontMotor.getSelectedSensorPosition());
+  }
+
+  public double getRightEncoderDistanceMeters() {
+    return nativeUnitsToDistanceMeters(rightBackMotor.getSelectedSensorPosition());
   }
 
   /**
@@ -153,8 +186,8 @@ public class DriveBase extends SubsystemBase {
    *
    * @return the average of the two encoder readings
    */
-  public double getAverageEncoderDistance() {
-    return (leftFrontMotor.getSelectedSensorPosition(0) + rightFrontMotor.getSelectedSensorPosition(0)) / 2.0;
+  public double getAverageEncoderDistanceMeters() {
+    return (getLeftEncoderDistanceMeters() + getRightEncoderDistanceMeters()) / 2.0;
   }
 
   /** Zeroes the heading of the robot. */
@@ -181,8 +214,8 @@ public class DriveBase extends SubsystemBase {
    *
    * @return the robot's heading in degrees, from -180 to 180
    */
-  public double getHeading() {
-    return gyro.getRotation2d().getDegrees();
+  public Rotation2d getHeading() {
+    return new Rotation2d(-Math.toRadians(gyro.getYaw()));
   }
 
   /**
@@ -221,5 +254,27 @@ public class DriveBase extends SubsystemBase {
    */
   public void tankDrive(double leftSpeed, double rightSpeed, boolean squaredInputs) {
     differentialDrive.tankDrive(leftSpeed, rightSpeed, squaredInputs);
+  }
+
+  private int distanceToNativeUnits(double positionMeters) {
+    double wheelRotations = positionMeters / (2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches));
+    double motorRotations = wheelRotations * kSensorGearRatio;
+    int sensorCounts = (int) (motorRotations * kCountsPerRev);
+    return sensorCounts;
+  }
+
+  private double nativeUnitsToVelocityMetersPerSecond(double nativeVelocity) {
+    double motorRotationsPer100ms = nativeVelocity / kCountsPerRev;
+    double motorRotationsPerSecond = motorRotationsPer100ms * k100msPerSecond;
+    double wheelRotationsPerSecond = motorRotationsPerSecond / kSensorGearRatio;
+    double velocityMetersPerSecond = wheelRotationsPerSecond * (2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches));
+    return velocityMetersPerSecond;
+  }
+
+  private double nativeUnitsToDistanceMeters(double sensorCounts) {
+    double motorRotations = (double) sensorCounts / kCountsPerRev;
+    double wheelRotations = motorRotations / kSensorGearRatio;
+    double positionMeters = wheelRotations * (2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches));
+    return positionMeters;
   }
 }
