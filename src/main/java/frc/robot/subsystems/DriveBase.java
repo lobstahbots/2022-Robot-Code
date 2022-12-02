@@ -10,10 +10,12 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
@@ -87,7 +89,7 @@ public class DriveBase extends SubsystemBase {
     rightBackMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
 
 
-    setBrakingMode(NeutralMode.Brake);
+    setBrakingMode(NeutralMode.Coast);
 
     differentialDrive =
         new OverclockedDifferentialDrive(
@@ -99,8 +101,8 @@ public class DriveBase extends SubsystemBase {
 
     odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
 
-    rightFrontMotor.setInverted(TalonFXInvertType.CounterClockwise);
-    rightBackMotor.setInverted(TalonFXInvertType.CounterClockwise);
+    // rightFrontMotor.setInverted(TalonFXInvertType.CounterClockwise);
+    // rightBackMotor.setInverted(TalonFXInvertType.CounterClockwise);
 
 
     CommandScheduler.getInstance().registerSubsystem(this);
@@ -160,9 +162,10 @@ public class DriveBase extends SubsystemBase {
    *
    * @param pose The pose to which to set the odometry.
    */
-  public void resetOdometry(Pose2d pose) {
+  public void resetOdometry(Translation2d translation2d, Rotation2d rotation) {
+    gyro.reset();
+    odometry.resetPosition(new Pose2d(translation2d, rotation), new Rotation2d());
     resetEncoders();
-    odometry.resetPosition(pose, new Rotation2d(gyro.getYaw()));
   }
 
   /** Resets the drive encoders to currently read a position of 0. */
@@ -268,6 +271,7 @@ public class DriveBase extends SubsystemBase {
     double motorRotationsPerSecond = motorRotationsPer100ms * k100msPerSecond;
     double wheelRotationsPerSecond = motorRotationsPerSecond / kSensorGearRatio;
     double velocityMetersPerSecond = wheelRotationsPerSecond * (2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches));
+    SmartDashboard.putNumber("Velocity", velocityMetersPerSecond);
     return velocityMetersPerSecond;
   }
 
@@ -276,5 +280,12 @@ public class DriveBase extends SubsystemBase {
     double wheelRotations = motorRotations / kSensorGearRatio;
     double positionMeters = wheelRotations * (2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches));
     return positionMeters;
+  }
+
+  @Override
+  public void periodic() {
+    odometry.update(getHeading(), getLeftEncoderDistanceMeters(), getRightEncoderDistanceMeters());
+    SmartDashboard.putNumber("Gyro Value", this.getHeading().getDegrees());
+    SmartDashboard.putString("Pose", this.getPose().toString());
   }
 }

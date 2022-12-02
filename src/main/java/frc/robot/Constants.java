@@ -26,7 +26,7 @@ public final class Constants {
     public static final double SIMPLE_AUTON_RUNTIME = 3.0;
     public static final double MEDIUM_AUTON_OUTTAKE_RUNTIME = 3.0;
     public static final double MAX_DRIVE_SPEED = 0.25;
-    public static final double MAX_ACCELERATION = 0.25;
+    public static final double MAX_ACCELERATION = 0.1;
     public static final double RAMSETE_B = 2.0;
     public static final double RAMSETE_ZETA = 0.7;
   }

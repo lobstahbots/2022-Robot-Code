@@ -142,8 +142,7 @@ public class RobotContainer {
     autonChooser.addOption("Path Follow Auton", pathFollowAuton);
     autonChooser.setDefaultOption("Path Follow Auton", pathFollowAuton);
 
-    SmartDashboard.putNumber("Gyro Value", driveBase.getHeading().getDegrees());
-
+    SmartDashboard.putString("Initial Pose", newPath.getInitialPose().toString());
     SmartDashboard.putData(autonChooser);
   }
 
@@ -159,7 +158,7 @@ public class RobotContainer {
         new InstantCommand(() -> {
           // Reset odometry for the first path you run during auto
           if (isFirstPath) {
-            driveBase.resetOdometry(traj.getInitialPose());
+            driveBase.resetOdometry(traj.getInitialPose().getTranslation(), traj.getInitialPose().getRotation());
           }
         }),
         new PPRamseteCommand(
