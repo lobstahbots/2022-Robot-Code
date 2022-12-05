@@ -210,7 +210,7 @@ public class DriveBase extends SubsystemBase {
    * @return the robot's heading in degrees, from -180 to 180
    */
   public Rotation2d getHeading() {
-    return new Rotation2d(-Math.toRadians(gyro.getYaw()));
+    return new Rotation2d(Math.toRadians(gyro.getYaw()));
   }
 
   /**
@@ -219,7 +219,7 @@ public class DriveBase extends SubsystemBase {
    * @return The turn rate of the robot, in degrees per second
    */
   public double getTurnRate() {
-    return -gyro.getRate();
+    return gyro.getRate();
   }
 
   /**
