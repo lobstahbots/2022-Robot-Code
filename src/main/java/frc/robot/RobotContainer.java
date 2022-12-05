@@ -39,7 +39,7 @@ import frc.robot.Constants.DriveConstants.DriveMotorCANIDs;
 import frc.robot.Constants.IOConstants;
 import frc.robot.Constants.IOConstants.DriverAxes;
 import frc.robot.Constants.IOConstants.DriverButtons;
-
+import frc.robot.commands.drive.PathCommand;
 import frc.robot.commands.drive.StopDriveCommand;
 import frc.robot.commands.drive.StraightDriveCommand;
 import frc.robot.commands.drive.TankDriveCommand;
@@ -127,7 +127,7 @@ public class RobotContainer {
 
   private final Command visionTrackAuton = new VisionCommand(driveBase, limelight);
 
-  private final Command pathFollowAuton = getTrajectoryCommand(newPath, true).andThen(() -> driveBase.stopDrive());;
+  private final Command pathFollowAuton = new PathCommand(driveBase, newPath, true);
 
 
   private final SendableChooser<Command> autonChooser = new SendableChooser<>();
@@ -144,45 +144,6 @@ public class RobotContainer {
 
     SmartDashboard.putString("Initial Pose", newPath.getInitialPose().toString());
     SmartDashboard.putData(autonChooser);
-  }
-
-
-  public Command getTrajectoryCommand(PathPlannerTrajectory traj, boolean isFirstPath) {
-    RamseteController ramsete = new RamseteController();
-    ramsete.setEnabled(false);
-
-    PIDController leftController = new PIDController(DriveConstants.KP, DriveConstants.KI, DriveConstants.KD);
-    PIDController rightController = new PIDController(DriveConstants.KP, DriveConstants.KI, DriveConstants.KD);
-
-    return new SequentialCommandGroup(
-        new InstantCommand(() -> {
-          // Reset odometry for the first path you run during auto
-          if (isFirstPath) {
-            driveBase.resetOdometry(traj.getInitialPose().getTranslation(), traj.getInitialPose().getRotation());
-          }
-        }),
-        new PPRamseteCommand(
-            traj,
-            driveBase::getPose, // Pose supplier
-            ramsete,
-            new SimpleMotorFeedforward(DriveConstants.KS, DriveConstants.KV, DriveConstants.KA),
-            DriveConstants.KINEMATICS, // DifferentialDriveKinematics
-            driveBase::getWheelSpeeds, // DifferentialDriveWheelSpeeds supplier
-            leftController, // Left controller. Tune these values for your robot. Leaving them 0 will only use
-                            // feedforwards.
-            rightController, // Right controller (usually the same values as left controller)
-            (leftVolts, rightVolts) -> {
-              driveBase.tankDriveVolts(leftVolts, rightVolts);
-
-              leftMeasurement.setNumber(driveBase.getWheelSpeeds().leftMetersPerSecond);
-              leftReference.setNumber(leftController.getSetpoint());
-
-              rightMeasurement.setNumber(driveBase.getWheelSpeeds().rightMetersPerSecond);
-              rightReference.setNumber(rightController.getSetpoint());
-
-            }, // Voltage biconsumer
-            driveBase // Requires this drive subsystem
-        ));
   }
 
   /**

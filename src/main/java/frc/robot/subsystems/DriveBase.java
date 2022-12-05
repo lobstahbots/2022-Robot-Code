@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 import overclocked.stl.motorcontrol.OverclockedDifferentialDrive;
+import overclocked.stl.math.OverclockedMath;
 
 /**
  * A subsystem that controls the drive train (aka chassis) on a robot.
@@ -37,15 +38,6 @@ public class DriveBase extends SubsystemBase {
 
   private final DifferentialDriveOdometry odometry;
   private final AHRS gyro = new AHRS();
-
-  private final int kCountsPerRev = 2048; // Encoder counts per revolution of the motor shaft.
-  private final double kSensorGearRatio = 1; // Gear ratio is the ratio between the *encoder* and the wheels. On the
-                                             // AndyMark drivetrain, encoders mount 1:1 with the gearbox shaft.
-  private final double kGearRatio = 10.71; // Switch kSensorGearRatio to this gear ratio if encoder is on the motor
-                                           // instead of on the gearbox.
-  private final double kWheelRadiusInches = 6;
-  private final int k100msPerSecond = 10;
-
 
   /**
    * Constructs a DriveBase with a {@link TalonFX} at each of the given CAN IDs.
@@ -153,8 +145,8 @@ public class DriveBase extends SubsystemBase {
    */
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
     return new DifferentialDriveWheelSpeeds(
-        nativeUnitsToVelocityMetersPerSecond(leftFrontMotor.getSelectedSensorVelocity()),
-        nativeUnitsToVelocityMetersPerSecond(rightFrontMotor.getSelectedSensorVelocity()));
+        OverclockedMath.nativeUnitsToVelocityMetersPerSecond(leftFrontMotor.getSelectedSensorVelocity()),
+        OverclockedMath.nativeUnitsToVelocityMetersPerSecond(rightFrontMotor.getSelectedSensorVelocity()));
   }
 
   /**
@@ -177,11 +169,11 @@ public class DriveBase extends SubsystemBase {
   }
 
   public double getLeftEncoderDistanceMeters() {
-    return nativeUnitsToDistanceMeters(leftFrontMotor.getSelectedSensorPosition());
+    return OverclockedMath.nativeUnitsToDistanceMeters(leftFrontMotor.getSelectedSensorPosition());
   }
 
   public double getRightEncoderDistanceMeters() {
-    return nativeUnitsToDistanceMeters(rightBackMotor.getSelectedSensorPosition());
+    return OverclockedMath.nativeUnitsToDistanceMeters(rightBackMotor.getSelectedSensorPosition());
   }
 
   /**
@@ -257,29 +249,6 @@ public class DriveBase extends SubsystemBase {
    */
   public void tankDrive(double leftSpeed, double rightSpeed, boolean squaredInputs) {
     differentialDrive.tankDrive(leftSpeed, rightSpeed, squaredInputs);
-  }
-
-  private int distanceToNativeUnits(double positionMeters) {
-    double wheelRotations = positionMeters / (2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches));
-    double motorRotations = wheelRotations * kSensorGearRatio;
-    int sensorCounts = (int) (motorRotations * kCountsPerRev);
-    return sensorCounts;
-  }
-
-  private double nativeUnitsToVelocityMetersPerSecond(double nativeVelocity) {
-    double motorRotationsPer100ms = nativeVelocity / kCountsPerRev;
-    double motorRotationsPerSecond = motorRotationsPer100ms * k100msPerSecond;
-    double wheelRotationsPerSecond = motorRotationsPerSecond / kSensorGearRatio;
-    double velocityMetersPerSecond = wheelRotationsPerSecond * (2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches));
-    SmartDashboard.putNumber("Velocity", velocityMetersPerSecond);
-    return velocityMetersPerSecond;
-  }
-
-  private double nativeUnitsToDistanceMeters(double sensorCounts) {
-    double motorRotations = (double) sensorCounts / kCountsPerRev;
-    double wheelRotations = motorRotations / kSensorGearRatio;
-    double positionMeters = wheelRotations * (2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches));
-    return positionMeters;
   }
 
   @Override
