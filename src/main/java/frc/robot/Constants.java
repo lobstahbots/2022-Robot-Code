@@ -39,8 +39,8 @@ public final class Constants {
     public static final double SIMPLE_AUTON_SPEED = 0.7;
     public static final double SIMPLE_AUTON_RUNTIME = 3.0;
     public static final double MEDIUM_AUTON_OUTTAKE_RUNTIME = 3.0;
-    public static final double MAX_DRIVE_SPEED = 0.25;
-    public static final double MAX_ACCELERATION = 0.1;
+    public static final double MAX_DRIVE_SPEED = 1;
+    public static final double MAX_ACCELERATION = 1;
     public static final double RAMSETE_B = 2.0;
     public static final double RAMSETE_ZETA = 0.7;
   }
@@ -85,10 +85,10 @@ public final class Constants {
 
     public static final double ACCELERATION_RATE_LIMIT = 2.1;
 
-    public static final double KS = 0.62513;
-    public static final double KV = 2.4045;
-    public static final double KA = 0.35889;
-    public static final double KP = 0;
+    public static final double KS = 0.56859;
+    public static final double KV = 2.4414;
+    public static final double KA = 0.24643;
+    public static final double KP = 0.00000094597;
     public static final double KI = 0;
     public static final double KD = 0;
 

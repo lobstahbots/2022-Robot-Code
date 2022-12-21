@@ -169,11 +169,11 @@ public class DriveBase extends SubsystemBase {
   }
 
   public double getLeftEncoderDistanceMeters() {
-    return OverclockedMath.nativeUnitsToDistanceMeters(leftFrontMotor.getSelectedSensorPosition());
+    return OverclockedMath.nativeUnitsToDistanceMeters(leftFrontMotor.getSelectedSensorPosition()) / 2;
   }
 
   public double getRightEncoderDistanceMeters() {
-    return OverclockedMath.nativeUnitsToDistanceMeters(rightBackMotor.getSelectedSensorPosition());
+    return OverclockedMath.nativeUnitsToDistanceMeters(rightBackMotor.getSelectedSensorPosition()) / 2;
   }
 
   /**
@@ -256,5 +256,10 @@ public class DriveBase extends SubsystemBase {
     odometry.update(getHeading(), getLeftEncoderDistanceMeters(), getRightEncoderDistanceMeters());
     SmartDashboard.putNumber("Gyro Value", this.getHeading().getDegrees());
     SmartDashboard.putString("Pose", this.getPose().toString());
+    var translation = odometry.getPoseMeters().getTranslation();
+    // this.zeroHeading();
+    SmartDashboard.putNumber("x", this.getLeftEncoderDistanceMeters());
+    SmartDashboard.putNumber("y", this.getRightEncoderDistanceMeters());
   }
+
 }
